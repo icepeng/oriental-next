@@ -1,0 +1,41 @@
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { ClarityModule } from '@clr/angular';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'environments/environment';
+
+import { AboutComponent } from './about/about.component';
+import { AppComponent } from './app.component';
+import { HomeModule } from './home/home.module';
+import { metaReducers, reducers } from './reducers';
+import { appRoutes } from './routes';
+
+@NgModule({
+    declarations: [AppComponent, AboutComponent],
+    imports: [
+        BrowserAnimationsModule,
+        BrowserModule,
+        FormsModule,
+        ClarityModule,
+        RouterModule.forRoot(appRoutes),
+        StoreModule.forRoot(reducers, { metaReducers }),
+        StoreRouterConnectingModule.forRoot({
+            stateKey: 'router',
+        }),
+        StoreDevtoolsModule.instrument({
+            name: 'Oriental Salad Store DevTools',
+            logOnly: environment.production,
+        }),
+        EffectsModule.forRoot([]),
+        HomeModule.forRoot(),
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+})
+export class AppModule {}
