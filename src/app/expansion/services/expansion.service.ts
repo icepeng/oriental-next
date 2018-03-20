@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -9,7 +8,7 @@ import { Expansion } from '../models/expansion.model';
 
 @Injectable()
 export class ExpansionService {
-    constructor(private http: HttpClient) {}
+    constructor() {}
 
     private mockApi() {
         return of({
@@ -18,6 +17,7 @@ export class ExpansionService {
             expansions: [
                 {
                     code: 'the-witchwood',
+                    releaseDate: '2018-04-10',
                     cards: [
                         {
                             id: '1',

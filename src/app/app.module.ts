@@ -5,16 +5,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import {
+    RouterStateSerializer,
+    StoreRouterConnectingModule,
+} from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'environments/environment';
 
 import { AboutComponent } from './about/about.component';
 import { AppComponent } from './app.component';
+import { CardModule } from './card/card.module';
+import { ExpansionModule } from './expansion/expansion.module';
 import { HomeModule } from './home/home.module';
 import { metaReducers, reducers } from './reducers';
 import { appRoutes } from './routes';
+import { CustomRouterStateSerializer } from './shared/utils';
 
 @NgModule({
     declarations: [AppComponent, AboutComponent],
@@ -34,8 +40,15 @@ import { appRoutes } from './routes';
         }),
         EffectsModule.forRoot([]),
         HomeModule.forRoot(),
+        ExpansionModule.forRoot(),
+        CardModule.forRoot(),
     ],
-    providers: [],
+    providers: [
+        {
+            provide: RouterStateSerializer,
+            useClass: CustomRouterStateSerializer,
+        },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

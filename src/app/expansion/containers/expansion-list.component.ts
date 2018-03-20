@@ -1,4 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as fromStore from '../reducers';
 
 @Component({
   selector: 'app-expansion-list',
@@ -6,8 +8,9 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpansionListComponent implements OnInit {
+  expansions$ = this.store.select(fromStore.getAllExpansions);
 
-  constructor() { }
+  constructor(private store: Store<any>) { }
 
   ngOnInit() {
   }

@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
+import { Card } from '../../card/models/card.model';
 import { Expansion } from '../models/expansion.model';
 
 export enum ExpansionActionTypes {
@@ -22,6 +23,7 @@ export class LoadSuccess implements Action {
             latest: string | null;
             next: string | null;
             expansions: Expansion[];
+            cards: Card[];
         },
     ) {}
 }
