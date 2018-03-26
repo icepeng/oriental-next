@@ -10,4 +10,5 @@ export interface ExpansionEvaluation {
     expansion: string;
     user: string;
     description: string;
+    cardEvaluations: string[];
 }

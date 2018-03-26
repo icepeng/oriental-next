@@ -4,16 +4,19 @@ import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ExpansionDetailComponent } from './containers/expansion-detail.component';
 import { ExpansionListComponent } from './containers/expansion-list.component';
 import { ExpansionEffects } from './effects/expansion.effects';
 import * as fromExpansion from './reducers';
 import { ExpansionService } from './services/expansion.service';
+import { ExpansionRatingChartComponent } from './components/expansion-rating-chart.component';
+import { CardAverageChartComponent } from './components/card-average-chart.component';
 
 @NgModule({
-    imports: [CommonModule, ClarityModule, RouterModule],
-    declarations: [ExpansionListComponent, ExpansionDetailComponent],
+    imports: [CommonModule, ClarityModule, RouterModule, NgxEchartsModule],
+    declarations: [ExpansionListComponent, ExpansionDetailComponent, ExpansionRatingChartComponent, CardAverageChartComponent],
 })
 export class ExpansionModule {
     static forRoot(): ModuleWithProviders {
