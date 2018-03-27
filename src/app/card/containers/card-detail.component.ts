@@ -1,16 +1,33 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ChangeDetectionStrategy,
+    OnDestroy,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs/Subject';
+import * as CardActions from '../actions/card.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'app-card-detail',
-  templateUrl: './card-detail.component.html',
-  styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-card-detail',
+    templateUrl: './card-detail.component.html',
+    styles: [],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardDetailComponent implements OnInit {
+export class CardDetailComponent implements OnInit, OnDestroy {
+    unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor() { }
+    constructor(private route: ActivatedRoute, private store: Store<any>) {}
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.route.paramMap.subscribe(params =>
+            this.store.dispatch(new CardActions.Select(params.get('id'))),
+        );
+    }
 
+    ngOnDestroy() {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
+    }
 }
