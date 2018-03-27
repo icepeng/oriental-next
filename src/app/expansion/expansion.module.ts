@@ -13,10 +13,17 @@ import * as fromExpansion from './reducers';
 import { ExpansionService } from './services/expansion.service';
 import { ExpansionRatingChartComponent } from './components/expansion-rating-chart.component';
 import { CardAverageChartComponent } from './components/card-average-chart.component';
+import { ExpansionComponent } from './containers/expansion.component';
 
 @NgModule({
     imports: [CommonModule, ClarityModule, RouterModule, NgxEchartsModule],
-    declarations: [ExpansionListComponent, ExpansionDetailComponent, ExpansionRatingChartComponent, CardAverageChartComponent],
+    declarations: [
+        ExpansionListComponent,
+        ExpansionDetailComponent,
+        ExpansionRatingChartComponent,
+        CardAverageChartComponent,
+        ExpansionComponent,
+    ],
 })
 export class ExpansionModule {
     static forRoot(): ModuleWithProviders {
@@ -35,14 +42,20 @@ export class ExpansionModule {
         RouterModule.forChild([
             {
                 path: 'expansions',
+                component: ExpansionComponent,
                 children: [
+                    {
+                        path: 'list',
+                        component: ExpansionListComponent,
+                    },
                     {
                         path: ':id',
                         component: ExpansionDetailComponent,
                     },
                     {
                         path: '',
-                        component: ExpansionListComponent,
+                        redirectTo: 'list',
+                        pathMatch: 'full',
                     },
                 ],
             },

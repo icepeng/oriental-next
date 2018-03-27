@@ -1,18 +1,17 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+
 import * as fromStore from '../reducers';
 
 @Component({
-  selector: 'app-expansion-list',
-  templateUrl: './expansion-list.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-expansion-list',
+    templateUrl: './expansion-list.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExpansionListComponent implements OnInit {
-  expansions$ = this.store.select(fromStore.getAllExpansions);
+    expansions$ = this.store.select(fromStore.getAllExpansions);
 
-  constructor(private store: Store<any>) { }
+    constructor(private store: Store<any>) {}
 
-  ngOnInit() {
-  }
-
+    ngOnInit() {}
 }

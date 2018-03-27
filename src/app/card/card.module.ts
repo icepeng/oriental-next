@@ -7,10 +7,11 @@ import { StoreModule } from '@ngrx/store';
 import * as fromCard from './reducers';
 import { CardListComponent } from './containers/card-list.component';
 import { CardDetailComponent } from './containers/card-detail.component';
+import { CardComponent } from './containers/card.component';
 
 @NgModule({
     imports: [CommonModule, ClarityModule, RouterModule],
-    declarations: [CardListComponent, CardDetailComponent],
+    declarations: [CardListComponent, CardDetailComponent, CardComponent],
 })
 export class CardModule {
     static forRoot(): ModuleWithProviders {
@@ -28,15 +29,17 @@ export class CardModule {
         RouterModule.forChild([
             {
                 path: 'cards',
+                component: CardComponent,
                 children: [
+                    {
+                        path: 'list',
+                        component: CardListComponent,
+                    },
                     {
                         path: ':id',
                         component: CardDetailComponent,
                     },
-                    {
-                        path: '',
-                        component: CardListComponent,
-                    },
+                    { path: '', redirectTo: 'list', pathMatch: 'full' },
                 ],
             },
         ]),
