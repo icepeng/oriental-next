@@ -8,7 +8,7 @@ export interface State {
 }
 
 export const initialState: State = {
-    locale: 'ko',
+    locale: 'ko-kr',
 };
 
 export function reducer(
