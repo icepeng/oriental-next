@@ -1,13 +1,13 @@
 export const cards = {
     '1': {
         imgLink:
-            'https://assets.webn.mobi/hearthstone/1341590178d40e6a29212445499ca20817f787e9fc499273750f00294ba5b670.png',
-        name: '마녀숲 사과',
+            'https://assets.webn.mobi/hearthstone/3caf0afed53cb777aaa00430480926cfcff504598f6e873c8edf64cb82c62625.png',
+        name: 'Witchwood Apple',
     },
     '2': {
         imgLink:
-            'https://assets.webn.mobi/hearthstone/c31a541ca5c138bac02197e037540445500bc899fe98588a39685cfaea73150c.png',
-        name: '숲 속의 안내자',
+            'https://assets.webn.mobi/hearthstone/41efc82e8c66ac5e8e340c831ca064d38e6f8e4c823bda4d2ec7eac4ac0fa756.png',
+        name: 'Forest Guide',
     },
 };
 

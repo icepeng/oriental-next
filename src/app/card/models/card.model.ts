@@ -1,6 +1,5 @@
 export interface Card {
     id: string;
-    name: string;
     class: Classes | 'Neutral';
     rarity: Rarity;
     cost: number;

@@ -21,15 +21,23 @@ export class ExpansionService {
                     cards: [
                         {
                             id: '1',
-                            name: 'test1',
-                            class: 'MAGE',
-                            cost: 1,
+                            class: 'Druid',
+                            cost: 2,
+                            rarity: 'common',
+                            stat: {
+                                power: 3,
+                                generality: 3,
+                            },
                         },
                         {
                             id: '2',
-                            name: 'test2',
-                            class: 'HUNTER',
-                            cost: 2,
+                            class: 'Druid',
+                            cost: 4,
+                            rarity: 'rare',
+                            stat: {
+                                power: 2,
+                                generality: 2,
+                            },
                         },
                     ],
                 },

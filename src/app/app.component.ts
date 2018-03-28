@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as Expansion from './expansion/actions/expansion.actions';
+import * as Localization from './core/actions/localization.actions';
 
 @Component({
     selector: 'my-app',
@@ -13,5 +14,9 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(new Expansion.Load());
+    }
+
+    setLocale(locale: string) {
+        this.store.dispatch(new Localization.Set(locale));
     }
 }
