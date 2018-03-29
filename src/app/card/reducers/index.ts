@@ -81,6 +81,17 @@ export const getFilteredCards = createSelector(
     },
 );
 
+export const getFilteredCardsTotal = createSelector(
+    getFilteredCards,
+    cards => cards.length,
+);
+
+export const getSelectedCardIndex = createSelector(
+    getFilteredCards,
+    getSelectedCardId,
+    (cards, id) => cards.findIndex(x => x.id === id),
+);
+
 export const getLimitedFilteredCards = createSelector(
     getFilteredCards,
     getViewLimit,

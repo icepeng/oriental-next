@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     styleUrls: ['./about.component.scss'],
-    templateUrl: './about.component.html'
+    templateUrl: './about.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AboutComponent {
-}
+export class AboutComponent {}

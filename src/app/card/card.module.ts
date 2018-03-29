@@ -11,6 +11,7 @@ import { CardListComponent } from './containers/card-list.component';
 import { CardComponent } from './containers/card.component';
 import { LocalCardDirective } from './local-card.directive';
 import * as fromCard from './reducers';
+import { CardNavigateComponent } from './components/card-navigate.component';
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import * as fromCard from './reducers';
         CardComponent,
         CardFilterComponent,
         LocalCardDirective,
+        CardNavigateComponent,
     ],
 })
 export class CardModule {
