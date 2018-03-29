@@ -18,3 +18,5 @@ export const expansions = {
         name: '마녀숲',
     },
 };
+
+export const ui = {};

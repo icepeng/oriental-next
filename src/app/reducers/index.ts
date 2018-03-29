@@ -52,3 +52,8 @@ export const getLocalCards = createSelector(
     getLocale,
     locale => locales.cards[locale],
 );
+
+export const getLocalUI = createSelector(
+    getLocale,
+    locale => locales.ui[locale],
+);

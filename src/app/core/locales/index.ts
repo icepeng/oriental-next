@@ -5,3 +5,8 @@ export const cards = {
     'ko-kr': ko.cards,
     'en-us': en.cards,
 };
+
+export const ui = {
+    'ko-kr': ko.ui,
+    'en-us': en.ui,
+};

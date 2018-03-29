@@ -2,40 +2,40 @@
   <section class="form-block">
     <div class="row form-group">
       <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
-        <label for="class">직업</label>
+        <label appLocalUI="Class" for="class"></label>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
         <div class="select form-control">
           <select formControlName="class" id="class">
-            <option value="ALL">ALL</option>
+            <option appLocalUI="ALL" value="ALL">ALL</option>
             <option *ngFor="let _class of classFilter" [value]="_class">{{ _class }}</option>
           </select>
         </div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
-        <label for="cost">코스트</label>
+        <label appLocalUI="Cost" for="cost"></label>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
         <div class="select form-control">
           <select formControlName="cost" id="cost">
-            <option value="ALL">ALL</option>
+            <option appLocalUI="ALL" value="ALL"></option>
             <option *ngFor="let cost of costFilter" [value]="cost">{{ cost }}</option>
           </select>
         </div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
-        <label for="rarity">레어도</label>
+        <label appLocalUI="Rarity" for="rarity"></label>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
         <div class="select form-control">
           <select formControlName="rarity" id="rarity">
-            <option value="ALL">ALL</option>
+            <option appLocalUI="ALL" value="ALL"></option>
             <option *ngFor="let rarity of rarityFilter" [value]="rarity">{{ rarity }}</option>
           </select>
         </div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
-        <label for="sortColumn">정렬</label>
+        <label appLocalUI="Sort" for="sortColumn"></label>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
         <div class="select form-control">
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
-        <label for="sortOrder">순서</label>
+        <label appLocalUI="Order" for="sortOrder"></label>
       </div>
       <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
         <div class="select form-control">

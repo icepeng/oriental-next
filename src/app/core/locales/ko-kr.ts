@@ -20,6 +20,7 @@ export const expansions = {
 };
 
 export const ui = {
+    Estimates: '카드 예측',
     Expansions: '확장팩',
     Cards: '카드',
     About: '정보',
@@ -29,4 +30,5 @@ export const ui = {
     Rarity: '레어도',
     Sort: '정렬',
     Order: '순서',
+    ALL: '모두',
 };

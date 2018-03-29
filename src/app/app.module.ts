@@ -20,6 +20,7 @@ import { ExpansionModule } from './expansion/expansion.module';
 import { HomeModule } from './home/home.module';
 import { metaReducers, reducers } from './reducers';
 import { appRoutes } from './routes';
+import { SharedModule } from './shared/shared.module';
 import { CustomRouterStateSerializer } from './shared/utils';
 
 @NgModule({
@@ -39,6 +40,7 @@ import { CustomRouterStateSerializer } from './shared/utils';
             logOnly: environment.production,
         }),
         EffectsModule.forRoot([]),
+        SharedModule,
         HomeModule.forRoot(),
         ExpansionModule.forRoot(),
         CardModule.forRoot(),

@@ -5,14 +5,14 @@ import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { StoreModule } from '@ngrx/store';
 
+import { SharedModule } from '../shared/shared.module';
 import { CardFilterComponent } from './components/card-filter.component';
+import { CardNavigateComponent } from './components/card-navigate.component';
 import { CardDetailComponent } from './containers/card-detail.component';
 import { CardListComponent } from './containers/card-list.component';
-import { CardComponent } from './containers/card.component';
-import { LocalCardDirective } from './local-card.directive';
-import * as fromCard from './reducers';
-import { CardNavigateComponent } from './components/card-navigate.component';
 import { CardSummaryComponent } from './containers/card-summary.component';
+import { CardComponent } from './containers/card.component';
+import * as fromCard from './reducers';
 
 @NgModule({
     imports: [
@@ -21,13 +21,13 @@ import { CardSummaryComponent } from './containers/card-summary.component';
         RouterModule,
         FormsModule,
         ReactiveFormsModule,
+        SharedModule,
     ],
     declarations: [
         CardListComponent,
         CardDetailComponent,
         CardComponent,
         CardFilterComponent,
-        LocalCardDirective,
         CardNavigateComponent,
         CardSummaryComponent,
     ],
