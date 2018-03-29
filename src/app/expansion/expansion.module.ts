@@ -6,14 +6,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxEchartsModule } from 'ngx-echarts';
 
+import { CardAverageChartComponent } from './components/card-average-chart.component';
+import { ExpansionRatingChartComponent } from './components/expansion-rating-chart.component';
 import { ExpansionDetailComponent } from './containers/expansion-detail.component';
 import { ExpansionListComponent } from './containers/expansion-list.component';
+import { ExpansionSummaryComponent } from './containers/expansion-summary.component';
+import { ExpansionComponent } from './containers/expansion.component';
 import { ExpansionEffects } from './effects/expansion.effects';
 import * as fromExpansion from './reducers';
 import { ExpansionService } from './services/expansion.service';
-import { ExpansionRatingChartComponent } from './components/expansion-rating-chart.component';
-import { CardAverageChartComponent } from './components/card-average-chart.component';
-import { ExpansionComponent } from './containers/expansion.component';
 
 @NgModule({
     imports: [CommonModule, ClarityModule, RouterModule, NgxEchartsModule],
@@ -23,6 +24,7 @@ import { ExpansionComponent } from './containers/expansion.component';
         ExpansionRatingChartComponent,
         CardAverageChartComponent,
         ExpansionComponent,
+        ExpansionSummaryComponent,
     ],
 })
 export class ExpansionModule {
@@ -49,12 +51,16 @@ export class ExpansionModule {
                         component: ExpansionListComponent,
                     },
                     {
+                        path: 'summary',
+                        component: ExpansionSummaryComponent,
+                    },
+                    {
                         path: ':id',
                         component: ExpansionDetailComponent,
                     },
                     {
                         path: '',
-                        redirectTo: 'list',
+                        redirectTo: 'summary',
                         pathMatch: 'full',
                     },
                 ],

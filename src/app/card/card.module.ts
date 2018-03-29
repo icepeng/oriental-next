@@ -12,6 +12,7 @@ import { CardComponent } from './containers/card.component';
 import { LocalCardDirective } from './local-card.directive';
 import * as fromCard from './reducers';
 import { CardNavigateComponent } from './components/card-navigate.component';
+import { CardSummaryComponent } from './containers/card-summary.component';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import { CardNavigateComponent } from './components/card-navigate.component';
         CardFilterComponent,
         LocalCardDirective,
         CardNavigateComponent,
+        CardSummaryComponent,
     ],
 })
 export class CardModule {
@@ -53,10 +55,14 @@ export class CardModule {
                         component: CardListComponent,
                     },
                     {
+                        path: 'summary',
+                        component: CardSummaryComponent,
+                    },
+                    {
                         path: ':id',
                         component: CardDetailComponent,
                     },
-                    { path: '', redirectTo: 'list', pathMatch: 'full' },
+                    { path: '', redirectTo: 'summary', pathMatch: 'full' },
                 ],
             },
         ]),
