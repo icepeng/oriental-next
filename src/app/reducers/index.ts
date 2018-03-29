@@ -11,16 +11,19 @@ import { storeFreeze } from 'ngrx-store-freeze';
 import { environment } from '../../environments/environment';
 import { RouterStateUrl } from '../shared/utils';
 import * as fromLocalization from '../core/reducers/localization.reducer';
+import * as fromLocaleModal from '../core/reducers/locale-modal.reducer';
 import * as locales from '../core/locales';
 
 export interface State {
     router: fromRouter.RouterReducerState<RouterStateUrl>;
     localization: fromLocalization.State;
+    localeModal: fromLocaleModal.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
     router: fromRouter.routerReducer,
     localization: fromLocalization.reducer,
+    localeModal: fromLocaleModal.reducer,
 };
 
 // console.log all actions
@@ -56,4 +59,16 @@ export const getLocalCards = createSelector(
 export const getLocalUI = createSelector(
     getLocale,
     locale => locales.ui[locale],
+);
+
+/**
+ * Locale Modal Reducers
+ */
+export const getLocaleModalState = createFeatureSelector<fromLocaleModal.State>(
+    'localeModal',
+);
+
+export const getLocaleModalIsOpen = createSelector(
+    getLocaleModalState,
+    fromLocaleModal.getIsOpen,
 );

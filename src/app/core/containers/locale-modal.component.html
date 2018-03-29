@@ -1,0 +1,22 @@
+<clr-modal [clrModalOpen]="isOpen$ | async" [clrModalClosable]="false">
+    <h3 class="modal-title">I have a nice title</h3>
+    <div class="modal-body">
+        <form [formGroup]="formGroup">
+            <div class="form-group">
+                <label>Locale</label>
+                <div class="radio-inline">
+                    <input type="radio" value="ko-kr" formControlName="locale" id="korean">
+                    <label for="korean">한국어</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" value="en-us" formControlName="locale" id="english">
+                    <label for="english">English</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="approve()">Ok</button>
+    </div>
+</clr-modal>
