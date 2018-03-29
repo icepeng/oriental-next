@@ -18,3 +18,15 @@ export const expansions = {
         name: '마녀숲',
     },
 };
+
+export const ui = {
+    Expansions: '확장팩',
+    Cards: '카드',
+    About: '정보',
+    'Card List': '카드 목록',
+    Class: '직업',
+    Cost: '코스트',
+    Rarity: '레어도',
+    Sort: '정렬',
+    Order: '순서',
+};

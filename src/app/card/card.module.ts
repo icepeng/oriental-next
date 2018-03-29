@@ -5,12 +5,12 @@ import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { StoreModule } from '@ngrx/store';
 
+import { CardFilterComponent } from './components/card-filter.component';
 import { CardDetailComponent } from './containers/card-detail.component';
 import { CardListComponent } from './containers/card-list.component';
 import { CardComponent } from './containers/card.component';
+import { LocalCardDirective } from './local-card.directive';
 import * as fromCard from './reducers';
-import { CardFilterComponent } from './components/card-filter.component';
-import { CardImageComponent } from './components/card-image.component';
 
 @NgModule({
     imports: [
@@ -20,7 +20,13 @@ import { CardImageComponent } from './components/card-image.component';
         FormsModule,
         ReactiveFormsModule,
     ],
-    declarations: [CardListComponent, CardDetailComponent, CardComponent, CardFilterComponent, CardImageComponent],
+    declarations: [
+        CardListComponent,
+        CardDetailComponent,
+        CardComponent,
+        CardFilterComponent,
+        LocalCardDirective,
+    ],
 })
 export class CardModule {
     static forRoot(): ModuleWithProviders {
