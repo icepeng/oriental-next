@@ -20,7 +20,7 @@ export const expansions = {
 };
 
 export const ui = {
-    Estimates: '카드 예측',
+    Estimates: '예측 보기',
     Expansions: '확장팩',
     Cards: '카드',
     About: '정보',

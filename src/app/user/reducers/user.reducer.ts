@@ -4,6 +4,7 @@ import { UserActions, UserActionTypes } from '../actions/user.actions';
 import { User } from '../models/user.model';
 
 export interface State extends EntityState<User> {
+    authedId: string | null;
     selectedId: string | null;
 }
 
@@ -13,8 +14,7 @@ export const adapter: EntityAdapter<User> = createEntityAdapter<User>({
 });
 
 export const initialState: State = adapter.getInitialState({
-    latestId: null,
-    nextId: null,
+    authedId: null,
     selectedId: null,
 });
 
@@ -41,3 +41,5 @@ export function reducer(state = initialState, action: UserActions): State {
 }
 
 export const getSelectedId = (state: State) => state.selectedId;
+
+export const getAuthedId = (state: State) => state.authedId;
