@@ -15,15 +15,13 @@ import { takeUntil, combineLatest, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Directive({
-    selector: '[appLocalCard]',
+    selector: '[appLocalCardImg]',
 })
-export class LocalCardDirective implements OnInit, OnChanges, OnDestroy {
+export class LocalCardImageDirective implements OnInit, OnChanges, OnDestroy {
     @Input() id: string;
-    @Input() prop: string;
-    @HostBinding('innerText') text: string;
+    @HostBinding('attr.src') src: string;
 
     id$ = new BehaviorSubject<string>(null);
-    prop$ = new BehaviorSubject<string>(null);
     unsubscribe$: Subject<void> = new Subject<void>();
 
     constructor(private store: Store<any>, private _ref: ChangeDetectorRef) {}
@@ -32,23 +30,18 @@ export class LocalCardDirective implements OnInit, OnChanges, OnDestroy {
         this.store
             .select(fromRoot.getLocalCards)
             .pipe(
-                combineLatest(this.id$, this.prop$),
-                map(([cards, id, prop]) => cards[id][prop]),
+                combineLatest(this.id$),
+                map(([cards, id]) => cards[id].imgLink),
                 takeUntil(this.unsubscribe$),
             )
-            .subscribe(text => {
-                this.text = text;
+            .subscribe(imgLink => {
+                this.src = imgLink;
                 this._ref.markForCheck();
             });
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.id) {
-            this.id$.next(changes.id.currentValue);
-        }
-        if (changes.prop) {
-            this.prop$.next(changes.prop.currentValue);
-        }
+        this.id$.next(changes.id.currentValue);
     }
 
     ngOnDestroy() {

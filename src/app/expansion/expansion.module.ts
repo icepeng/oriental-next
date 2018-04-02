@@ -15,9 +15,16 @@ import { ExpansionComponent } from './containers/expansion.component';
 import { ExpansionEffects } from './effects/expansion.effects';
 import * as fromExpansion from './reducers';
 import { ExpansionService } from './services/expansion.service';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-    imports: [CommonModule, ClarityModule, RouterModule, NgxEchartsModule],
+    imports: [
+        CommonModule,
+        ClarityModule,
+        RouterModule,
+        NgxEchartsModule,
+        SharedModule,
+    ],
     declarations: [
         ExpansionListComponent,
         ExpansionDetailComponent,

@@ -15,14 +15,14 @@ import { takeUntil, combineLatest, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Directive({
-    selector: '[appLocalCard]',
+    selector: '[appLocalExpansion]',
 })
-export class LocalCardDirective implements OnInit, OnChanges, OnDestroy {
-    @Input() id: string;
+export class LocalExpansionDirective implements OnInit, OnChanges, OnDestroy {
+    @Input() code: string;
     @Input() prop: string;
     @HostBinding('innerText') text: string;
 
-    id$ = new BehaviorSubject<string>(null);
+    code$ = new BehaviorSubject<string>(null);
     prop$ = new BehaviorSubject<string>(null);
     unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -30,10 +30,10 @@ export class LocalCardDirective implements OnInit, OnChanges, OnDestroy {
 
     ngOnInit() {
         this.store
-            .select(fromRoot.getLocalCards)
+            .select(fromRoot.getLocalExpansions)
             .pipe(
-                combineLatest(this.id$, this.prop$),
-                map(([cards, id, prop]) => cards[id][prop]),
+                combineLatest(this.code$, this.prop$),
+                map(([expansions, code, prop]) => expansions[code][prop]),
                 takeUntil(this.unsubscribe$),
             )
             .subscribe(text => {
@@ -43,8 +43,8 @@ export class LocalCardDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.id) {
-            this.id$.next(changes.id.currentValue);
+        if (changes.code) {
+            this.code$.next(changes.code.currentValue);
         }
         if (changes.prop) {
             this.prop$.next(changes.prop.currentValue);

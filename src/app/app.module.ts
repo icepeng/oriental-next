@@ -24,6 +24,7 @@ import { metaReducers, reducers } from './reducers';
 import { appRoutes } from './routes';
 import { SharedModule } from './shared/shared.module';
 import { CustomRouterStateSerializer } from './shared/utils';
+import { SurveyModule } from './survey/survey.module';
 
 @NgModule({
     declarations: [AppComponent, AboutComponent],
@@ -47,6 +48,7 @@ import { CustomRouterStateSerializer } from './shared/utils';
         ExpansionModule.forRoot(),
         CardModule.forRoot(),
         EstimateModule.forRoot(),
+        SurveyModule.forRoot(),
         CoreModule.forRoot(),
     ],
     providers: [

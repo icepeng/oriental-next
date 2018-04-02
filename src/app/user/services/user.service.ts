@@ -13,6 +13,7 @@ export class UserService {
         return of({
             id: '1',
             battletag: 'iipeng#1234',
+            estimates: [],
         });
     }
 
