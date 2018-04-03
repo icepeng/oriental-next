@@ -16,5 +16,8 @@ export class SurveyComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        // TODO: select current survey
+        // TODO: estimate 중 user === authedUser && survey === currentSurvey가 존재하면, 정보 불러오기
+    }
 }

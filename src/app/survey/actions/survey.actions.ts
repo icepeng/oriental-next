@@ -1,29 +1,28 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
-import {
-    CardEstimate,
-    ExpansionEstimate,
-} from '../../estimate/models/estimate.model';
+
+import { Survey } from '../models/survey.model';
 
 export enum SurveyActionTypes {
-    SubmitInit = '[Survey] Submit Init',
-    SubmitCard = '[Survey] Submit Card',
-    SubmitExpansion = '[Survey] Submit Expansion',
+    Load = '[Survey] Load',
+    LoadSuccess = '[Survey] Load Success',
+    LoadFailure = '[Survey] Load Failure',
 }
 
-export class SubmitInit implements Action {
-    readonly type = SurveyActionTypes.SubmitInit;
+export class Load implements Action {
+    readonly type = SurveyActionTypes.Load;
 }
 
-export class SubmitCard implements Action {
-    readonly type = SurveyActionTypes.SubmitCard;
+export class LoadSuccess implements Action {
+    readonly type = SurveyActionTypes.LoadSuccess;
 
-    constructor(public payload: CardEstimate) {}
+    constructor(public payload: Survey[]) {}
 }
 
-export class SubmitExpansion implements Action {
-    readonly type = SurveyActionTypes.SubmitExpansion;
+export class LoadFailure implements Action {
+    readonly type = SurveyActionTypes.LoadFailure;
 
-    constructor(public payload: ExpansionEstimate) {}
+    constructor(public payload: HttpErrorResponse) {}
 }
 
-export type SurveyActions = SubmitCard | SubmitExpansion;
+export type SurveyActions = Load | LoadSuccess | LoadFailure;
