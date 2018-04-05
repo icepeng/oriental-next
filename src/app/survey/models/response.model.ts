@@ -1,12 +1,12 @@
-export interface Estimate {
+export interface SurveyResponse {
     id: string;
     user: string;
     survey: string;
-    cardEstimates: string[];
-    expansionEstimate: string;
+    cardResponses: string[];
+    expansionResponse: string;
 }
 
-export interface CardEstimate {
+export interface CardResponse {
     id: string;
     card: string;
     power: number;
@@ -14,7 +14,7 @@ export interface CardEstimate {
     description: string;
 }
 
-export interface ExpansionEstimate {
+export interface ExpansionResponse {
     id: string;
     fun: number;
     balance: number;

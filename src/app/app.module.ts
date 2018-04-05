@@ -17,7 +17,6 @@ import { AboutComponent } from './about/about.component';
 import { AppComponent } from './app.component';
 import { CardModule } from './card/card.module';
 import { CoreModule } from './core/core.module';
-import { EstimateModule } from './estimate/estimate.module';
 import { ExpansionModule } from './expansion/expansion.module';
 import { HomeModule } from './home/home.module';
 import { metaReducers, reducers } from './reducers';
@@ -47,7 +46,6 @@ import { SurveyModule } from './survey/survey.module';
         HomeModule.forRoot(),
         ExpansionModule.forRoot(),
         CardModule.forRoot(),
-        EstimateModule.forRoot(),
         SurveyModule.forRoot(),
         CoreModule.forRoot(),
     ],

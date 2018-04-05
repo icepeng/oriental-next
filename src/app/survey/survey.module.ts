@@ -5,10 +5,14 @@ import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 
 import { SharedModule } from '../shared/shared.module';
-import { SurveyCardComponent } from './containers/survey-card.component';
-import { SurveyExpansionComponent } from './containers/survey-expansion.component';
-import { SurveyComponent } from './containers/survey.component';
 import { SurveyGuideComponent } from './containers/survey-guide.component';
+import { SurveyListComponent } from './containers/survey-list.component';
+import { SurveyResponseListComponent } from './containers/survey-response-list.component';
+import { SurveyResponseViewComponent } from './containers/survey-response-view.component';
+import { SurveyWriteCardComponent } from './containers/survey-write-card.component';
+import { SurveyWriteExpansionComponent } from './containers/survey-write-expansion.component';
+import { SurveyWriteComponent } from './containers/survey-write.component';
+import { SurveyComponent } from './containers/survey.component';
 
 @NgModule({
     imports: [
@@ -20,10 +24,14 @@ import { SurveyGuideComponent } from './containers/survey-guide.component';
         SharedModule,
     ],
     declarations: [
-        SurveyCardComponent,
-        SurveyExpansionComponent,
+        SurveyWriteCardComponent,
+        SurveyWriteExpansionComponent,
         SurveyComponent,
         SurveyGuideComponent,
+        SurveyListComponent,
+        SurveyWriteComponent,
+        SurveyResponseListComponent,
+        SurveyResponseViewComponent,
     ],
 })
 export class SurveyModule {
@@ -49,12 +57,20 @@ export class SurveyModule {
                         component: SurveyGuideComponent,
                     },
                     {
-                        path: 'cards',
-                        component: SurveyCardComponent,
+                        path: 'list',
+                        component: SurveyListComponent,
                     },
                     {
-                        path: 'expansion',
-                        component: SurveyExpansionComponent,
+                        path: ':id/write',
+                        component: SurveyWriteComponent,
+                    },
+                    {
+                        path: ':id/responses',
+                        component: SurveyResponseListComponent,
+                    },
+                    {
+                        path: ':surveyId/responses/:id',
+                        component: SurveyResponseViewComponent,
                     },
                     { path: '', redirectTo: 'guide', pathMatch: 'full' },
                 ],
