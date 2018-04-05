@@ -3,16 +3,19 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
+import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../shared/shared.module';
+import { SurveyCardFilterComponent } from './components/survey-card-filter.component';
+import { SurveyWriteExpansionComponent } from './components/survey-write-expansion.component';
 import { SurveyGuideComponent } from './containers/survey-guide.component';
 import { SurveyListComponent } from './containers/survey-list.component';
 import { SurveyResponseListComponent } from './containers/survey-response-list.component';
 import { SurveyResponseViewComponent } from './containers/survey-response-view.component';
 import { SurveyWriteCardComponent } from './containers/survey-write-card.component';
-import { SurveyWriteExpansionComponent } from './containers/survey-write-expansion.component';
 import { SurveyWriteComponent } from './containers/survey-write.component';
 import { SurveyComponent } from './containers/survey.component';
+import { reducers } from './reducers';
 
 @NgModule({
     imports: [
@@ -32,6 +35,7 @@ import { SurveyComponent } from './containers/survey.component';
         SurveyWriteComponent,
         SurveyResponseListComponent,
         SurveyResponseViewComponent,
+        SurveyCardFilterComponent,
     ],
 })
 export class SurveyModule {
@@ -46,10 +50,10 @@ export class SurveyModule {
 @NgModule({
     imports: [
         SurveyModule,
-        // StoreModule.forFeature('estimate', fromSurvey.reducers),
+        StoreModule.forFeature('survey', reducers),
         RouterModule.forChild([
             {
-                path: 'survey',
+                path: 'surveys',
                 component: SurveyComponent,
                 children: [
                     {

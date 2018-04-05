@@ -1,34 +1,34 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    EventEmitter,
     Input,
     OnDestroy,
     OnInit,
     Output,
-    EventEmitter,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
 
-import { Classes, Rarity } from '../models/card.model';
-import { CardFilter } from '../models/filter.model';
+import { Classes, Rarity } from '../../card/models/card.model';
+import { SurveyCardFilter } from '../models/filter.model';
 
 @Component({
-    selector: 'app-card-filter',
-    templateUrl: './card-filter.component.html',
+    selector: 'app-survey-card-filter',
+    templateUrl: './survey-card-filter.component.html',
     styles: [],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardFilterComponent implements OnInit, OnDestroy {
+export class SurveyCardFilterComponent implements OnInit, OnDestroy {
     @Input()
-    set filter(value: CardFilter) {
+    set filter(value: SurveyCardFilter) {
         if (this.formGroup.dirty) {
             return;
         }
         this.formGroup.reset(value);
     }
-    @Output('filterChange') filterChange = new EventEmitter<CardFilter>();
+    @Output('filterChange') filterChange = new EventEmitter<SurveyCardFilter>();
 
     classFilter: (Classes | 'Neutral')[] = [
         'Mage',
@@ -48,8 +48,7 @@ export class CardFilterComponent implements OnInit, OnDestroy {
         class: new FormControl(),
         cost: new FormControl(),
         rarity: new FormControl(),
-        sortColumn: new FormControl(),
-        sortOrder: new FormControl(),
+        isAnswered: new FormControl(),
     });
     unsubscribe$: Subject<void> = new Subject<void>();
 

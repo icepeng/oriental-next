@@ -1,7 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-
-import * as fromExpansion from '../../expansion/reducers';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-survey-write-expansion',
@@ -10,11 +7,9 @@ import * as fromExpansion from '../../expansion/reducers';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurveyWriteExpansionComponent implements OnInit {
-    selectedExpansionId$ = this.store.select(
-        fromExpansion.getSelectedExpansionId,
-    );
+    @Input() expansion: string;
 
-    constructor(private store: Store<any>) {}
+    constructor() {}
 
     ngOnInit() {}
 }

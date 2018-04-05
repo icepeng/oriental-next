@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { Card } from '../../card/models/card.model';
 import { Expansion } from '../models/expansion.model';
+import { Survey } from '../../survey/models/survey.model';
 
 @Injectable()
 export class ExpansionService {
@@ -23,7 +24,7 @@ export class ExpansionService {
                             id: '1',
                             class: 'Druid',
                             cost: 2,
-                            rarity: 'common',
+                            rarity: 'Common',
                             stat: {
                                 power: 3,
                                 generality: 3,
@@ -33,11 +34,20 @@ export class ExpansionService {
                             id: '2',
                             class: 'Druid',
                             cost: 4,
-                            rarity: 'rare',
+                            rarity: 'Rare',
                             stat: {
                                 power: 2,
                                 generality: 2,
                             },
+                        },
+                    ],
+                    surveys: [
+                        {
+                            id: '1',
+                            startTime: '2018-04-05T14:01:12.012Z',
+                            endTime: null,
+                            isPreRelease: true,
+                            status: 'ongoing',
                         },
                     ],
                 },
@@ -50,6 +60,7 @@ export class ExpansionService {
         next: string;
         expansions: Expansion[];
         cards: Card[];
+        surveys: Survey[];
     }> {
         return this.mockApi().pipe(
             map(data => {
@@ -60,7 +71,17 @@ export class ExpansionService {
                     cards: expansion.cards.map(x => x.id),
                 }));
                 const cards = data.expansions.reduce(
-                    (arr, x) => [...arr, ...x.cards],
+                    (arr, x) => [
+                        ...arr,
+                        ...x.cards.map(y => ({ ...y, expansion: x.code })),
+                    ],
+                    [],
+                );
+                const surveys = data.expansions.reduce(
+                    (arr, x) => [
+                        ...arr,
+                        ...x.surveys.map(y => ({ ...y, expansion: x.code })),
+                    ],
                     [],
                 );
                 return {
@@ -68,6 +89,7 @@ export class ExpansionService {
                     next,
                     expansions,
                     cards,
+                    surveys,
                 };
             }),
         );

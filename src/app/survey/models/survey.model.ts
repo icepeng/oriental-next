@@ -4,4 +4,5 @@ export interface Survey {
     startTime: string;
     endTime: string | null;
     isPreRelease: boolean;
+    status: 'ongoing' | 'closed';
 }

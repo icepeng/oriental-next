@@ -23,15 +23,26 @@ export const expansions = {
 };
 
 export const ui = {
-    Estimates: '예측 보기',
+    Surveys: '설문',
+    'Survey List': '설문 목록',
+    'Write Survey': '설문 작성',
     Expansions: '확장팩',
+    Expansion: '확장팩',
     Cards: '카드',
-    About: '정보',
     'Card List': '카드 목록',
+    About: '정보',
     Class: '직업',
     Cost: '코스트',
     Rarity: '레어도',
     Sort: '정렬',
     Order: '순서',
     ALL: '모두',
+    Ongoing: '진행중',
+    Closed: '종료',
+    List: '목록',
+    'Starting Guide': '사전 가이드',
+    'Review & Submit': '검토 & 저장',
+    'Is Answered': '답변 여부',
+    'YES': '예',
+    'NO': '아니오',
 };

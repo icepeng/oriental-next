@@ -4,25 +4,13 @@ import { Action } from '@ngrx/store';
 import { Survey } from '../models/survey.model';
 
 export enum SurveyActionTypes {
-    Load = '[Survey] Load',
-    LoadSuccess = '[Survey] Load Success',
-    LoadFailure = '[Survey] Load Failure',
+    Select = '[Survey] Select',
 }
 
-export class Load implements Action {
-    readonly type = SurveyActionTypes.Load;
+export class Select implements Action {
+    readonly type = SurveyActionTypes.Select;
+
+    constructor(public payload: string) {}
 }
 
-export class LoadSuccess implements Action {
-    readonly type = SurveyActionTypes.LoadSuccess;
-
-    constructor(public payload: Survey[]) {}
-}
-
-export class LoadFailure implements Action {
-    readonly type = SurveyActionTypes.LoadFailure;
-
-    constructor(public payload: HttpErrorResponse) {}
-}
-
-export type SurveyActions = Load | LoadSuccess | LoadFailure;
+export type SurveyActions = Select;
