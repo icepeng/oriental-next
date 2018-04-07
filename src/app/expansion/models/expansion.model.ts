@@ -1,5 +1,5 @@
 export interface Expansion {
   code: string;
-  releaseDate: string;
+  // releaseDate: string;
   cards: string[];
 }

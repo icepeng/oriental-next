@@ -2,28 +2,31 @@ import * as fromRouter from '@ngrx/router-store';
 import {
     ActionReducer,
     ActionReducerMap,
-    MetaReducer,
     createFeatureSelector,
     createSelector,
+    MetaReducer,
 } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { environment } from '../../environments/environment';
-import { RouterStateUrl } from '../shared/utils';
-import * as fromLocalization from '../core/reducers/localization.reducer';
-import * as fromLocaleModal from '../core/reducers/locale-modal.reducer';
 import * as locales from '../core/locales';
+import * as fromAuth from '../core/reducers/auth.reducer';
+import * as fromLocaleModal from '../core/reducers/locale-modal.reducer';
+import * as fromLocalization from '../core/reducers/localization.reducer';
+import { RouterStateUrl } from '../shared/utils';
 
 export interface State {
     router: fromRouter.RouterReducerState<RouterStateUrl>;
     localization: fromLocalization.State;
     localeModal: fromLocaleModal.State;
+    auth: fromAuth.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
     router: fromRouter.routerReducer,
     localization: fromLocalization.reducer,
     localeModal: fromLocaleModal.reducer,
+    auth: fromAuth.reducer,
 };
 
 // console.log all actions
@@ -76,4 +79,21 @@ export const getLocaleModalState = createFeatureSelector<fromLocaleModal.State>(
 export const getLocaleModalIsOpen = createSelector(
     getLocaleModalState,
     fromLocaleModal.getIsOpen,
+);
+
+/**
+ * Auth Reducers
+ */
+export const getAuthState = createFeatureSelector<fromAuth.State>('auth');
+
+export const getToken = createSelector(
+    getAuthState,
+    fromAuth.getToken,
+);
+
+export const getTokenExp = createSelector(getAuthState, fromAuth.getExp);
+
+export const getLoggedIn = createSelector(
+    getAuthState,
+    fromAuth.getLoggedIn,
 );

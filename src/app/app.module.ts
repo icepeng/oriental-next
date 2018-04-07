@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +18,7 @@ import { AboutComponent } from './about/about.component';
 import { AppComponent } from './app.component';
 import { CardModule } from './card/card.module';
 import { CoreModule } from './core/core.module';
+import { AuthEffects } from './core/effects/auth.effects';
 import { ExpansionModule } from './expansion/expansion.module';
 import { HomeModule } from './home/home.module';
 import { metaReducers, reducers } from './reducers';
@@ -24,6 +26,7 @@ import { appRoutes } from './routes';
 import { SharedModule } from './shared/shared.module';
 import { CustomRouterStateSerializer } from './shared/utils';
 import { SurveyModule } from './survey/survey.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
     declarations: [AppComponent, AboutComponent],
@@ -31,6 +34,7 @@ import { SurveyModule } from './survey/survey.module';
         BrowserAnimationsModule,
         BrowserModule,
         FormsModule,
+        HttpClientModule,
         ClarityModule,
         RouterModule.forRoot(appRoutes),
         StoreModule.forRoot(reducers, { metaReducers }),
@@ -41,13 +45,14 @@ import { SurveyModule } from './survey/survey.module';
             name: 'Oriental Salad Store DevTools',
             logOnly: environment.production,
         }),
-        EffectsModule.forRoot([]),
+        EffectsModule.forRoot([AuthEffects]),
         SharedModule,
         HomeModule.forRoot(),
         ExpansionModule.forRoot(),
         CardModule.forRoot(),
         SurveyModule.forRoot(),
         CoreModule.forRoot(),
+        UserModule.forRoot(),
     ],
     providers: [
         {

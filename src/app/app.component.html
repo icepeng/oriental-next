@@ -24,17 +24,29 @@
       </a>
     </div>
     <div class="header-actions">
-      <clr-dropdown>
+      <clr-dropdown *ngIf="authedUser$ | async as authedUser; else noauth">
         <button class="nav-text" clrDropdownTrigger>
-          ipeng#3533
+          {{ authedUser.battletag }}
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a (click)="openLocaleModal()" clrDropdownItem>Change Locale</a>
           <a href="..." clrDropdownItem>My Profile</a>
-          <a href="..." clrDropdownItem>Log out</a>
+          <a (click)="logout()" clrDropdownItem>Log out</a>
         </clr-dropdown-menu>
       </clr-dropdown>
+      <ng-template #noauth>
+        <clr-dropdown>
+          <button class="nav-icon" clrDropdownTrigger>
+            <clr-icon shape="user"></clr-icon>
+            <clr-icon shape="caret down"></clr-icon>
+          </button>
+          <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+            <a (click)="openLocaleModal()" clrDropdownItem>Change Locale</a>
+            <a (click)="login()" clrDropdownItem>Log In</a>
+          </clr-dropdown-menu>
+        </clr-dropdown>
+      </ng-template>
     </div>
   </clr-header>
   <app-locale-modal></app-locale-modal>

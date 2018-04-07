@@ -1,15 +1,6 @@
-export const cards = {
-    '1': {
-        imgLink:
-            'https://assets.webn.mobi/hearthstone/1341590178d40e6a29212445499ca20817f787e9fc499273750f00294ba5b670.png',
-        name: '마녀숲 사과',
-    },
-    '2': {
-        imgLink:
-            'https://assets.webn.mobi/hearthstone/c31a541ca5c138bac02197e037540445500bc899fe98588a39685cfaea73150c.png',
-        name: '숲 속의 안내자',
-    },
-};
+// tslint:disable:max-line-length
+
+export const cards = require('./ko-kr.cards.json');
 
 export const expansions = {
     'the-witchwood': {
@@ -43,6 +34,6 @@ export const ui = {
     'Starting Guide': '사전 가이드',
     'Review & Submit': '검토 & 저장',
     'Unanswered Only': '미응답만 표시',
-    'YES': '예',
-    'NO': '아니오',
+    YES: '예',
+    NO: '아니오',
 };

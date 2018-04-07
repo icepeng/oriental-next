@@ -1,5 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
+import { AuthActions, AuthActionTypes } from '../../core/actions/auth.actions';
 import { UserActions, UserActionTypes } from '../actions/user.actions';
 import { User } from '../models/user.model';
 
@@ -18,7 +19,10 @@ export const initialState: State = adapter.getInitialState({
     selectedId: null,
 });
 
-export function reducer(state = initialState, action: UserActions): State {
+export function reducer(
+    state = initialState,
+    action: UserActions | AuthActions,
+): State {
     switch (action.type) {
         case UserActionTypes.LoadSuccess: {
             return {
@@ -31,6 +35,20 @@ export function reducer(state = initialState, action: UserActions): State {
             return {
                 ...state,
                 selectedId: action.payload,
+            };
+        }
+
+        case AuthActionTypes.LoginSuccess: {
+            return {
+                ...state,
+                authedId: action.payload.decoded.id,
+            };
+        }
+
+        case AuthActionTypes.Logout: {
+            return {
+                ...state,
+                authedId: null,
             };
         }
 

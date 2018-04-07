@@ -21,8 +21,6 @@ export class LoadSuccess implements Action {
 
     constructor(
         public payload: {
-            latest: string | null;
-            next: string | null;
             expansions: Expansion[];
             cards: Card[];
             surveys: Survey[];

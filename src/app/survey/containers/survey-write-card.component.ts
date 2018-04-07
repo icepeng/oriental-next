@@ -67,6 +67,7 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
                 return;
             }
             this.store.dispatch(new FormAction.SelectCard(id));
+            document.querySelector('.content-area').scrollTo(0, 0);
         });
     }
 

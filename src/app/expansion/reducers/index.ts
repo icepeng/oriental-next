@@ -33,16 +33,6 @@ export const getSelectedExpansionId = createSelector(
     fromExpansion.getSelectedId,
 );
 
-export const getLatestExpansionId = createSelector(
-    getExpansionEntitiesState,
-    fromExpansion.getLatestId,
-);
-
-export const getNextExpansionId = createSelector(
-    getExpansionEntitiesState,
-    fromExpansion.getNextId,
-);
-
 export const {
     selectIds: getExpansionIds,
     selectEntities: getExpansionEntities,
@@ -55,21 +45,5 @@ export const getSelectedExpansion = createSelector(
     getSelectedExpansionId,
     (entities, selectedId) => {
         return selectedId && entities[selectedId];
-    },
-);
-
-export const getLatestExpansion = createSelector(
-    getExpansionEntities,
-    getLatestExpansionId,
-    (entities, latestId) => {
-        return latestId && entities[latestId];
-    },
-);
-
-export const getNextExpansion = createSelector(
-    getExpansionEntities,
-    getNextExpansionId,
-    (entities, nextId) => {
-        return nextId && entities[nextId];
     },
 );

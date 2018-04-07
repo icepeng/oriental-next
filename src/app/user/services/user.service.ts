@@ -1,23 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { map } from 'rxjs/operators';
 
+import { HttpAuth } from '../../core/services/http-auth.service';
 import { User } from '../models/user.model';
 
 @Injectable()
 export class UserService {
-    constructor() {}
+    constructor(private http: HttpAuth) {}
 
-    private mockApi() {
-        return of({
-            id: '1',
-            battletag: 'iipeng#1234',
-            estimates: [],
-        });
-    }
-
-    getOne(): Observable<User> {
-        return this.mockApi().pipe(map(data => data));
+    getOne(id: string): Observable<User> {
+        return this.http.get<User>(`https://localhost:3002/api/v1/users/${id}`);
     }
 }

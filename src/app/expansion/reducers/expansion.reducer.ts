@@ -7,8 +7,6 @@ import {
 import { Expansion } from '../models/expansion.model';
 
 export interface State extends EntityState<Expansion> {
-    latestId: string | null;
-    nextId: string | null;
     selectedId: string | null;
 }
 
@@ -20,8 +18,6 @@ export const adapter: EntityAdapter<Expansion> = createEntityAdapter<Expansion>(
 );
 
 export const initialState: State = adapter.getInitialState({
-    latestId: null,
-    nextId: null,
     selectedId: null,
 });
 
@@ -31,8 +27,6 @@ export function reducer(state = initialState, action: ExpansionActions): State {
             return {
                 ...adapter.addAll(action.payload.expansions, state),
                 selectedId: state.selectedId,
-                latestId: action.payload.latest,
-                nextId: action.payload.next,
             };
         }
 
@@ -50,5 +44,3 @@ export function reducer(state = initialState, action: ExpansionActions): State {
 }
 
 export const getSelectedId = (state: State) => state.selectedId;
-export const getLatestId = (state: State) => state.latestId;
-export const getNextId = (state: State) => state.nextId;

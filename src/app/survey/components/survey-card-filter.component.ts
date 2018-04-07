@@ -30,20 +30,20 @@ export class SurveyCardFilterComponent implements OnInit, OnDestroy {
     }
     @Output('filterChange') filterChange = new EventEmitter<SurveyCardFilter>();
 
-    classFilter: (Classes | 'Neutral')[] = [
-        'Mage',
-        'Warlock',
-        'Shaman',
-        'Paladin',
-        'Preist',
-        'Rogue',
-        'Druid',
-        'Hunter',
-        'Warrior',
-        'Neutral',
+    classFilter: (Classes | 'NEUTRAL')[] = [
+        'MAGE',
+        'WARLOCK',
+        'SHAMAN',
+        'PALADIN',
+        'PREIST',
+        'ROGUE',
+        'DRUID',
+        'HUNTER',
+        'WARRIOR',
+        'NEUTRAL',
     ];
     costFilter = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    rarityFilter: Rarity[] = ['Common', 'Rare', 'Epic', 'Legendary'];
+    rarityFilter: Rarity[] = ['COMMON', 'RARE', 'EPIC', 'LEGENDARY'];
     formGroup = new FormGroup({
         class: new FormControl(),
         cost: new FormControl(),

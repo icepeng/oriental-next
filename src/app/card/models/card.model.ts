@@ -1,7 +1,7 @@
 export interface Card {
     id: string;
     expansion: string;
-    class: Classes | 'Neutral';
+    class: Classes | 'NEUTRAL';
     rarity: Rarity;
     cost: number;
     stat?: {
@@ -11,13 +11,13 @@ export interface Card {
 }
 
 export type Classes =
-    | 'Mage'
-    | 'Warlock'
-    | 'Shaman'
-    | 'Paladin'
-    | 'Preist'
-    | 'Rogue'
-    | 'Druid'
-    | 'Hunter'
-    | 'Warrior';
-export type Rarity = 'Free' | 'Common' | 'Rare' | 'Epic' | 'Legendary';
+    | 'MAGE'
+    | 'WARLOCK'
+    | 'SHAMAN'
+    | 'PALADIN'
+    | 'PREIST'
+    | 'ROGUE'
+    | 'DRUID'
+    | 'HUNTER'
+    | 'WARRIOR';
+export type Rarity = 'FREE' | 'COMMON' | 'RARE' | 'EPIC' | 'LEGENDARY';

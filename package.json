@@ -31,6 +31,7 @@
     "@webcomponents/custom-elements": "1.0.0",
     "core-js": "^2.4.1",
     "echarts": "^4.0.4",
+    "jwt-decode": "^2.2.0",
     "mutationobserver-shim": "^0.3.2",
     "ngrx-store-freeze": "^0.2.1",
     "ngx-echarts": "^2.1.0",

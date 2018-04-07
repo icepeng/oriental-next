@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { StoreModule } from '@ngrx/store';
 
+import { AuthGuard } from '../core/services/auth-guard.service';
 import { SharedModule } from '../shared/shared.module';
 import { SurveyCardFilterComponent } from './components/survey-card-filter.component';
 import { SurveyGuideComponent } from './containers/survey-guide.component';
@@ -69,6 +70,7 @@ export class SurveyModule {
                     {
                         path: ':id/write',
                         component: SurveyWriteComponent,
+                        canActivate: [AuthGuard],
                         children: [
                             {
                                 path: 'cards',
