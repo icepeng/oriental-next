@@ -25,20 +25,12 @@ export class ExpansionService {
                             class: 'Druid',
                             cost: 2,
                             rarity: 'Common',
-                            stat: {
-                                power: 3,
-                                generality: 3,
-                            },
                         },
                         {
                             id: '2',
                             class: 'Druid',
                             cost: 4,
                             rarity: 'Rare',
-                            stat: {
-                                power: 2,
-                                generality: 2,
-                            },
                         },
                     ],
                     surveys: [

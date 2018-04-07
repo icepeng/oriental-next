@@ -10,11 +10,13 @@ import * as fromExpansion from '../../expansion/reducers';
 import * as fromRoot from '../../reducers';
 import { SurveyCardFilter } from '../models/filter.model';
 import * as fromFilter from './filter.reducer';
+import * as fromForm from './survey-form.reducer';
 import * as fromSurvey from './survey.reducer';
 
 export interface SurveyState {
     survey: fromSurvey.State;
     filter: fromFilter.State;
+    form: fromForm.State;
 }
 
 export interface State extends fromRoot.State {
@@ -24,6 +26,7 @@ export interface State extends fromRoot.State {
 export const reducers: ActionReducerMap<SurveyState> = {
     survey: fromSurvey.reducer,
     filter: fromFilter.reducer,
+    form: fromForm.reducer,
 };
 
 export const getSurveyState = createFeatureSelector<SurveyState>('survey');
@@ -73,6 +76,28 @@ export const getSelectedSurveyCards = createSelector(
     (expansion, cards) => expansion.cards.map(id => cards[id]),
 );
 
+// Form
+
+export const getSurveyFormState = createSelector(
+    getSurveyState,
+    state => state.form,
+);
+
+export const getFormSelectedCardId = createSelector(
+    getSurveyFormState,
+    fromForm.getSelectedCardId,
+);
+
+export const getFormCards = createSelector(
+    getSurveyFormState,
+    fromForm.getCards,
+);
+
+export const getFormExpansion = createSelector(
+    getSurveyFormState,
+    fromForm.getExpansion,
+);
+
 // Filter
 export const getSurveyFilterState = createSelector(
     getSurveyState,
@@ -89,6 +114,18 @@ export const getFilteredCards = createSelector(
     getSelectedSurveyCards,
     (filter, cards) => {
         return cards.filter(card => filterCard(card, filter));
+    },
+);
+
+export const getFilteredCardsNullOnly = createSelector(
+    getFilter,
+    getFilteredCards,
+    getFormCards,
+    (filter, cards, formCards) => {
+        if (!filter.nullOnly) {
+            return cards;
+        }
+        return cards.filter(card => !formCards[card.id]);
     },
 );
 

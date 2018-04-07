@@ -1,10 +1,10 @@
 <form [formGroup]="formGroup">
   <section class="form-block">
-    <div class="row form-group">
-      <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+    <div class="form-group row">
+      <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
         <label appLocalUI="Class" for="class"></label>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
+      <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
         <div class="select form-control">
           <select formControlName="class" id="class">
             <option appLocalUI="ALL" value="ALL">ALL</option>
@@ -12,10 +12,10 @@
           </select>
         </div>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+      <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
         <label appLocalUI="Cost" for="cost"></label>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
+      <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
         <div class="select form-control">
           <select formControlName="cost" id="cost">
             <option appLocalUI="ALL" value="ALL"></option>
@@ -23,10 +23,10 @@
           </select>
         </div>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
+      <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
         <label appLocalUI="Rarity" for="rarity"></label>
       </div>
-      <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
+      <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
         <div class="select form-control">
           <select formControlName="rarity" id="rarity">
             <option appLocalUI="ALL" value="ALL"></option>
@@ -34,16 +34,13 @@
           </select>
         </div>
       </div>
-      <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4">
-        <label appLocalUI="Is Answered" for="isAnswered"></label>
-      </div>
-      <div class="col-lg-4 col-md-4 col-sm-8 col-xs-8">
-        <div class="select form-control">
-          <select formControlName="isAnswered" id="isAnswered">
-            <option appLocalUI="ALL" value="ALL"></option>
-            <option appLocalUI="YES" value="Y"></option>
-            <option appLocalUI="NO" value="N"></option>
-          </select>
+    </div>
+    <div class="form-group row">
+      <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
+        <label appLocalUI="Unanswered Only"></label>
+        <div class="toggle-switch">
+          <input formControlName="nullOnly" type="checkbox" id="nullOnly">
+          <label for="nullOnly"></label>
         </div>
       </div>
     </div>

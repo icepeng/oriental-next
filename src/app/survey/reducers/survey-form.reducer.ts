@@ -1,8 +1,10 @@
-import { SurveyCardFilter } from '../models/filter.model';
-import { FilterActions, FilterActionTypes } from './../actions/filter.actions';
+import {
+    SurveyFormActions,
+    SurveyFormActionTypes,
+} from '../actions/survey-form.actions';
 
 export interface State {
-    selectedCard: string;
+    selectedCardId: string | null;
     cards: {
         [id: string]: {
             power: number;
@@ -18,18 +20,49 @@ export interface State {
 }
 
 export const initialState: State = {
-    selectedCard: null,
+    selectedCardId: null,
     cards: {},
     expansion: null,
 };
 
-export function reducer(state = initialState, action: any): State {
+export function reducer(
+    state = initialState,
+    action: SurveyFormActions,
+): State {
     switch (action.type) {
+        case SurveyFormActionTypes.SelectCard: {
+            return {
+                ...state,
+                selectedCardId: action.payload,
+            };
+        }
+
+        case SurveyFormActionTypes.SubmitCard: {
+            return {
+                ...state,
+                cards: {
+                    ...state.cards,
+                    [action.payload.card]: action.payload,
+                },
+                selectedCardId: null,
+            };
+        }
+
+        case SurveyFormActionTypes.SubmitExpansion: {
+            return {
+                ...state,
+                expansion: action.payload,
+                selectedCardId: null,
+            };
+        }
+
         default: {
             return state;
         }
     }
 }
+
+export const getSelectedCardId = (state: State) => state.selectedCardId;
 
 export const getCards = (state: State) => state.cards;
 

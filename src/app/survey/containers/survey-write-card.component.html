@@ -1,1 +1,64 @@
-<h1>Card Survey</h1>
+<div class="form-wrapper" *ngIf="selectedCardId$ | async as selectedCardId">
+    <div class="card-selected">
+        <img appLocalCardImg [id]="selectedCardId">
+    </div>
+    <form [formGroup]="formGroup">
+        <section class="form-block">
+            <div class="form-group">
+                <label>카드 파워</label>
+                <div class="radio-inline">
+                    <input type="radio" formControlName="power" [value]="3" id="f4">
+                    <label for="f4">매우 높음</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" formControlName="power" [value]="1" id="f3">
+                    <label for="f3">높음</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" formControlName="power" [value]="-1" id="f2">
+                    <label for="f2">낮음</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" formControlName="power" [value]="-3" id="f1">
+                    <label for="f1">매우 낮음</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>범용성</label>
+                <div class="radio-inline">
+                    <input type="radio" formControlName="generality" [value]="3" id="b4">
+                    <label for="b4">매우 높음</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" formControlName="generality" [value]="1" id="b3">
+                    <label for="b3">높음</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" formControlName="generality" [value]="-1" id="b2">
+                    <label for="b2">낮음</label>
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" formControlName="generality" [value]="-3" id="b1">
+                    <label for="b1">매우 낮음</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>추가 설명</label>
+                <textarea formControlName="description" rows="6"></textarea>
+            </div>
+            <button [attr.disabled]="formGroup.invalid ? true : null" (click)="onSubmit()" class="btn btn-primary">확인</button>
+            <button (click)="onCancel()" class="btn btn-secondary">취소</button>
+        </section>
+    </form>
+</div>
+<app-survey-card-filter [filter]="filter$ | async" (filterChange)="onFilterChange($event)">
+</app-survey-card-filter>
+<div class="row">
+    <ng-container *ngFor="let card of cards$ | async">
+        <div class="col-sm-3">
+            <div (click)="onSelect(card.id)" class="card-img">
+                <img appLocalCardImg [id]="card.id">
+            </div>
+        </div>
+    </ng-container>
+</div>

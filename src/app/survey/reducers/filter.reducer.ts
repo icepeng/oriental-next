@@ -10,7 +10,7 @@ export const initialState: State = {
         class: 'ALL',
         cost: 'ALL',
         rarity: 'ALL',
-        isAnswered: 'N',
+        nullOnly: true,
     },
 };
 

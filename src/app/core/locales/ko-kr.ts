@@ -42,7 +42,7 @@ export const ui = {
     List: '목록',
     'Starting Guide': '사전 가이드',
     'Review & Submit': '검토 & 저장',
-    'Is Answered': '답변 여부',
+    'Unanswered Only': '미응답만 표시',
     'YES': '예',
     'NO': '아니오',
 };

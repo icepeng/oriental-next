@@ -48,7 +48,7 @@ export class SurveyCardFilterComponent implements OnInit, OnDestroy {
         class: new FormControl(),
         cost: new FormControl(),
         rarity: new FormControl(),
-        isAnswered: new FormControl(),
+        nullOnly: new FormControl(),
     });
     unsubscribe$: Subject<void> = new Subject<void>();
 
