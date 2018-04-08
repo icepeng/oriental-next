@@ -6,9 +6,8 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatest, take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-
+import { combineLatest, take, takeUntil } from 'rxjs/operators';
 import * as FilterAction from '../actions/filter.actions';
 import * as FormAction from '../actions/survey-form.actions';
 import { SurveyCardFilter } from '../models/filter.model';
@@ -22,7 +21,7 @@ import * as fromSurvey from '../reducers';
 })
 export class SurveyWriteCardComponent implements OnInit, OnDestroy {
     filter$ = this.store.select(fromSurvey.getFilter);
-    cards$ = this.store.select(fromSurvey.getFilteredCardsNullOnly);
+    cards$ = this.store.select(fromSurvey.getCardFormList);
     selectedCardId$ = this.store.select(fromSurvey.getFormSelectedCardId);
     unsubscribe$: Subject<void> = new Subject<void>();
 
@@ -55,6 +54,7 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
                     description: formCard.description,
                 });
             });
+        this.store.dispatch(new FormAction.SelectCard(null));
     }
 
     onFilterChange(filter: SurveyCardFilter) {

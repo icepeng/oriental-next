@@ -35,14 +35,16 @@ export class UserService {
                         id: response.id,
                         user: user.id,
                         survey: response.surveyId,
-                        cardResponses: response.cardResponses.map(x => x.id),
+                        cardResponses: response.cardResponses.map(
+                            x => x.cardId + response.id,
+                        ),
                         expansionResponse: response.expansionResponse.id,
                     }));
                     const cardResponses = res.user.responses.reduce(
                         (arr, response) => [
                             ...arr,
                             ...response.cardResponses.map(x => ({
-                                id: x.id,
+                                id: x.cardId + response.id,
                                 card: x.cardId,
                                 power: x.power,
                                 generality: x.generality,
@@ -52,7 +54,10 @@ export class UserService {
                         [] as CardResponse[],
                     );
                     const expansionResponses = res.user.responses.reduce(
-                        (arr, response) => [...arr, response.expansionResponse],
+                        (arr, response) => [
+                            ...arr,
+                            { ...response.expansionResponse, id: response.id },
+                        ],
                         [] as ExpansionResponse[],
                     );
                     return {

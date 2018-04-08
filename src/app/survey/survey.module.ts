@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { StoreModule } from '@ngrx/store';
-
 import { AuthGuard } from '../core/services/auth-guard.service';
 import { SharedModule } from '../shared/shared.module';
 import { SurveyCardFilterComponent } from './components/survey-card-filter.component';
@@ -18,6 +17,9 @@ import { SurveyWriteSubmitComponent } from './containers/survey-write-submit.com
 import { SurveyWriteComponent } from './containers/survey-write.component';
 import { SurveyComponent } from './containers/survey.component';
 import { reducers } from './reducers';
+import { WriteCanDeactivateGuard } from './services/write-can-deactivate.guard';
+import { WriteCardCanDeactivateGuard } from './services/write-card-can-deactivate.guard';
+import { WriteExpansionCanDeactivateGuard } from './services/write-expansion-can-deactivate.guard';
 
 @NgModule({
     imports: [
@@ -45,7 +47,11 @@ export class SurveyModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: RootSurveyModule,
-            providers: [],
+            providers: [
+                WriteCardCanDeactivateGuard,
+                WriteCanDeactivateGuard,
+                WriteExpansionCanDeactivateGuard,
+            ],
         };
     }
 }
@@ -71,14 +77,19 @@ export class SurveyModule {
                         path: ':id/write',
                         component: SurveyWriteComponent,
                         canActivate: [AuthGuard],
+                        canDeactivate: [WriteCanDeactivateGuard],
                         children: [
                             {
                                 path: 'cards',
                                 component: SurveyWriteCardComponent,
+                                canDeactivate: [WriteCardCanDeactivateGuard],
                             },
                             {
                                 path: 'expansion',
                                 component: SurveyWriteExpansionComponent,
+                                canDeactivate: [
+                                    WriteExpansionCanDeactivateGuard,
+                                ],
                             },
                             {
                                 path: 'submit',

@@ -22,6 +22,7 @@ export class SurveyWriteExpansionComponent implements OnInit {
         balance: new FormControl(null, Validators.required),
         description: new FormControl(''),
     });
+    submit = false;
 
     constructor(
         private store: Store<any>,
@@ -58,6 +59,7 @@ export class SurveyWriteExpansionComponent implements OnInit {
                 ...this.formGroup.value,
             }),
         );
+        this.submit = true;
         this.router.navigate(['../', 'submit'], { relativeTo: this.route });
     }
 }

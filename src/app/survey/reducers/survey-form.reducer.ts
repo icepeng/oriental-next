@@ -43,6 +43,7 @@ export function reducer(
                     return {
                         ...obj,
                         [x.card]: {
+                            card: x.card,
                             power: x.power,
                             generality: x.generality,
                             description: x.description,

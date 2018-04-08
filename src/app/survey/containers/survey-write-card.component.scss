@@ -1,7 +1,16 @@
 .card-img {
-    margin-bottom: 12px;
     cursor: pointer;
 }
+
+.card-badge {
+    text-align: center;
+    padding-left: 12px;
+}
+
+.card-wrapper {
+    margin-bottom: 12px;
+}
+
 .card-selected {
     text-align: center;
     padding-top: 24px;
@@ -16,6 +25,7 @@
         }
     }
 }
+
 .form-wrapper {
     border-bottom: 1px solid #ccc;
 }

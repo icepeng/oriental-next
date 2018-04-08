@@ -126,15 +126,24 @@ export const getFilteredCards = createSelector(
     },
 );
 
-export const getFilteredCardsNullOnly = createSelector(
+export const getCardFormList = createSelector(
     getFilter,
     getFilteredCards,
     getFormCards,
     (filter, cards, formCards) => {
+        const res = cards.map<
+            Card & {
+                form: {
+                    power: number;
+                    generality: number;
+                    description: string;
+                };
+            }
+        >(card => ({ ...card, form: formCards[card.id] }));
         if (!filter.nullOnly) {
-            return cards;
+            return res;
         }
-        return cards.filter(card => !formCards[card.id]);
+        return res.filter(card => !card.form);
     },
 );
 

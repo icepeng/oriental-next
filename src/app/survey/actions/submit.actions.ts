@@ -20,7 +20,7 @@ export class Add implements Action {
 export class AddSuccess implements Action {
     readonly type = SurveySubmitActionTypes.Add;
 
-    constructor(public payload: string) {}
+    constructor(public payload: { id: string; form: SurveyForm }) {}
 }
 
 export class Edit implements Action {
@@ -31,6 +31,8 @@ export class Edit implements Action {
 
 export class EditSuccess implements Action {
     readonly type = SurveySubmitActionTypes.EditSuccess;
+
+    constructor(public payload: { id: string; form: SurveyForm }) {}
 }
 
 export class Failure implements Action {

@@ -31,7 +31,7 @@ export class LocalCardImageDirective implements OnInit, OnChanges, OnDestroy {
             .select(fromRoot.getLocalCards)
             .pipe(
                 combineLatest(this.id$),
-                map(([cards, id]) => {if (!cards[id]) {console.log(id)} return cards[id].imgLink}),
+                map(([cards, id]) => cards[id].imgLink),
                 takeUntil(this.unsubscribe$),
             )
             .subscribe(imgLink => {

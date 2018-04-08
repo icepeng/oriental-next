@@ -2,12 +2,12 @@ export interface SurveyResponse {
     id: number;
     user: string;
     survey: number;
-    cardResponses: number[];
+    cardResponses: string[];
     expansionResponse: number;
 }
 
 export interface CardResponse {
-    id: number;
+    id: string;
     card: string;
     power: number;
     generality: number;
@@ -30,9 +30,14 @@ export interface ResponseFromApi {
 }
 
 export interface CardResponseFromApi {
-    id: number;
     cardId: string;
     power: number;
     generality: number;
+    description: string;
+}
+
+export interface ExpansionResponseFromApi {
+    fun: number;
+    balance: number;
     description: string;
 }

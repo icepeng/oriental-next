@@ -1,7 +1,7 @@
 <clr-main-container>
   <clr-header>
     <div class="branding">
-      <a href="#" class="nav-link">
+      <a href="#" [routerLink]="['/home']" class="nav-link">
         <span class="clr-icon clr-clarity-logo"></span>
         <span class="title">Oriental Salad</span>
       </a>
@@ -31,7 +31,7 @@
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a (click)="openLocaleModal()" clrDropdownItem>Change Locale</a>
-          <a href="..." clrDropdownItem>My Profile</a>
+          <!-- <a href="..." clrDropdownItem>My Profile</a> -->
           <a (click)="logout()" clrDropdownItem>Log out</a>
         </clr-dropdown-menu>
       </clr-dropdown>
@@ -50,5 +50,5 @@
     </div>
   </clr-header>
   <app-locale-modal></app-locale-modal>
-  <router-outlet></router-outlet>
+  <router-outlet *ngIf="expansions$ | async"></router-outlet>
 </clr-main-container>
