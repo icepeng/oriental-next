@@ -107,6 +107,11 @@ export const getFormExpansion = createSelector(
     fromForm.getExpansion,
 );
 
+export const getFormIsLoading = createSelector(
+    getSurveyFormState,
+    fromForm.getIsLoading,
+);
+
 // Filter
 export const getSurveyFilterState = createSelector(
     getSurveyState,

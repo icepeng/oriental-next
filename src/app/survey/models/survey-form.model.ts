@@ -1,7 +1,6 @@
 export interface SurveyForm {
-    survey: string;
-    cardEstimates: SurveyCardForm[];
-    expansionEstimate: SurveyExpansionForm;
+    cardResponses: SurveyCardForm[];
+    expansionResponse: SurveyExpansionForm;
 }
 
 export interface SurveyCardForm {

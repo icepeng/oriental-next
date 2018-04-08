@@ -3,6 +3,7 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AuthGuard } from '../core/services/auth-guard.service';
 import { SharedModule } from '../shared/shared.module';
@@ -16,7 +17,9 @@ import { SurveyWriteExpansionComponent } from './containers/survey-write-expansi
 import { SurveyWriteSubmitComponent } from './containers/survey-write-submit.component';
 import { SurveyWriteComponent } from './containers/survey-write.component';
 import { SurveyComponent } from './containers/survey.component';
+import { SurveyFormEffects } from './effects/survey-form.effects';
 import { reducers } from './reducers';
+import { SurveyService } from './services/survey.service';
 import { WriteCanDeactivateGuard } from './services/write-can-deactivate.guard';
 import { WriteCardCanDeactivateGuard } from './services/write-card-can-deactivate.guard';
 import { WriteExpansionCanDeactivateGuard } from './services/write-expansion-can-deactivate.guard';
@@ -48,6 +51,7 @@ export class SurveyModule {
         return {
             ngModule: RootSurveyModule,
             providers: [
+                SurveyService,
                 WriteCardCanDeactivateGuard,
                 WriteCanDeactivateGuard,
                 WriteExpansionCanDeactivateGuard,
@@ -60,6 +64,7 @@ export class SurveyModule {
     imports: [
         SurveyModule,
         StoreModule.forFeature('survey', reducers),
+        EffectsModule.forFeature([SurveyFormEffects]),
         RouterModule.forChild([
             {
                 path: 'surveys',

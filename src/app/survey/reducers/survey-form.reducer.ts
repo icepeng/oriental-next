@@ -1,25 +1,27 @@
 import {
-    SurveyFormActions,
+    SurveySubmitActions,
+    SurveySubmitActionTypes,
+} from '../actions/submit.actions';
+import {
     SurveyFormActionTypes,
+    SurveyFormActions,
 } from '../actions/survey-form.actions';
+import {
+    SurveyCardForm,
+    SurveyExpansionForm,
+} from '../models/survey-form.model';
 
 export interface State {
+    isLoading: boolean;
     selectedCardId: string | null;
     cards: {
-        [id: string]: {
-            power: number;
-            generality: number;
-            description: string;
-        };
+        [id: string]: SurveyCardForm;
     };
-    expansion: {
-        fun: number;
-        balance: number;
-        description: string;
-    };
+    expansion: SurveyExpansionForm;
 }
 
 export const initialState: State = {
+    isLoading: false,
     selectedCardId: null,
     cards: {},
     expansion: null,
@@ -27,7 +29,7 @@ export const initialState: State = {
 
 export function reducer(
     state = initialState,
-    action: SurveyFormActions,
+    action: SurveyFormActions | SurveySubmitActions,
 ): State {
     switch (action.type) {
         case SurveyFormActionTypes.Init: {
@@ -84,6 +86,23 @@ export function reducer(
             };
         }
 
+        case SurveySubmitActionTypes.Add:
+        case SurveySubmitActionTypes.Edit: {
+            return {
+                ...state,
+                isLoading: true,
+            };
+        }
+
+        case SurveySubmitActionTypes.Failure:
+        case SurveySubmitActionTypes.AddSuccess:
+        case SurveySubmitActionTypes.EditSuccess: {
+            return {
+                ...state,
+                isLoading: false,
+            };
+        }
+
         default: {
             return state;
         }
@@ -95,3 +114,5 @@ export const getSelectedCardId = (state: State) => state.selectedCardId;
 export const getCards = (state: State) => state.cards;
 
 export const getExpansion = (state: State) => state.expansion;
+
+export const getIsLoading = (state: State) => state.isLoading;

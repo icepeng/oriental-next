@@ -14,31 +14,42 @@ export enum SurveySubmitActionTypes {
 export class Add implements Action {
     readonly type = SurveySubmitActionTypes.Add;
 
-    constructor(public payload: { form: SurveyForm }) {}
+    constructor(public payload: { survey: number; form: SurveyForm }) {}
 }
 
 export class AddSuccess implements Action {
-    readonly type = SurveySubmitActionTypes.Add;
+    readonly type = SurveySubmitActionTypes.AddSuccess;
 
-    constructor(public payload: { id: string; form: SurveyForm }) {}
+    constructor(
+        public payload: { id: number; survey: number; form: SurveyForm },
+    ) {}
 }
 
 export class Edit implements Action {
     readonly type = SurveySubmitActionTypes.Edit;
 
-    constructor(public payload: { id: string; form: SurveyForm }) {}
+    constructor(
+        public payload: { id: number; survey: number; form: SurveyForm },
+    ) {}
 }
 
 export class EditSuccess implements Action {
     readonly type = SurveySubmitActionTypes.EditSuccess;
 
-    constructor(public payload: { id: string; form: SurveyForm }) {}
+    constructor(
+        public payload: { id: number; survey: number; form: SurveyForm },
+    ) {}
 }
 
 export class Failure implements Action {
-    readonly type = SurveySubmitActionTypes.Add;
+    readonly type = SurveySubmitActionTypes.Failure;
 
     constructor(public payload: HttpErrorResponse) {}
 }
 
-export type SurveyActions = Add | AddSuccess | Edit | EditSuccess | Failure;
+export type SurveySubmitActions =
+    | Add
+    | AddSuccess
+    | Edit
+    | EditSuccess
+    | Failure;

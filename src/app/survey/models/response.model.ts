@@ -26,7 +26,7 @@ export interface ResponseFromApi {
     user: string;
     surveyId: number;
     cardResponses: CardResponseFromApi[];
-    expansionResponse: ExpansionResponse;
+    expansionResponse: ExpansionResponseFromApi;
 }
 
 export interface CardResponseFromApi {
