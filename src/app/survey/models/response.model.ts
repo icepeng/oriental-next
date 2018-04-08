@@ -20,3 +20,11 @@ export interface ExpansionResponse {
     balance: number;
     description: string;
 }
+
+export interface ResponseFromApi {
+    id: string;
+    user: string;
+    surveyId: string;
+    cardResponses: CardResponse[];
+    expansionResponse: ExpansionResponse;
+}

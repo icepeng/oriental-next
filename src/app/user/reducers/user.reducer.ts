@@ -26,7 +26,7 @@ export function reducer(
     switch (action.type) {
         case UserActionTypes.LoadSuccess: {
             return {
-                ...adapter.addOne(action.payload, state),
+                ...adapter.addOne(action.payload.user, state),
                 selectedId: state.selectedId,
             };
         }

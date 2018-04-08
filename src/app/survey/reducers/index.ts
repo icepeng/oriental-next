@@ -10,6 +10,9 @@ import * as fromExpansion from '../../expansion/reducers';
 import * as fromRoot from '../../reducers';
 import { SurveyCardFilter } from '../models/filter.model';
 import * as fromFilter from './filter.reducer';
+import * as fromCardResponse from './response-card.reducer';
+import * as fromExpansionResponse from './response-expansion.reducer';
+import * as fromResponse from './response.reducer';
 import * as fromForm from './survey-form.reducer';
 import * as fromSurvey from './survey.reducer';
 
@@ -17,6 +20,9 @@ export interface SurveyState {
     survey: fromSurvey.State;
     filter: fromFilter.State;
     form: fromForm.State;
+    response: fromResponse.State;
+    cardResponse: fromCardResponse.State;
+    expansionResponse: fromExpansionResponse.State;
 }
 
 export interface State extends fromRoot.State {
@@ -27,6 +33,9 @@ export const reducers: ActionReducerMap<SurveyState> = {
     survey: fromSurvey.reducer,
     filter: fromFilter.reducer,
     form: fromForm.reducer,
+    response: fromResponse.reducer,
+    cardResponse: fromCardResponse.reducer,
+    expansionResponse: fromExpansionResponse.reducer,
 };
 
 export const getSurveyState = createFeatureSelector<SurveyState>('survey');
@@ -146,3 +155,40 @@ function filterCard(card: Card, filter: SurveyCardFilter) {
     }
     return true;
 }
+
+// Responses
+export const getResponseState = createSelector(
+    getSurveyState,
+    state => state.response,
+);
+
+export const {
+    selectIds: getResponseIds,
+    selectEntities: getResponseEntities,
+    selectAll: getAllResponses,
+    selectTotal: getTotalResponses,
+} = fromResponse.adapter.getSelectors(getResponseState);
+
+export const getCardResponseState = createSelector(
+    getSurveyState,
+    state => state.cardResponse,
+);
+
+export const {
+    selectIds: getCardResponseIds,
+    selectEntities: getCardResponseEntities,
+    selectAll: getAllCardResponses,
+    selectTotal: getTotalCardResponses,
+} = fromCardResponse.adapter.getSelectors(getCardResponseState);
+
+export const getExpansionResponseState = createSelector(
+    getSurveyState,
+    state => state.expansionResponse,
+);
+
+export const {
+    selectIds: getExpansionResponseIds,
+    selectEntities: getExpansionResponseEntities,
+    selectAll: getAllExpansionResponses,
+    selectTotal: getTotalExpansionResponses,
+} = fromExpansionResponse.adapter.getSelectors(getExpansionResponseState);

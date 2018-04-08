@@ -23,7 +23,7 @@ export class UserEffects {
         this.userService
           .getOne(payload)
           .pipe(
-            map(user => new LoadSuccess(user)),
+            map(res => new LoadSuccess(res)),
             catchError(err => of(new LoadFailure(err))),
           ),
       ),

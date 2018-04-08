@@ -1,14 +1,57 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
 import { HttpAuth } from '../../core/services/http-auth.service';
-import { User } from '../models/user.model';
+import {
+    SurveyResponse,
+    CardResponse,
+    ExpansionResponse,
+} from '../../survey/models/response.model';
+import { User, UserFromApi } from '../models/user.model';
 
 @Injectable()
 export class UserService {
     constructor(private http: HttpAuth) {}
 
-    getOne(id: string): Observable<User> {
-        return this.http.get<User>(`https://localhost:3002/api/v1/users/${id}`);
+    getOne(
+        id: string,
+    ): Observable<{
+        user: User;
+        responses: SurveyResponse[];
+        cardResponses: CardResponse[];
+        expansionResponses: ExpansionResponse[];
+    }> {
+        return this.http
+            .get<UserFromApi>(`https://localhost:3002/api/v1/users/${id}`)
+            .pipe(
+                map(res => {
+                    const user = {
+                        id: res.user.id,
+                        battletag: res.user.battletag,
+                    };
+                    const responses = res.user.responses.map(response => ({
+                        id: response.id,
+                        user: user.id,
+                        survey: response.surveyId,
+                        cardResponses: response.cardResponses.map(x => x.id),
+                        expansionResponse: response.expansionResponse.id,
+                    }));
+                    const cardResponses = res.user.responses.reduce(
+                        (arr, response) => [...arr, ...response.cardResponses],
+                        [],
+                    );
+                    const expansionResponses = res.user.responses.reduce(
+                        (arr, response) => [...arr, response.expansionResponse],
+                        [],
+                    );
+                    return {
+                        user,
+                        responses,
+                        cardResponses,
+                        expansionResponses,
+                    };
+                }),
+            );
     }
 }

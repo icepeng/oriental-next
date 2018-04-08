@@ -1,6 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Action } from '@ngrx/store';
 
+import {
+    CardResponse,
+    ExpansionResponse,
+    SurveyResponse,
+} from '../../survey/models/response.model';
 import { User } from '../models/user.model';
 
 export enum UserActionTypes {
@@ -19,7 +24,14 @@ export class Load implements Action {
 export class LoadSuccess implements Action {
     readonly type = UserActionTypes.LoadSuccess;
 
-    constructor(public payload: User) {}
+    constructor(
+        public payload: {
+            user: User;
+            responses: SurveyResponse[];
+            cardResponses: CardResponse[];
+            expansionResponses: ExpansionResponse[];
+        },
+    ) {}
 }
 
 export class LoadFailure implements Action {
