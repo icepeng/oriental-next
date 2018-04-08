@@ -1,6 +1,6 @@
 <h1 appLocalUI="Survey List"></h1>
 <div class="row">
-  <div *ngFor="let survey of ongoingSurveys$ | async" class="col-sm-3">
+  <div *ngFor="let survey of ongoingList$ | async" class="col-sm-3">
     <div class="card">
       <div class="card-img">
         <img appLocalExpansionImg [code]="survey.expansion">
@@ -13,7 +13,8 @@
         <p class="card-text">{{ survey.startTime | date:'yyyy-MM-dd' }} ~ {{ survey.endTime | date:'yyyy-MM-dd' }}</p>
       </div>
       <div class="card-footer">
-        <button [routerLink]="['/', 'surveys', survey.id, 'write']" class="btn btn-sm btn-link">작성하기</button>
+          <button *ngIf="!survey.responsed" [routerLink]="['/', 'surveys', survey.id, 'write']" class="btn btn-sm btn-link">작성하기</button>
+          <button *ngIf="survey.responsed" [routerLink]="['/', 'surveys', survey.id, 'write']" class="btn btn-sm btn-link">편집하기</button>
       </div>
     </div>
   </div>

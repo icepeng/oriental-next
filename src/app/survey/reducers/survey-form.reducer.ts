@@ -30,6 +30,33 @@ export function reducer(
     action: SurveyFormActions,
 ): State {
     switch (action.type) {
+        case SurveyFormActionTypes.Init: {
+            return {
+                ...initialState,
+            };
+        }
+
+        case SurveyFormActionTypes.Load: {
+            return {
+                ...state,
+                cards: action.payload.cardResponses.reduce((obj, x) => {
+                    return {
+                        ...obj,
+                        [x.card]: {
+                            power: x.power,
+                            generality: x.generality,
+                            description: x.description,
+                        },
+                    };
+                }, {}),
+                expansion: {
+                    fun: action.payload.expansionResponse.fun,
+                    balance: action.payload.expansionResponse.balance,
+                    description: action.payload.expansionResponse.description,
+                },
+            };
+        }
+
         case SurveyFormActionTypes.SelectCard: {
             return {
                 ...state,

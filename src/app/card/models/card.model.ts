@@ -15,7 +15,7 @@ export type Classes =
     | 'WARLOCK'
     | 'SHAMAN'
     | 'PALADIN'
-    | 'PREIST'
+    | 'PRIEST'
     | 'ROGUE'
     | 'DRUID'
     | 'HUNTER'

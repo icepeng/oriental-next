@@ -35,7 +35,7 @@ export class SurveyCardFilterComponent implements OnInit, OnDestroy {
         'WARLOCK',
         'SHAMAN',
         'PALADIN',
-        'PREIST',
+        'PRIEST',
         'ROGUE',
         'DRUID',
         'HUNTER',

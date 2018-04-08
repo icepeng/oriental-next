@@ -1,5 +1,5 @@
 export interface Survey {
-    id: string;
+    id: number;
     expansion: string;
     startTime: string;
     endTime: string | null;

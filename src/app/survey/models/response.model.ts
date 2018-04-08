@@ -1,13 +1,13 @@
 export interface SurveyResponse {
-    id: string;
+    id: number;
     user: string;
-    survey: string;
-    cardResponses: string[];
-    expansionResponse: string;
+    survey: number;
+    cardResponses: number[];
+    expansionResponse: number;
 }
 
 export interface CardResponse {
-    id: string;
+    id: number;
     card: string;
     power: number;
     generality: number;
@@ -15,16 +15,24 @@ export interface CardResponse {
 }
 
 export interface ExpansionResponse {
-    id: string;
+    id: number;
     fun: number;
     balance: number;
     description: string;
 }
 
 export interface ResponseFromApi {
-    id: string;
+    id: number;
     user: string;
-    surveyId: string;
-    cardResponses: CardResponse[];
+    surveyId: number;
+    cardResponses: CardResponseFromApi[];
     expansionResponse: ExpansionResponse;
+}
+
+export interface CardResponseFromApi {
+    id: number;
+    cardId: string;
+    power: number;
+    generality: number;
+    description: string;
 }

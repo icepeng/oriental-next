@@ -9,6 +9,7 @@ import {
     ExpansionResponse,
 } from '../../survey/models/response.model';
 import { User, UserFromApi } from '../models/user.model';
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class UserService {
@@ -23,7 +24,7 @@ export class UserService {
         expansionResponses: ExpansionResponse[];
     }> {
         return this.http
-            .get<UserFromApi>(`https://localhost:3002/api/v1/users/${id}`)
+            .get<UserFromApi>(`${environment.apiAddress}/users/${id}`)
             .pipe(
                 map(res => {
                     const user = {
@@ -38,12 +39,21 @@ export class UserService {
                         expansionResponse: response.expansionResponse.id,
                     }));
                     const cardResponses = res.user.responses.reduce(
-                        (arr, response) => [...arr, ...response.cardResponses],
-                        [],
+                        (arr, response) => [
+                            ...arr,
+                            ...response.cardResponses.map(x => ({
+                                id: x.id,
+                                card: x.cardId,
+                                power: x.power,
+                                generality: x.generality,
+                                description: x.description,
+                            })),
+                        ],
+                        [] as CardResponse[],
                     );
                     const expansionResponses = res.user.responses.reduce(
                         (arr, response) => [...arr, response.expansionResponse],
-                        [],
+                        [] as ExpansionResponse[],
                     );
                     return {
                         user,
