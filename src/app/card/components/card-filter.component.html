@@ -8,7 +8,7 @@
         <div class="select form-control">
           <select formControlName="class" id="class">
             <option appLocalUI="ALL" value="ALL">ALL</option>
-            <option *ngFor="let _class of classFilter" [value]="_class">{{ _class }}</option>
+            <option [appLocalUI]="_class" *ngFor="let _class of classFilter" [value]="_class"></option>
           </select>
         </div>
       </div>
@@ -30,7 +30,7 @@
         <div class="select form-control">
           <select formControlName="rarity" id="rarity">
             <option appLocalUI="ALL" value="ALL"></option>
-            <option *ngFor="let rarity of rarityFilter" [value]="rarity">{{ rarity }}</option>
+            <option [appLocalUI]="_rarity" *ngFor="let _rarity of rarityFilter" [value]="_rarity"></option>
           </select>
         </div>
       </div>
