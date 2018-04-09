@@ -21,7 +21,12 @@ export class AddSuccess implements Action {
     readonly type = SurveySubmitActionTypes.AddSuccess;
 
     constructor(
-        public payload: { id: number; survey: number; form: SurveyForm },
+        public payload: {
+            id: number;
+            user: string;
+            survey: number;
+            form: SurveyForm;
+        },
     ) {}
 }
 
@@ -29,7 +34,11 @@ export class Edit implements Action {
     readonly type = SurveySubmitActionTypes.Edit;
 
     constructor(
-        public payload: { id: number; survey: number; form: SurveyForm },
+        public payload: {
+            id: number;
+            survey: number;
+            form: SurveyForm;
+        },
     ) {}
 }
 
@@ -37,7 +46,12 @@ export class EditSuccess implements Action {
     readonly type = SurveySubmitActionTypes.EditSuccess;
 
     constructor(
-        public payload: { id: number; survey: number; form: SurveyForm },
+        public payload: {
+            id: number;
+            user: string;
+            survey: number;
+            form: SurveyForm;
+        },
     ) {}
 }
 

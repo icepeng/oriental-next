@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import {
     Add,
     AddSuccess,
@@ -29,6 +30,7 @@ export class SurveyFormEffects {
                                 survey: payload.survey,
                                 form: payload.form,
                                 id: res.id,
+                                user: res.user,
                             }),
                     ),
                     catchError(error => of(new Failure(error))),
@@ -51,6 +53,7 @@ export class SurveyFormEffects {
                                     survey: payload.survey,
                                     form: payload.form,
                                     id: payload.id,
+                                    user: res.user,
                                 }),
                         ),
                         catchError(error => of(new Failure(error))),
@@ -58,8 +61,20 @@ export class SurveyFormEffects {
             ),
         );
 
+    @Effect({ dispatch: false })
+    success$ = this.actions$
+        .ofType(
+            SurveySubmitActionTypes.AddSuccess,
+            SurveySubmitActionTypes.EditSuccess,
+        )
+        .pipe(
+            map((action: AddSuccess | EditSuccess) => action.payload),
+            tap(() => this.router.navigate(['surveys', 'success'])),
+        );
+
     constructor(
         private actions$: Actions,
         private surveyService: SurveyService,
+        private router: Router,
     ) {}
 }

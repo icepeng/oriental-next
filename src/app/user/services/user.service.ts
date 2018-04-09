@@ -36,7 +36,7 @@ export class UserService {
                         user: user.id,
                         survey: response.surveyId,
                         cardResponses: response.cardResponses.map(
-                            x => x.cardId + response.id,
+                            x => `${x.cardId}-${response.id}`,
                         ),
                         expansionResponse: response.id,
                     }));
@@ -44,7 +44,7 @@ export class UserService {
                         (arr, response) => [
                             ...arr,
                             ...response.cardResponses.map(x => ({
-                                id: x.cardId + response.id,
+                                id: `${x.cardId}-${response.id}`,
                                 card: x.cardId,
                                 power: x.power,
                                 generality: x.generality,

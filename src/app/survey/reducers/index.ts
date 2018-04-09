@@ -112,6 +112,11 @@ export const getFormIsLoading = createSelector(
     fromForm.getIsLoading,
 );
 
+export const getFormDirty = createSelector(
+    getSurveyFormState,
+    fromForm.getDirty,
+);
+
 // Filter
 export const getSurveyFilterState = createSelector(
     getSurveyState,

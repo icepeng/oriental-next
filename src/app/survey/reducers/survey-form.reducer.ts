@@ -13,6 +13,7 @@ import {
 
 export interface State {
     isLoading: boolean;
+    dirty: boolean;
     selectedCardId: string | null;
     cards: {
         [id: string]: SurveyCardForm;
@@ -22,6 +23,7 @@ export interface State {
 
 export const initialState: State = {
     isLoading: false,
+    dirty: false,
     selectedCardId: null,
     cards: {},
     expansion: null,
@@ -40,7 +42,7 @@ export function reducer(
 
         case SurveyFormActionTypes.Load: {
             return {
-                ...state,
+                ...initialState,
                 cards: action.payload.cardResponses.reduce((obj, x) => {
                     return {
                         ...obj,
@@ -75,6 +77,7 @@ export function reducer(
                     [action.payload.card]: action.payload,
                 },
                 selectedCardId: null,
+                dirty: true,
             };
         }
 
@@ -83,6 +86,7 @@ export function reducer(
                 ...state,
                 expansion: action.payload,
                 selectedCardId: null,
+                dirty: true,
             };
         }
 
@@ -100,6 +104,7 @@ export function reducer(
             return {
                 ...state,
                 isLoading: false,
+                dirty: false,
             };
         }
 
@@ -116,3 +121,5 @@ export const getCards = (state: State) => state.cards;
 export const getExpansion = (state: State) => state.expansion;
 
 export const getIsLoading = (state: State) => state.isLoading;
+
+export const getDirty = (state: State) => state.dirty;

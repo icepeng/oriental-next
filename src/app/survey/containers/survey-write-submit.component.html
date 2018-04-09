@@ -1,3 +1,29 @@
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                카드 파워
+            </div>
+            <div class="card-block">
+                <div class="card-text">
+                    <app-card-response-ratio [cardResponses]="cardResponses$ | async" label="카드 파워" prop="power"></app-card-response-ratio>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                범용성 (카드 유형)
+            </div>
+            <div class="card-block">
+                <div class="card-text">
+                    <app-card-response-ratio [cardResponses]="cardResponses$ | async" label="범용성" prop="generality"></app-card-response-ratio>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <clr-alert *ngIf="cardMin$ | async" clrAlertType="alert-danger" [clrAlertClosable]="false">
     <div clr-alert-item class="alert-item">
         <span class="alert-text">
@@ -12,4 +38,4 @@
         </span>
     </div>
 </clr-alert>
-<button [clrLoading]="isLoading$ | async" (click)="onSubmit()" class="btn btn-primary">저장</button>
+<button [attr.disabled]="(disabled$ | async) ? true : null" [clrLoading]="isLoading$ | async" (click)="onSubmit()" class="btn btn-primary">저장</button>

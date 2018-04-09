@@ -9,6 +9,7 @@
         <p>
           <span appLocalExpansion [code]="survey.expansion" prop="name" class="card-title"></span>
           <span appLocalUI="Ongoing" class="label label-light-blue"></span>
+          <span *ngIf="survey.isPreRelease" appLocalUI="Pre-Release" class="label label-orange"></span>
         </p>
         <p class="card-text">{{ survey.startTime | date:'yyyy-MM-dd' }} ~ {{ survey.endTime | date:'yyyy-MM-dd' }}</p>
       </div>
@@ -25,7 +26,8 @@
       </div>
       <div class="card-block">
         <span appLocalExpansion [code]="survey.expansion" prop="name" class="card-title"></span>
-        <span appLocalUI="Closed" class="label label-orange"></span>
+        <span appLocalUI="Closed" class="label label-blue"></span>
+        <span *ngIf="survey.isPreRelease" appLocalUI="Pre-Release" class="label label-orange"></span>
         <p class="card-text">{{ survey.startTime | date:'yyyy-MM-dd' }} ~ {{ survey.endTime | date:'yyyy-MM-dd' }}</p>
       </div>
       <div class="card-footer">
