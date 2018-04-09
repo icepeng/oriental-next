@@ -1,3 +1,10 @@
+<clr-alert clrAlertType="alert-warning" [(clrAlertClosed)]="alertClosed">
+    <div class="alert-item">
+        <span class="alert-text">
+            평가 작성을 완료한 후 다른 카드를 선택해주세요.
+        </span>
+    </div>
+</clr-alert>
 <div class="form-wrapper" *ngIf="selectedCardId$ | async as selectedCardId">
     <div class="card-selected">
         <img appLocalCardImg [id]="selectedCardId">

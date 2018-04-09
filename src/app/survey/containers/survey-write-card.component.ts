@@ -31,6 +31,8 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
         description: new FormControl(''),
     });
 
+    alertClosed = true;
+
     constructor(private store: Store<any>) {}
 
     ngOnInit() {
@@ -63,11 +65,12 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
 
     onSelect(id: string) {
         this.selectedCardId$.pipe(take(1)).subscribe(x => {
+            document.querySelector('.content-area').scrollTo(0, 0);
             if (x) {
+                this.alertClosed = false;
                 return;
             }
             this.store.dispatch(new FormAction.SelectCard(id));
-            document.querySelector('.content-area').scrollTo(0, 0);
         });
     }
 
