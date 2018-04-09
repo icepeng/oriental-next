@@ -65,7 +65,7 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
 
     onSelect(id: string) {
         this.selectedCardId$.pipe(take(1)).subscribe(x => {
-            document.querySelector('.content-area').scrollTo(0, 0);
+            document.querySelector('.content-area').scrollTop = 0;
             if (x) {
                 this.alertClosed = false;
                 return;
@@ -76,6 +76,7 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
 
     onSubmit() {
         this.selectedCardId$.pipe(take(1)).subscribe(card => {
+            this.alertClosed = true;
             this.store.dispatch(
                 new FormAction.SubmitCard({
                     ...this.formGroup.value,
@@ -86,6 +87,7 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
     }
 
     onCancel() {
+        this.alertClosed = true;
         this.store.dispatch(new FormAction.SelectCard(null));
     }
 
