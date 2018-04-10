@@ -43,10 +43,10 @@ import { UserModule } from './user/user.module';
         StoreRouterConnectingModule.forRoot({
             stateKey: 'router',
         }),
-        StoreDevtoolsModule.instrument({
-            name: 'Oriental Salad Store DevTools',
-            logOnly: environment.production,
-        }),
+        // StoreDevtoolsModule.instrument({
+        //     name: 'Oriental Salad Store DevTools',
+        //     logOnly: environment.production,
+        // }),
         EffectsModule.forRoot([AuthEffects]),
         Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
         SharedModule,
