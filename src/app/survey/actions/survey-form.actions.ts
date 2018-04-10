@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 export enum SurveyFormActionTypes {
     Init = '[Survey Form] Init',
     SelectCard = '[Survey Form] Select Card',
+    CloseError = '[Survey Form] Close Error',
 }
 
 export class Init implements Action {
@@ -15,4 +16,8 @@ export class SelectCard implements Action {
     constructor(public payload: string) {}
 }
 
-export type SurveyFormActions = Init | SelectCard;
+export class CloseError implements Action {
+    readonly type = SurveyFormActionTypes.CloseError;
+}
+
+export type SurveyFormActions = Init | SelectCard | CloseError;

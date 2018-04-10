@@ -29,4 +29,8 @@ export class SurveyWriteComponent implements OnInit {
             this.store.dispatch(new FilterAction.ResetFilter());
         });
     }
+
+    alertClose() {
+        this.store.dispatch(new FormAction.CloseError());
+    }
 }

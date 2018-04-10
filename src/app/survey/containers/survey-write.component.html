@@ -14,7 +14,7 @@
         type="button"></button>
     </li>
   </ul>
-  <clr-alert [clrAlertType]="'alert-danger'" [clrAlertClosed]="!(error$ | async)">
+  <clr-alert [clrAlertType]="'alert-danger'" [clrAlertClosed]="!(error$ | async)" (clrAlertClosedChange)="alertClose()">
     <div class="alert-item">
         <span class="alert-text">
           저장 중 오류가 발생했습니다.

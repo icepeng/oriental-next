@@ -41,6 +41,13 @@ export function reducer(
             };
         }
 
+        case SurveyFormActionTypes.CloseError: {
+            return {
+                ...state,
+                error: null,
+            };
+        }
+
         case SurveySubmitActionTypes.SubmitCard:
         case SurveySubmitActionTypes.SubmitExpansion: {
             return {
