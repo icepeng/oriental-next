@@ -6,6 +6,7 @@ import * as LocaleModal from './core/actions/locale-modal.actions';
 import * as Expansion from './expansion/actions/expansion.actions';
 import * as fromExpansion from './expansion/reducers';
 import * as fromUser from './user/reducers';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 @Component({
     selector: 'my-app',
@@ -16,7 +17,11 @@ export class AppComponent implements OnInit {
     authedUser$ = this.store.select(fromUser.getAuthedUser);
     expansions$ = this.store.select(fromExpansion.getTotalExpansions);
 
-    constructor(private router: Router, private store: Store<any>) {}
+    constructor(
+        private router: Router,
+        private store: Store<any>,
+        public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics,
+    ) {}
 
     ngOnInit() {
         this.store.dispatch(new Expansion.Load());

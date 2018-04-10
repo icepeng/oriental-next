@@ -12,6 +12,8 @@ import {
 } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 import { environment } from 'environments/environment';
 
 import { AboutComponent } from './about/about.component';
@@ -46,6 +48,7 @@ import { UserModule } from './user/user.module';
             logOnly: environment.production,
         }),
         EffectsModule.forRoot([AuthEffects]),
+        Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
         SharedModule,
         HomeModule.forRoot(),
         ExpansionModule.forRoot(),
