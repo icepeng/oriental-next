@@ -19,7 +19,7 @@ export class SurveyService {
     }> {
         return this.http
             .post<{ id: number }>(
-                `${environment.apiAddress}/surveys/${surveyId}/responses`,
+                `${environment.apiAddress}/surveys/${surveyId}/responses/empty`,
                 {},
             )
             .pipe(map(data => data));
