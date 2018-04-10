@@ -38,4 +38,4 @@
         </span>
     </div>
 </clr-alert>
-<button [attr.disabled]="(disabled$ | async) ? true : null" [clrLoading]="isLoading$ | async" (click)="onSubmit()" class="btn btn-primary">저장</button>
+<button type="button" [attr.disabled]="(disabled$ | async) ? true : null" [clrLoading]="isLoading$ | async" (click)="onSubmit()" class="btn btn-primary">저장</button>

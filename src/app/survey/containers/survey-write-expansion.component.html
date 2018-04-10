@@ -45,6 +45,6 @@
             <label>추가 설명</label>
             <textarea formControlName="description" rows="6"></textarea>
         </div>
-        <button (click)="onSubmit()" [attr.disabled]="formGroup.invalid ? true : null" class="btn btn-primary">확인</button>
+        <button type="button" (click)="onSubmit()" [attr.disabled]="formGroup.invalid ? true : null" class="btn btn-primary">확인</button>
     </section>
 </form>
