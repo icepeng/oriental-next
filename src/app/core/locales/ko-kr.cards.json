@@ -154,7 +154,7 @@
             "https://assets.webn.mobi/hearthstone/be837fb1b704ad69f25ee755caee6acae9d4ee20fd953bee9183db1132ff1069.png",
         "name": "유리 기사"
     },
-    "druidofthe-scythe": {
+    "druid-of-the-scythe": {
         "imgLink":
             "https://assets.webn.mobi/hearthstone/e85b33e6d905b8866c8c47867922e3c245fb9e247cd7eca6cc6a8a4786e3177c.png",
         "name": "낫의 드루이드"
@@ -474,7 +474,7 @@
             "https://assets.webn.mobi/hearthstone/c0e4987b584cd5c91818534f18f8c737241cc6a622f1e18c1dd102e5dc58f94f.png",
         "name": "종을 울려라!"
     },
-    "paragonof-light": {
+    "paragon-of-light": {
         "imgLink":
             "https://assets.webn.mobi/hearthstone/45142f5d81412d4562975f3b0e2c640ac4bbe169bca81d608604cba273364ed3.png",
         "name": "빛의 용장"
@@ -549,7 +549,7 @@
             "https://assets.webn.mobi/hearthstone/1341590178d40e6a29212445499ca20817f787e9fc499273750f00294ba5b670.png",
         "name": "마녀숲 사과"
     },
-    "curseof-weakness": {
+    "curse-of-weakness": {
         "imgLink":
             "https://assets.webn.mobi/hearthstone/f90f95e745f0e092543bde0718846b516e82b55d137152a06c290ec353ac64da.png",
         "name": "무력화 저주"
