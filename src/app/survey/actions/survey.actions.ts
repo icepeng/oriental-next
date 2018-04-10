@@ -10,7 +10,7 @@ export enum SurveyActionTypes {
 export class Select implements Action {
     readonly type = SurveyActionTypes.Select;
 
-    constructor(public payload: string) {}
+    constructor(public payload: number) {}
 }
 
 export type SurveyActions = Select;

@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, take, combineLatest } from 'rxjs/operators';
-
+import { take } from 'rxjs/operators';
 import * as FilterAction from '../actions/filter.actions';
-import * as SurveyAction from '../actions/survey.actions';
+import * as ResponseAction from '../actions/response.actions';
 import * as FormAction from '../actions/survey-form.actions';
-import * as fromUser from '../../user/reducers';
+import * as SurveyAction from '../actions/survey.actions';
 import * as fromSurvey from '../reducers';
 
 @Component({
@@ -16,46 +15,18 @@ import * as fromSurvey from '../reducers';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurveyWriteComponent implements OnInit {
+    error$ = this.store.select(fromSurvey.getFormError);
+
     constructor(private store: Store<any>, private route: ActivatedRoute) {}
 
     ngOnInit() {
-        this.route.paramMap
-            .pipe(
-                map(paramMap => paramMap.get('id')),
-                combineLatest(
-                    this.store.select(fromUser.getAuthedUserId),
-                    this.store.select(fromSurvey.getAllResponses),
-                    this.store.select(fromSurvey.getCardResponseEntities),
-                    this.store.select(fromSurvey.getExpansionResponseEntities),
-                ),
-                take(1),
-            )
-            .subscribe(
-                ([
-                    id,
-                    userId,
-                    responses,
-                    cardResponses,
-                    expansionResponses,
-                ]) => {
-                    this.store.dispatch(new SurveyAction.Select(id));
-                    const response = responses.find(
-                        x => x.user === userId && x.survey === +id,
-                    );
-                    if (!response) {
-                        return this.store.dispatch(new FormAction.Init());
-                    }
-                    return this.store.dispatch(
-                        new FormAction.Load({
-                            cardResponses: response.cardResponses.map(
-                                x => cardResponses[x],
-                            ),
-                            expansionResponse:
-                                expansionResponses[response.expansionResponse],
-                        }),
-                    );
-                },
+        this.route.paramMap.pipe(take(1)).subscribe(paramMap => {
+            this.store.dispatch(
+                new SurveyAction.Select(+paramMap.get('surveyId')),
             );
-        this.store.dispatch(new FilterAction.ResetFilter());
+            this.store.dispatch(new ResponseAction.Select(+paramMap.get('id')));
+            this.store.dispatch(new FormAction.Init());
+            this.store.dispatch(new FilterAction.ResetFilter());
+        });
     }
 }

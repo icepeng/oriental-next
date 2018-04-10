@@ -12,21 +12,15 @@ import {
 } from '../models/survey-form.model';
 
 export interface State {
+    error: string;
     isLoading: boolean;
-    dirty: boolean;
-    selectedCardId: string | null;
-    cards: {
-        [id: string]: SurveyCardForm;
-    };
-    expansion: SurveyExpansionForm;
+    selectedCardId: string;
 }
 
 export const initialState: State = {
+    error: null,
     isLoading: false,
-    dirty: false,
     selectedCardId: null,
-    cards: {},
-    expansion: null,
 };
 
 export function reducer(
@@ -40,28 +34,6 @@ export function reducer(
             };
         }
 
-        case SurveyFormActionTypes.Load: {
-            return {
-                ...initialState,
-                cards: action.payload.cardResponses.reduce((obj, x) => {
-                    return {
-                        ...obj,
-                        [x.card]: {
-                            card: x.card,
-                            power: x.power,
-                            generality: x.generality,
-                            description: x.description,
-                        },
-                    };
-                }, {}),
-                expansion: {
-                    fun: action.payload.expansionResponse.fun,
-                    balance: action.payload.expansionResponse.balance,
-                    description: action.payload.expansionResponse.description,
-                },
-            };
-        }
-
         case SurveyFormActionTypes.SelectCard: {
             return {
                 ...state,
@@ -69,42 +41,30 @@ export function reducer(
             };
         }
 
-        case SurveyFormActionTypes.SubmitCard: {
-            return {
-                ...state,
-                cards: {
-                    ...state.cards,
-                    [action.payload.card]: action.payload,
-                },
-                selectedCardId: null,
-                dirty: true,
-            };
-        }
-
-        case SurveyFormActionTypes.SubmitExpansion: {
-            return {
-                ...state,
-                expansion: action.payload,
-                selectedCardId: null,
-                dirty: true,
-            };
-        }
-
-        case SurveySubmitActionTypes.Add:
-        case SurveySubmitActionTypes.Edit: {
+        case SurveySubmitActionTypes.SubmitCard:
+        case SurveySubmitActionTypes.SubmitExpansion: {
             return {
                 ...state,
                 isLoading: true,
             };
         }
 
-        case SurveySubmitActionTypes.Failure:
-        case SurveySubmitActionTypes.AddSuccess:
-        case SurveySubmitActionTypes.EditSuccess: {
+        case SurveySubmitActionTypes.SubmitCardSuccess:
+        case SurveySubmitActionTypes.SubmitExpansionSuccess: {
             return {
                 ...state,
+                error: null,
                 isLoading: false,
-                dirty: false,
+                selectedCardId: null,
+            };
+        }
+
+        case SurveySubmitActionTypes.SubmitCardFailure:
+        case SurveySubmitActionTypes.SubmitExpansionFailure: {
+            return {
+                ...state,
+                error: action.payload.message,
+                isLoading: false,
             };
         }
 
@@ -114,12 +74,8 @@ export function reducer(
     }
 }
 
-export const getSelectedCardId = (state: State) => state.selectedCardId;
-
-export const getCards = (state: State) => state.cards;
-
-export const getExpansion = (state: State) => state.expansion;
-
 export const getIsLoading = (state: State) => state.isLoading;
 
-export const getDirty = (state: State) => state.dirty;
+export const getError = (state: State) => state.error;
+
+export const getSelectedCardId = (state: State) => state.selectedCardId;

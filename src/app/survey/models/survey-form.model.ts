@@ -1,8 +1,3 @@
-export interface SurveyForm {
-    cardResponses: SurveyCardForm[];
-    expansionResponse: SurveyExpansionForm;
-}
-
 export interface SurveyCardForm {
     card: string;
     power: number;

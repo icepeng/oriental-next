@@ -8,24 +8,25 @@ import { StoreModule } from '@ngrx/store';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { AuthGuard } from '../core/services/auth-guard.service';
 import { SharedModule } from '../shared/shared.module';
+import { CardResponseRatioComponent } from './components/card-response-ratio.component';
 import { SurveyCardFilterComponent } from './components/survey-card-filter.component';
 import { SurveyGuideComponent } from './components/survey-guide.component';
 import { SurveySuccessComponent } from './components/survey-success.component';
 import { SurveyListComponent } from './containers/survey-list.component';
+import { SurveyPrepareComponent } from './containers/survey-prepare.component';
 import { SurveyResponseListComponent } from './containers/survey-response-list.component';
 import { SurveyResponseViewComponent } from './containers/survey-response-view.component';
 import { SurveyWriteCardComponent } from './containers/survey-write-card.component';
 import { SurveyWriteExpansionComponent } from './containers/survey-write-expansion.component';
-import { SurveyWriteSubmitComponent } from './containers/survey-write-submit.component';
+import { SurveyWriteReviewComponent } from './containers/survey-write-review.component';
 import { SurveyWriteComponent } from './containers/survey-write.component';
 import { SurveyComponent } from './containers/survey.component';
 import { SurveyFormEffects } from './effects/survey-form.effects';
+import { SurveyPrepareEffects } from './effects/survey-prepare.effects';
 import { reducers } from './reducers';
 import { SurveyService } from './services/survey.service';
-import { WriteCanDeactivateGuard } from './services/write-can-deactivate.guard';
 import { WriteCardCanDeactivateGuard } from './services/write-card-can-deactivate.guard';
 import { WriteExpansionCanDeactivateGuard } from './services/write-expansion-can-deactivate.guard';
-import { CardResponseRatioComponent } from './components/card-response-ratio.component';
 
 @NgModule({
     imports: [
@@ -47,9 +48,10 @@ import { CardResponseRatioComponent } from './components/card-response-ratio.com
         SurveyResponseListComponent,
         SurveyResponseViewComponent,
         SurveyCardFilterComponent,
-        SurveyWriteSubmitComponent,
+        SurveyWriteReviewComponent,
         SurveySuccessComponent,
         CardResponseRatioComponent,
+        SurveyPrepareComponent,
     ],
 })
 export class SurveyModule {
@@ -59,7 +61,6 @@ export class SurveyModule {
             providers: [
                 SurveyService,
                 WriteCardCanDeactivateGuard,
-                WriteCanDeactivateGuard,
                 WriteExpansionCanDeactivateGuard,
             ],
         };
@@ -70,7 +71,7 @@ export class SurveyModule {
     imports: [
         SurveyModule,
         StoreModule.forFeature('survey', reducers),
-        EffectsModule.forFeature([SurveyFormEffects]),
+        EffectsModule.forFeature([SurveyFormEffects, SurveyPrepareEffects]),
         RouterModule.forChild([
             {
                 path: 'surveys',
@@ -89,10 +90,14 @@ export class SurveyModule {
                         component: SurveySuccessComponent,
                     },
                     {
-                        path: ':id/write',
+                        path: ':surveyId/prepare',
+                        component: SurveyPrepareComponent,
+                        canActivate: [AuthGuard],
+                    },
+                    {
+                        path: ':surveyId/responses/:id/write',
                         component: SurveyWriteComponent,
                         canActivate: [AuthGuard],
-                        canDeactivate: [WriteCanDeactivateGuard],
                         children: [
                             {
                                 path: 'cards',
@@ -107,8 +112,8 @@ export class SurveyModule {
                                 ],
                             },
                             {
-                                path: 'submit',
-                                component: SurveyWriteSubmitComponent,
+                                path: 'review',
+                                component: SurveyWriteReviewComponent,
                             },
                             {
                                 path: '',
@@ -118,11 +123,11 @@ export class SurveyModule {
                         ],
                     },
                     {
-                        path: ':id/responses',
+                        path: ':surveyId/responses',
                         component: SurveyResponseListComponent,
                     },
                     {
-                        path: ':surveyId/responses/:id',
+                        path: ':surveyId/responses/:id/view',
                         component: SurveyResponseViewComponent,
                     },
                     { path: '', redirectTo: 'guide', pathMatch: 'full' },

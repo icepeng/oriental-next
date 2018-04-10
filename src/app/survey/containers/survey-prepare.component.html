@@ -1,0 +1,13 @@
+<h1>주의사항</h1>
+<clr-alert [clrAlertType]="'alert-danger'" [clrAlertClosed]="!(error$ | async)">
+  <div class="alert-item">
+      <span class="alert-text">
+        등록 중 오류가 발생했습니다.
+      </span>
+  </div>
+</clr-alert>
+<ul class="list list-spacer">
+  <li>한번 작성한 평가는 수정만 가능하며, 삭제는 불가능합니다.</li>
+  <li>카드 평가가 10개 미만이거나, 확장팩 평가를 하지 않은 경우 설문 종료 이후 삭제됩니다.</li>
+</ul>
+<button class="btn btn-primary" [clrLoading]="isLoading$ | async" (click)="start()">시작하기</button>

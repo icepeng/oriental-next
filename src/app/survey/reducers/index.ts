@@ -3,18 +3,19 @@ import {
     createFeatureSelector,
     createSelector,
 } from '@ngrx/store';
-
 import { Card } from '../../card/models/card.model';
 import * as fromCard from '../../card/reducers';
 import * as fromExpansion from '../../expansion/reducers';
 import * as fromRoot from '../../reducers';
 import { SurveyCardFilter } from '../models/filter.model';
+import { SurveyCardForm } from '../models/survey-form.model';
 import * as fromFilter from './filter.reducer';
 import * as fromCardResponse from './response-card.reducer';
 import * as fromExpansionResponse from './response-expansion.reducer';
 import * as fromResponse from './response.reducer';
 import * as fromForm from './survey-form.reducer';
 import * as fromSurvey from './survey.reducer';
+import * as fromPrepare from './survey-prepare.reducer';
 
 export interface SurveyState {
     survey: fromSurvey.State;
@@ -23,6 +24,7 @@ export interface SurveyState {
     response: fromResponse.State;
     cardResponse: fromCardResponse.State;
     expansionResponse: fromExpansionResponse.State;
+    prepare: fromPrepare.State;
 }
 
 export interface State extends fromRoot.State {
@@ -36,6 +38,7 @@ export const reducers: ActionReducerMap<SurveyState> = {
     response: fromResponse.reducer,
     cardResponse: fromCardResponse.reducer,
     expansionResponse: fromExpansionResponse.reducer,
+    prepare: fromPrepare.reducer,
 };
 
 export const getSurveyState = createFeatureSelector<SurveyState>('survey');
@@ -85,26 +88,89 @@ export const getSelectedSurveyCards = createSelector(
     (expansion, cards) => expansion.cards.map(id => cards[id]),
 );
 
-// Form
+// Responses
+export const getResponseState = createSelector(
+    getSurveyState,
+    state => state.response,
+);
 
+export const {
+    selectIds: getResponseIds,
+    selectEntities: getResponseEntities,
+    selectAll: getAllResponses,
+    selectTotal: getTotalResponses,
+} = fromResponse.adapter.getSelectors(getResponseState);
+
+export const getSelectedResponseId = createSelector(
+    getResponseState,
+    state => state.selectedId,
+);
+
+export const getSelectedResponse = createSelector(
+    getResponseEntities,
+    getSelectedResponseId,
+    (entities, selectedId) => {
+        return selectedId && entities[selectedId];
+    },
+);
+
+export const getCardResponseState = createSelector(
+    getSurveyState,
+    state => state.cardResponse,
+);
+
+export const {
+    selectIds: getCardResponseIds,
+    selectEntities: getCardResponseEntities,
+    selectAll: getAllCardResponses,
+    selectTotal: getTotalCardResponses,
+} = fromCardResponse.adapter.getSelectors(getCardResponseState);
+
+export const getSelectedCardResponseId = createSelector(
+    getCardResponseState,
+    state => state.selectedId,
+);
+
+export const getSelectedCardResponse = createSelector(
+    getCardResponseEntities,
+    getSelectedCardResponseId,
+    (entities, selectedId) => {
+        return selectedId && entities[selectedId];
+    },
+);
+
+export const getExpansionResponseState = createSelector(
+    getSurveyState,
+    state => state.expansionResponse,
+);
+
+export const {
+    selectIds: getExpansionResponseIds,
+    selectEntities: getExpansionResponseEntities,
+    selectAll: getAllExpansionResponses,
+    selectTotal: getTotalExpansionResponses,
+} = fromExpansionResponse.adapter.getSelectors(getExpansionResponseState);
+
+export const getSelectedExpansionResponse = createSelector(
+    getExpansionResponseEntities,
+    getSelectedResponseId,
+    (entities, selectedId) => {
+        return selectedId && entities[selectedId];
+    },
+);
+
+export const getSelectedResponseCards = createSelector(
+    getSelectedResponse,
+    getCardResponseEntities,
+    (response, entities) => {
+        return response && response.cardResponses.map(id => entities[id]);
+    },
+);
+
+// Form
 export const getSurveyFormState = createSelector(
     getSurveyState,
     state => state.form,
-);
-
-export const getFormSelectedCardId = createSelector(
-    getSurveyFormState,
-    fromForm.getSelectedCardId,
-);
-
-export const getFormCards = createSelector(
-    getSurveyFormState,
-    fromForm.getCards,
-);
-
-export const getFormExpansion = createSelector(
-    getSurveyFormState,
-    fromForm.getExpansion,
 );
 
 export const getFormIsLoading = createSelector(
@@ -112,9 +178,14 @@ export const getFormIsLoading = createSelector(
     fromForm.getIsLoading,
 );
 
-export const getFormDirty = createSelector(
+export const getFormError = createSelector(
     getSurveyFormState,
-    fromForm.getDirty,
+    fromForm.getError,
+);
+
+export const getFormSelectedCardId = createSelector(
+    getSurveyFormState,
+    fromForm.getSelectedCardId,
 );
 
 // Filter
@@ -139,17 +210,14 @@ export const getFilteredCards = createSelector(
 export const getCardFormList = createSelector(
     getFilter,
     getFilteredCards,
-    getFormCards,
-    (filter, cards, formCards) => {
+    getSelectedResponseId,
+    getCardResponseEntities,
+    (filter, cards, responseId, formCards) => {
         const res = cards.map<
             Card & {
-                form: {
-                    power: number;
-                    generality: number;
-                    description: string;
-                };
+                form: SurveyCardForm;
             }
-        >(card => ({ ...card, form: formCards[card.id] }));
+        >(card => ({ ...card, form: formCards[`${card.id}-${responseId}`] }));
         if (!filter.nullOnly) {
             return res;
         }
@@ -175,39 +243,18 @@ function filterCard(card: Card, filter: SurveyCardFilter) {
     return true;
 }
 
-// Responses
-export const getResponseState = createSelector(
+// Prepare
+export const getSurveyPrepareState = createSelector(
     getSurveyState,
-    state => state.response,
+    state => state.prepare,
 );
 
-export const {
-    selectIds: getResponseIds,
-    selectEntities: getResponseEntities,
-    selectAll: getAllResponses,
-    selectTotal: getTotalResponses,
-} = fromResponse.adapter.getSelectors(getResponseState);
-
-export const getCardResponseState = createSelector(
-    getSurveyState,
-    state => state.cardResponse,
+export const getPrepareIsLoading = createSelector(
+    getSurveyPrepareState,
+    fromPrepare.getIsLoading,
 );
 
-export const {
-    selectIds: getCardResponseIds,
-    selectEntities: getCardResponseEntities,
-    selectAll: getAllCardResponses,
-    selectTotal: getTotalCardResponses,
-} = fromCardResponse.adapter.getSelectors(getCardResponseState);
-
-export const getExpansionResponseState = createSelector(
-    getSurveyState,
-    state => state.expansionResponse,
+export const getPrepareError = createSelector(
+    getSurveyPrepareState,
+    fromPrepare.getError,
 );
-
-export const {
-    selectIds: getExpansionResponseIds,
-    selectEntities: getExpansionResponseEntities,
-    selectAll: getAllExpansionResponses,
-    selectTotal: getTotalExpansionResponses,
-} = fromExpansionResponse.adapter.getSelectors(getExpansionResponseState);

@@ -19,7 +19,7 @@ export class AuthService {
                 resolve(event.data);
             };
             window.open(environment.authAddress);
-            window.addEventListener('message', receiveMessage);
+            window.addEventListener('message', receiveMessage, false);
         });
     }
 

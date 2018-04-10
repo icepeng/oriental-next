@@ -1,8 +1,12 @@
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import {
+    EntityAdapter,
+    EntityState,
+    Update,
+    createEntityAdapter,
+} from '@ngrx/entity';
 import { UserActionTypes, UserActions } from '../../user/actions/user.actions';
 import {
-    AddSuccess,
-    EditSuccess,
+    SubmitExpansionSuccess,
     SurveySubmitActionTypes,
     SurveySubmitActions,
 } from '../actions/submit.actions';
@@ -19,11 +23,14 @@ export const adapter: EntityAdapter<ExpansionResponse> = createEntityAdapter<
 export const initialState: State = adapter.getInitialState();
 
 function buildExpansionResponse(
-    action: AddSuccess | EditSuccess,
-): ExpansionResponse {
+    action: SubmitExpansionSuccess,
+): Update<ExpansionResponse> {
     return {
-        ...action.payload.form.expansionResponse,
-        id: action.payload.id,
+        id: action.payload.response,
+        changes: {
+            ...action.payload.form,
+            id: action.payload.response,
+        },
     };
 }
 
@@ -38,21 +45,9 @@ export function reducer(
             };
         }
 
-        case SurveySubmitActionTypes.AddSuccess: {
+        case SurveySubmitActionTypes.SubmitExpansionSuccess: {
             return {
-                ...adapter.addOne(buildExpansionResponse(action), state),
-            };
-        }
-
-        case SurveySubmitActionTypes.EditSuccess: {
-            return {
-                ...adapter.updateOne(
-                    {
-                        id: action.payload.id,
-                        changes: buildExpansionResponse(action),
-                    },
-                    state,
-                ),
+                ...adapter.upsertOne(buildExpansionResponse(action), state),
             };
         }
 

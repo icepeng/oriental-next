@@ -13,25 +13,30 @@
         </p>
         <p class="card-text">{{ survey.startTime | date:'yyyy-MM-dd' }} ~ {{ survey.endTime | date:'yyyy-MM-dd' }}</p>
       </div>
-      <div class="card-footer">
-          <button *ngIf="!survey.responsed" [routerLink]="['/', 'surveys', survey.id, 'write']" class="btn btn-sm btn-link">작성하기</button>
-          <button *ngIf="survey.responsed" [routerLink]="['/', 'surveys', survey.id, 'write']" class="btn btn-sm btn-link">편집하기</button>
+      <div *ngIf="loggedIn$ | async; else loginBlock;" class="card-footer">
+        <button *ngIf="!survey.responseId" [routerLink]="['/', 'surveys', survey.id, 'prepare']" class="btn btn-sm btn-link">작성하기</button>
+        <button *ngIf="survey.responseId" [routerLink]="['/', 'surveys', survey.id, 'responses', survey.responseId, 'write']" class="btn btn-sm btn-link">편집하기</button>
       </div>
+      <ng-template #loginBlock>
+        <div class="card-footer">
+          <button (click)="login()" class="btn btn-sm btn-link ">로그인</button>
+        </div>
+      </ng-template>
     </div>
   </div>
-  <div *ngFor="let survey of closedSurveys$ | async" class="col-sm-3">
-    <div class="card">
-      <div class="card-img">
-        <img appLocalExpansionImg [code]="survey.expansion">
+  <div *ngFor="let survey of closedSurveys$ | async " class="col-sm-3 ">
+    <div class="card ">
+      <div class="card-img ">
+        <img appLocalExpansionImg [code]="survey.expansion ">
       </div>
-      <div class="card-block">
-        <span appLocalExpansion [code]="survey.expansion" prop="name" class="card-title"></span>
-        <span appLocalUI="Closed" class="label label-blue"></span>
-        <span *ngIf="survey.isPreRelease" appLocalUI="Pre-Release" class="label label-orange"></span>
-        <p class="card-text">{{ survey.startTime | date:'yyyy-MM-dd' }} ~ {{ survey.endTime | date:'yyyy-MM-dd' }}</p>
+      <div class="card-block ">
+        <span appLocalExpansion [code]="survey.expansion " prop="name " class="card-title "></span>
+        <span appLocalUI="Closed " class="label label-blue "></span>
+        <span *ngIf="survey.isPreRelease " appLocalUI="Pre-Release " class="label label-orange "></span>
+        <p class="card-text ">{{ survey.startTime | date:'yyyy-MM-dd' }} ~ {{ survey.endTime | date:'yyyy-MM-dd' }}</p>
       </div>
-      <div class="card-footer">
-        <button class="btn btn-sm btn-link">결과 보기</button>
+      <div class="card-footer ">
+        <button class="btn btn-sm btn-link ">결과 보기</button>
       </div>
     </div>
   </div>

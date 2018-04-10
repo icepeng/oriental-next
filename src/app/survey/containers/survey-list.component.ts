@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { combineLatest, map } from 'rxjs/operators';
-
+import * as AuthAction from '../../core/actions/auth.actions';
+import * as fromRoot from '../../reducers';
 import * as fromUser from '../../user/reducers';
 import { Survey } from '../models/survey.model';
 import * as fromSurvey from '../reducers';
@@ -14,8 +15,9 @@ import * as fromSurvey from '../reducers';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurveyListComponent implements OnInit {
-    ongoingList$: Observable<(Survey & { responsed: boolean })[]>;
+    ongoingList$: Observable<(Survey & { responseId: number })[]>;
     closedSurveys$ = this.store.select(fromSurvey.getClosedSurveys);
+    loggedIn$ = this.store.select(fromRoot.getLoggedIn);
 
     constructor(private store: Store<any>) {}
 
@@ -29,15 +31,19 @@ export class SurveyListComponent implements OnInit {
                 ),
                 map(([surveys, userId, responses]) => {
                     return surveys.map(survey => {
-                        const responsed = !!responses.find(
+                        const response = responses.find(
                             x => x.survey === survey.id && x.user === userId,
                         );
                         return {
                             ...survey,
-                            responsed,
+                            responseId: response ? response.id : null,
                         };
                     });
                 }),
             );
+    }
+
+    login() {
+        this.store.dispatch(new AuthAction.Login());
     }
 }

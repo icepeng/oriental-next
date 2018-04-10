@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
 import { combineLatest, take, takeUntil } from 'rxjs/operators';
 import * as FilterAction from '../actions/filter.actions';
+import * as SubmitAction from '../actions/submit.actions';
 import * as FormAction from '../actions/survey-form.actions';
 import { SurveyCardFilter } from '../models/filter.model';
 import * as fromSurvey from '../reducers';
@@ -23,6 +24,7 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
     filter$ = this.store.select(fromSurvey.getFilter);
     cards$ = this.store.select(fromSurvey.getCardFormList);
     selectedCardId$ = this.store.select(fromSurvey.getFormSelectedCardId);
+    isLoading$ = this.store.select(fromSurvey.getFormIsLoading);
     unsubscribe$: Subject<void> = new Subject<void>();
 
     formGroup = new FormGroup({
@@ -38,12 +40,16 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.selectedCardId$
             .pipe(
-                combineLatest(this.store.select(fromSurvey.getFormCards)),
+                combineLatest(
+                    this.store.select(fromSurvey.getSelectedResponseId),
+                    this.store.select(fromSurvey.getCardResponseEntities),
+                ),
                 takeUntil(this.unsubscribe$),
             )
-            .subscribe(([id, formCards]) => {
-                const formCard = formCards[id];
-                if (!formCard) {
+            .subscribe(([cardId, responseId, cardResponseEntities]) => {
+                const id = `${cardId}-${responseId}`;
+                const cardResponse = cardResponseEntities[id];
+                if (!cardResponse) {
                     return this.formGroup.reset({
                         power: null,
                         generality: null,
@@ -51,9 +57,9 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
                     });
                 }
                 this.formGroup.reset({
-                    power: formCard.power,
-                    generality: formCard.generality,
-                    description: formCard.description,
+                    power: cardResponse.power,
+                    generality: cardResponse.generality,
+                    description: cardResponse.description,
                 });
             });
         this.store.dispatch(new FormAction.SelectCard(null));
@@ -75,15 +81,31 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
     }
 
     onSubmit() {
-        this.selectedCardId$.pipe(take(1)).subscribe(card => {
-            this.alertClosed = true;
-            this.store.dispatch(
-                new FormAction.SubmitCard({
-                    ...this.formGroup.value,
-                    card,
-                }),
-            );
-        });
+        this.selectedCardId$
+            .pipe(
+                combineLatest(
+                    this.store.select(fromSurvey.getSelectedSurveyId),
+                    this.store.select(fromSurvey.getSelectedResponseId),
+                    this.isLoading$,
+                ),
+                take(1),
+            )
+            .subscribe(([card, survey, response, isLoading]) => {
+                if (this.formGroup.invalid || isLoading) {
+                    return;
+                }
+                this.alertClosed = true;
+                this.store.dispatch(
+                    new SubmitAction.SubmitCard({
+                        form: {
+                            ...this.formGroup.value,
+                            card,
+                        },
+                        survey,
+                        response,
+                    }),
+                );
+            });
     }
 
     onCancel() {

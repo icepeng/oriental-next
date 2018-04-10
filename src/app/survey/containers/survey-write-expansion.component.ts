@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { map, take } from 'rxjs/operators';
+import { map, take, combineLatest } from 'rxjs/operators';
 
-import * as FormAction from '../actions/survey-form.actions';
+import * as SubmitAction from '../actions/submit.actions';
 import * as fromSurvey from '../reducers';
 
 @Component({
@@ -15,6 +15,8 @@ import * as fromSurvey from '../reducers';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurveyWriteExpansionComponent implements OnInit {
+    isLoading$ = this.store.select(fromSurvey.getFormIsLoading);
+
     expansion$: Observable<string>;
 
     formGroup = new FormGroup({
@@ -35,10 +37,11 @@ export class SurveyWriteExpansionComponent implements OnInit {
             .select(fromSurvey.getSelectedSurvey)
             .pipe(map(survey => survey.expansion));
         this.store
-            .select(fromSurvey.getFormExpansion)
+            .select(fromSurvey.getSelectedExpansionResponse)
             .pipe(take(1))
-            .subscribe(formExpansion => {
-                if (!formExpansion) {
+            .subscribe(expansionResponse => {
+                console.log(expansionResponse)
+                if (!expansionResponse) {
                     return this.formGroup.reset({
                         fun: null,
                         balance: null,
@@ -46,20 +49,38 @@ export class SurveyWriteExpansionComponent implements OnInit {
                     });
                 }
                 this.formGroup.reset({
-                    fun: formExpansion.fun,
-                    balance: formExpansion.balance,
-                    description: formExpansion.description,
+                    fun: expansionResponse.fun,
+                    balance: expansionResponse.balance,
+                    description: expansionResponse.description,
                 });
             });
     }
 
     onSubmit() {
-        this.store.dispatch(
-            new FormAction.SubmitExpansion({
-                ...this.formGroup.value,
-            }),
-        );
-        this.submit = true;
-        this.router.navigate(['../', 'submit'], { relativeTo: this.route });
+        this.store
+            .select(fromSurvey.getSelectedSurveyId)
+            .pipe(
+                combineLatest(
+                    this.store.select(fromSurvey.getSelectedResponseId),
+                    this.isLoading$,
+                ),
+                take(1),
+            )
+            .subscribe(([survey, response, isLoading]) => {
+                if (this.formGroup.invalid || isLoading) {
+                    return;
+                }
+                this.store.dispatch(
+                    new SubmitAction.SubmitExpansion({
+                        form: this.formGroup.value,
+                        survey,
+                        response,
+                    }),
+                );
+                this.submit = true;
+                this.router.navigate(['../', 'review'], {
+                    relativeTo: this.route,
+                });
+            });
     }
 }

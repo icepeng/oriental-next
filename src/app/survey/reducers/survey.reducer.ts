@@ -1,14 +1,13 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-
-import { SurveyActions, SurveyActionTypes } from '../actions/survey.actions';
-import { Survey } from '../models/survey.model';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import {
-    ExpansionActions,
     ExpansionActionTypes,
+    ExpansionActions,
 } from '../../expansion/actions/expansion.actions';
+import { SurveyActionTypes, SurveyActions } from '../actions/survey.actions';
+import { Survey } from '../models/survey.model';
 
 export interface State extends EntityState<Survey> {
-    selectedId: string | null;
+    selectedId: number | null;
 }
 
 export const adapter: EntityAdapter<Survey> = createEntityAdapter<Survey>({

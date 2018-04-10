@@ -1,8 +1,16 @@
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import {
+    EntityAdapter,
+    EntityState,
+    Update,
+    createEntityAdapter,
+} from '@ngrx/entity';
 import { UserActionTypes, UserActions } from '../../user/actions/user.actions';
 import {
-    AddSuccess,
-    EditSuccess,
+    ResponseActionTypes,
+    ResponseActions,
+} from '../actions/response.actions';
+import {
+    SubmitCardSuccess,
     SurveySubmitActionTypes,
     SurveySubmitActions,
 } from '../actions/submit.actions';
@@ -23,21 +31,29 @@ export const initialState: State = adapter.getInitialState({
     selectedId: null,
 });
 
-function buildCardResponses(action: AddSuccess | EditSuccess) {
-    return action.payload.form.cardResponses.map<CardResponse>(x => ({
-        id: `${x.card}-${action.payload.id}`,
-        card: x.card,
-        description: x.description,
-        generality: x.generality,
-        power: x.power,
-    }));
+function buildCardResponse(action: SubmitCardSuccess): Update<CardResponse> {
+    const id = `${action.payload.form.card}-${action.payload.response}`;
+    return {
+        id,
+        changes: {
+            id,
+            ...action.payload.form,
+        },
+    };
 }
 
 export function reducer(
     state = initialState,
-    action: UserActions | SurveySubmitActions,
+    action: UserActions | SurveySubmitActions | ResponseActions,
 ): State {
     switch (action.type) {
+        case ResponseActionTypes.SelectCard: {
+            return {
+                ...state,
+                selectedId: action.payload,
+            };
+        }
+
         case UserActionTypes.LoadSuccess: {
             return {
                 ...adapter.addMany(action.payload.cardResponses, state),
@@ -45,23 +61,9 @@ export function reducer(
             };
         }
 
-        case SurveySubmitActionTypes.AddSuccess: {
+        case SurveySubmitActionTypes.SubmitCardSuccess: {
             return {
-                ...adapter.addMany(buildCardResponses(action), state),
-                selectedId: state.selectedId,
-            };
-        }
-
-        case SurveySubmitActionTypes.EditSuccess: {
-            return {
-                ...adapter.upsertMany(
-                    buildCardResponses(action).map(x => ({
-                        id: x.id,
-                        changes: x,
-                    })),
-                    state,
-                ),
-                selectedId: state.selectedId,
+                ...adapter.upsertOne(buildCardResponse(action), state),
             };
         }
 

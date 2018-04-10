@@ -53,13 +53,18 @@ export class UserService {
                         ],
                         [] as CardResponse[],
                     );
-                    const expansionResponses = res.user.responses.reduce(
-                        (arr, response) => [
-                            ...arr,
-                            { ...response.expansionResponse, id: response.id },
-                        ],
-                        [] as ExpansionResponse[],
-                    );
+                    const expansionResponses = res.user.responses
+                        .filter(response => !!response.expansionResponse)
+                        .reduce(
+                            (arr, response) => [
+                                ...arr,
+                                {
+                                    ...response.expansionResponse,
+                                    id: response.id,
+                                },
+                            ],
+                            [] as ExpansionResponse[],
+                        );
                     return {
                         user,
                         responses,

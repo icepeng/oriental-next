@@ -10,9 +10,16 @@
         type="button"></button>
     </li>
     <li role="presentation" class="nav-item">
-      <button [routerLink]="['./', 'submit']" routerLinkActive="active" appLocalUI="Review & Submit" id="tab3" class="btn btn-link nav-link"
+      <button [routerLink]="['./', 'review']" routerLinkActive="active" appLocalUI="Review" id="tab3" class="btn btn-link nav-link"
         type="button"></button>
     </li>
   </ul>
+  <clr-alert [clrAlertType]="'alert-danger'" [clrAlertClosed]="!(error$ | async)">
+    <div class="alert-item">
+        <span class="alert-text">
+          저장 중 오류가 발생했습니다.
+        </span>
+    </div>
+  </clr-alert>
   <router-outlet></router-outlet>
 </div>
