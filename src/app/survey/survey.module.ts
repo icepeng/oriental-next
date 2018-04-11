@@ -11,7 +11,6 @@ import { SharedModule } from '../shared/shared.module';
 import { CardResponseRatioComponent } from './components/card-response-ratio.component';
 import { SurveyCardFilterComponent } from './components/survey-card-filter.component';
 import { SurveyGuideComponent } from './components/survey-guide.component';
-import { SurveySuccessComponent } from './components/survey-success.component';
 import { SurveyListComponent } from './containers/survey-list.component';
 import { SurveyPrepareComponent } from './containers/survey-prepare.component';
 import { SurveyResponseListComponent } from './containers/survey-response-list.component';
@@ -49,7 +48,6 @@ import { WriteExpansionCanDeactivateGuard } from './services/write-expansion-can
         SurveyResponseViewComponent,
         SurveyCardFilterComponent,
         SurveyWriteReviewComponent,
-        SurveySuccessComponent,
         CardResponseRatioComponent,
         SurveyPrepareComponent,
     ],
@@ -84,10 +82,6 @@ export class SurveyModule {
                     {
                         path: 'list',
                         component: SurveyListComponent,
-                    },
-                    {
-                        path: 'success',
-                        component: SurveySuccessComponent,
                     },
                     {
                         path: ':surveyId/prepare',
