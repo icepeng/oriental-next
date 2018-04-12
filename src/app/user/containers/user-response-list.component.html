@@ -8,7 +8,7 @@
         <div class="card-block">
           <p>
             <span appLocalExpansion [code]="item.survey.expansion" prop="name" class="card-title"></span>
-            <span appLocalUI="Ongoing" class="label label-light-blue"></span>
+            <span *ngIf="item.survey.status === 'ongoing'" appLocalUI="Ongoing" class="label label-light-blue"></span>
             <span *ngIf="item.survey.isPreRelease" appLocalUI="Pre-Release" class="label label-orange"></span>
           </p>
           <ul class="list">
