@@ -12,7 +12,7 @@ export class AuthService {
     login(): Promise<string> {
         return new Promise((resolve, reject) => {
             const receiveMessage = (event: any) => {
-                if (event.origin !== environment.apiDomain) {
+                if (event.origin.indexOf(environment.apiDomain) === -1) {
                     return;
                 }
                 window.removeEventListener('message', receiveMessage);
