@@ -8,11 +8,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
 import { combineLatest, take, takeUntil } from 'rxjs/operators';
-import * as FilterAction from '../actions/filter.actions';
 import * as SubmitAction from '../actions/submit.actions';
 import * as FormAction from '../actions/survey-form.actions';
 import { SurveyCardFilter } from '../models/filter.model';
-import * as fromSurvey from '../reducers';
+import * as fromForm from '../selectors/form.selectors';
+import * as fromResponse from '../selectors/response.selectors';
+import * as fromSurvey from '../selectors/survey.selectors';
 
 @Component({
     selector: 'app-survey-write-card',
@@ -21,10 +22,10 @@ import * as fromSurvey from '../reducers';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurveyWriteCardComponent implements OnInit, OnDestroy {
-    filter$ = this.store.select(fromSurvey.getFilter);
-    cards$ = this.store.select(fromSurvey.getCardFormList);
-    selectedCardId$ = this.store.select(fromSurvey.getFormSelectedCardId);
-    isLoading$ = this.store.select(fromSurvey.getFormIsLoading);
+    filter$ = this.store.select(fromForm.getFilter);
+    cards$ = this.store.select(fromForm.getCardFormList);
+    selectedCardId$ = this.store.select(fromForm.getFormSelectedCardId);
+    isLoading$ = this.store.select(fromForm.getFormIsLoading);
     unsubscribe$: Subject<void> = new Subject<void>();
 
     formGroup = new FormGroup({
@@ -41,8 +42,8 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
         this.selectedCardId$
             .pipe(
                 combineLatest(
-                    this.store.select(fromSurvey.getSelectedResponseId),
-                    this.store.select(fromSurvey.getCardResponseEntities),
+                    this.store.select(fromResponse.getSelectedResponseId),
+                    this.store.select(fromResponse.getCardResponseEntities),
                 ),
                 takeUntil(this.unsubscribe$),
             )
@@ -66,7 +67,7 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
     }
 
     onFilterChange(filter: SurveyCardFilter) {
-        this.store.dispatch(new FilterAction.SetFilter(filter));
+        this.store.dispatch(new FormAction.SetFilter(filter));
     }
 
     onSelect(id: string) {
@@ -85,7 +86,7 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
             .pipe(
                 combineLatest(
                     this.store.select(fromSurvey.getSelectedSurveyId),
-                    this.store.select(fromSurvey.getSelectedResponseId),
+                    this.store.select(fromResponse.getSelectedResponseId),
                     this.isLoading$,
                 ),
                 take(1),

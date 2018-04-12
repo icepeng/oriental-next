@@ -3,6 +3,10 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { AuthActions, AuthActionTypes } from '../../core/actions/auth.actions';
 import { UserActions, UserActionTypes } from '../actions/user.actions';
 import { User } from '../models/user.model';
+import {
+    ResponseActions,
+    ResponseActionTypes,
+} from '../../survey/actions/response.actions';
 
 export interface State extends EntityState<User> {
     authedId: string | null;
@@ -21,10 +25,17 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(
     state = initialState,
-    action: UserActions | AuthActions,
+    action: UserActions | AuthActions | ResponseActions,
 ): State {
     switch (action.type) {
         case UserActionTypes.LoadSuccess: {
+            return {
+                ...adapter.addOne(action.payload.user, state),
+                selectedId: state.selectedId,
+            };
+        }
+
+        case ResponseActionTypes.LoadOneSuccess: {
             return {
                 ...adapter.addOne(action.payload.user, state),
                 selectedId: state.selectedId,

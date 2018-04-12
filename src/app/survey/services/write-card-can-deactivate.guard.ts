@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { SurveyWriteCardComponent } from '../containers/survey-write-card.component';
-import * as fromSurvey from '../reducers';
+import * as fromForm from '../selectors/form.selectors';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class WriteCardCanDeactivateGuard
     canDeactivate(
         component: SurveyWriteCardComponent,
     ): Observable<boolean> | boolean {
-        return this.store.select(fromSurvey.getFormSelectedCardId).pipe(
+        return this.store.select(fromForm.getFormSelectedCardId).pipe(
             switchMap(id => {
                 if (!id) {
                     return of(true);

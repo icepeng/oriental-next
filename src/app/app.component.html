@@ -31,7 +31,7 @@
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a (click)="openLocaleModal()" clrDropdownItem>Change Locale</a>
-          <!-- <a href="..." clrDropdownItem>My Profile</a> -->
+          <a [routerLink]="['/', 'users', authedUser.id]"  clrDropdownItem>My Profile</a>
           <a (click)="logout()" clrDropdownItem>Log out</a>
         </clr-dropdown-menu>
       </clr-dropdown>

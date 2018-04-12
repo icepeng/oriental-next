@@ -5,7 +5,7 @@ import {
     OnChanges,
     OnInit,
 } from '@angular/core';
-import { SurveyCardForm } from '../models/survey-form.model';
+import { CardResponse } from '../models/response.model';
 
 @Component({
     selector: 'app-card-response-ratio',
@@ -14,12 +14,17 @@ import { SurveyCardForm } from '../models/survey-form.model';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardResponseRatioComponent implements OnInit, OnChanges {
-    @Input() cardResponses: SurveyCardForm[];
+    @Input() cardResponses: CardResponse[];
     @Input() label: string;
     @Input() prop: 'power' | 'generality';
 
     options = {
         tooltip: {},
+        xAxis: {
+            type: 'category',
+            data: [20, 40, 60, 80]
+        },
+        yAxis: {},
         series: [],
     };
 
@@ -28,11 +33,14 @@ export class CardResponseRatioComponent implements OnInit, OnChanges {
     ngOnInit() {}
 
     ngOnChanges() {
+        if (!this.label || !this.cardResponses || !this.prop) {
+            return;
+        }
         this.options = {
             ...this.options,
             series: [
                 {
-                    type: 'pie',
+                    type: 'bar',
                     name: this.label,
                     data: this.getData(this.cardResponses, this.prop),
                 },
@@ -40,10 +48,10 @@ export class CardResponseRatioComponent implements OnInit, OnChanges {
         };
     }
 
-    getData(cardResponses: SurveyCardForm[], prop: 'power' | 'generality') {
+    getData(cardResponses: CardResponse[], prop: 'power' | 'generality') {
         return [20, 40, 60, 80].map(name => {
             const value = cardResponses.filter(x => x[prop] === name).length;
-            return { name, value };
+            return value;
         });
     }
 }

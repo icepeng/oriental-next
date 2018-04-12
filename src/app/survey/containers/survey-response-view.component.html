@@ -1,3 +1,20 @@
-<p>
-  survey-response-view works!
-</p>
+<h1>{{ battletag$ | async }} -
+  <span appLocalExpansion [code]="expansion$ | async" prop="name"></span>
+</h1>
+<div class="wrapper">
+  <ul class="nav" role="tablist">
+    <li role="presentation" class="nav-item">
+      <button [routerLink]="['./', 'summary']" routerLinkActive="active" appLocalUI="Summary" id="tab1" class="btn btn-link nav-link"
+        type="button"></button>
+    </li>
+    <li role="presentation" class="nav-item">
+      <button [routerLink]="['./', 'cards']" routerLinkActive="active" appLocalUI="Cards" id="tab2" class="btn btn-link nav-link"
+        type="button"></button>
+    </li>
+    <li *ngIf="hasExpansionResponse$ | async" role="presentation" class="nav-item">
+      <button [routerLink]="['./', 'expansion']" routerLinkActive="active" appLocalUI="Expansion" id="tab3" class="btn btn-link nav-link"
+        type="button"></button>
+    </li>
+  </ul>
+  <router-outlet></router-outlet>
+</div>

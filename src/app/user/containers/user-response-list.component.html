@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <div class="row">
+    <div *ngFor="let item of list$ | async" class="col-sm-3">
+      <div class="card">
+        <div class="card-img">
+          <img appLocalExpansionImg [code]="item.survey.expansion">
+        </div>
+        <div class="card-block">
+          <p>
+            <span appLocalExpansion [code]="item.survey.expansion" prop="name" class="card-title"></span>
+            <span appLocalUI="Ongoing" class="label label-light-blue"></span>
+            <span *ngIf="item.survey.isPreRelease" appLocalUI="Pre-Release" class="label label-orange"></span>
+          </p>
+          <ul class="list">
+            <li>시작: {{ item.survey.startTime | date:'yyyy-MM-dd, HH:mm:ss' }}</li>
+            <li *ngIf="item.survey.endTime">종료: {{ item.survey.endTime | date:'yyyy-MM-dd, HH:mm:ss' }}</li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <button *ngIf="item.viewable" [routerLink]="['/', 'surveys', item.survey.id, 'responses', item.response.id, 'view']" class="btn btn-sm btn-link">보기</button>
+          <button *ngIf="item.editable" [routerLink]="['/', 'surveys', item.survey.id, 'responses', item.response.id, 'write']" class="btn btn-sm btn-link">편집하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

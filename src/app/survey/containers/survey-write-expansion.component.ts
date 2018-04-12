@@ -3,10 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { map, take, combineLatest } from 'rxjs/operators';
-
+import { combineLatest, map, take } from 'rxjs/operators';
 import * as SubmitAction from '../actions/submit.actions';
-import * as fromSurvey from '../reducers';
+import * as fromForm from '../selectors/form.selectors';
+import * as fromResponse from '../selectors/response.selectors';
+import * as fromSurvey from '../selectors/survey.selectors';
 
 @Component({
     selector: 'app-survey-write-expansion',
@@ -15,7 +16,7 @@ import * as fromSurvey from '../reducers';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurveyWriteExpansionComponent implements OnInit {
-    isLoading$ = this.store.select(fromSurvey.getFormIsLoading);
+    isLoading$ = this.store.select(fromForm.getFormIsLoading);
 
     expansion$: Observable<string>;
 
@@ -37,10 +38,10 @@ export class SurveyWriteExpansionComponent implements OnInit {
             .select(fromSurvey.getSelectedSurvey)
             .pipe(map(survey => survey.expansion));
         this.store
-            .select(fromSurvey.getSelectedExpansionResponse)
+            .select(fromResponse.getSelectedExpansionResponse)
             .pipe(take(1))
             .subscribe(expansionResponse => {
-                console.log(expansionResponse)
+                console.log(expansionResponse);
                 if (!expansionResponse) {
                     return this.formGroup.reset({
                         fun: null,
@@ -61,7 +62,7 @@ export class SurveyWriteExpansionComponent implements OnInit {
             .select(fromSurvey.getSelectedSurveyId)
             .pipe(
                 combineLatest(
-                    this.store.select(fromSurvey.getSelectedResponseId),
+                    this.store.select(fromResponse.getSelectedResponseId),
                     this.isLoading$,
                 ),
                 take(1),

@@ -6,7 +6,8 @@ import * as AuthAction from '../../core/actions/auth.actions';
 import * as fromRoot from '../../reducers';
 import * as fromUser from '../../user/reducers';
 import { Survey } from '../models/survey.model';
-import * as fromSurvey from '../reducers';
+import * as fromSurvey from '../selectors/survey.selectors';
+import * as fromResponse from '../selectors/response.selectors';
 
 @Component({
     selector: 'app-survey-list',
@@ -27,7 +28,7 @@ export class SurveyListComponent implements OnInit {
             .pipe(
                 combineLatest(
                     this.store.select(fromUser.getAuthedUserId),
-                    this.store.select(fromSurvey.getAllResponses),
+                    this.store.select(fromResponse.getAllResponses),
                 ),
                 map(([surveys, userId, responses]) => {
                     return surveys.map(survey => {

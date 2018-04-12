@@ -48,6 +48,13 @@ export function reducer(
             };
         }
 
+        case ResponseActionTypes.LoadOneSuccess: {
+            return {
+                ...adapter.addOne(action.payload.response, state),
+                selectedId: state.selectedId,
+            };
+        }
+
         case UserActionTypes.LoadSuccess: {
             return {
                 ...adapter.addMany(action.payload.responses, state),

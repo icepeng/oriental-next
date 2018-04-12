@@ -1,0 +1,17 @@
+<app-survey-response-view-card-filter [filter]="filter$ | async" (filterChange)="onFilterChange($event)">
+</app-survey-response-view-card-filter>
+<div class="row">
+  <div *ngFor="let cardResponse of cardResponses$ | async" class="col-sm-3 card-wrapper">
+    <div [routerLink]="['./', cardResponse.card]" class="card-img">
+      <img appLocalCardImg [id]="cardResponse.card">
+    </div>
+    <div class="card-badge">
+      <span class="label label-light-blue">카드 파워
+        <span class="badge">{{ cardResponse.power }}</span>
+      </span>
+      <span class="label label-orange">범용성
+        <span class="badge">{{ cardResponse.generality }}</span>
+      </span>
+    </div>
+  </div>
+</div>

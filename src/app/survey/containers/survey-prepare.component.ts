@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { take, combineLatest } from 'rxjs/operators';
-import * as SurveyAction from '../actions/survey.actions';
-import * as SubmitAction from '../actions/submit.actions';
+import { combineLatest, take } from 'rxjs/operators';
 import * as fromUser from '../../user/reducers';
-import * as fromSurvey from '../reducers';
+import * as SubmitAction from '../actions/submit.actions';
+import * as fromPrepare from '../selectors/prepare.selectors';
 
 @Component({
     selector: 'app-survey-prepare',
@@ -14,8 +13,8 @@ import * as fromSurvey from '../reducers';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurveyPrepareComponent implements OnInit {
-    isLoading$ = this.store.select(fromSurvey.getPrepareIsLoading);
-    error$ = this.store.select(fromSurvey.getPrepareError);
+    isLoading$ = this.store.select(fromPrepare.getPrepareIsLoading);
+    error$ = this.store.select(fromPrepare.getPrepareError);
 
     constructor(private store: Store<any>, private route: ActivatedRoute) {}
 

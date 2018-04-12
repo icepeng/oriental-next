@@ -54,6 +54,12 @@ export function reducer(
             };
         }
 
+        case ResponseActionTypes.LoadOneSuccess: {
+            return {
+                ...adapter.addMany(action.payload.cardResponses, state),
+            };
+        }
+
         case UserActionTypes.LoadSuccess: {
             return {
                 ...adapter.addMany(action.payload.cardResponses, state),

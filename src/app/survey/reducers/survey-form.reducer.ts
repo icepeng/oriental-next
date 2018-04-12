@@ -1,26 +1,30 @@
 import {
-    SurveySubmitActions,
     SurveySubmitActionTypes,
+    SurveySubmitActions,
 } from '../actions/submit.actions';
 import {
     SurveyFormActionTypes,
     SurveyFormActions,
 } from '../actions/survey-form.actions';
-import {
-    SurveyCardForm,
-    SurveyExpansionForm,
-} from '../models/survey-form.model';
+import { SurveyCardFilter } from '../models/filter.model';
 
 export interface State {
     error: string;
     isLoading: boolean;
     selectedCardId: string;
+    filter: SurveyCardFilter;
 }
 
 export const initialState: State = {
     error: null,
     isLoading: false,
     selectedCardId: null,
+    filter: {
+        class: 'ALL',
+        cost: 'ALL',
+        rarity: 'ALL',
+        nullOnly: true,
+    },
 };
 
 export function reducer(
@@ -45,6 +49,13 @@ export function reducer(
             return {
                 ...state,
                 error: null,
+            };
+        }
+
+        case SurveyFormActionTypes.SetFilter: {
+            return {
+                ...state,
+                filter: action.payload,
             };
         }
 
@@ -86,3 +97,5 @@ export const getIsLoading = (state: State) => state.isLoading;
 export const getError = (state: State) => state.error;
 
 export const getSelectedCardId = (state: State) => state.selectedCardId;
+
+export const getFilter = (state: State) => state.filter;

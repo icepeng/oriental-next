@@ -6,3 +6,9 @@ export interface SurveyCardFilter {
     cost: string | 'ALL';
     nullOnly: boolean;
 }
+
+export interface ResponseViewCardFilter {
+    class: Classes | 'NEUTRAL' | 'ALL';
+    rarity: Rarity | 'ALL';
+    cost: string | 'ALL';
+}

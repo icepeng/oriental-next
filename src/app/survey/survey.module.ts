@@ -11,9 +11,14 @@ import { SharedModule } from '../shared/shared.module';
 import { CardResponseRatioComponent } from './components/card-response-ratio.component';
 import { SurveyCardFilterComponent } from './components/survey-card-filter.component';
 import { SurveyGuideComponent } from './components/survey-guide.component';
+import { SurveyResponseViewCardFilterComponent } from './components/survey-response-view-card-filter.component';
 import { SurveyListComponent } from './containers/survey-list.component';
 import { SurveyPrepareComponent } from './containers/survey-prepare.component';
 import { SurveyResponseListComponent } from './containers/survey-response-list.component';
+import { SurveyResponseViewCardListComponent } from './containers/survey-response-view-card-list.component';
+import { SurveyResponseViewCardComponent } from './containers/survey-response-view-card.component';
+import { SurveyResponseViewExpansionComponent } from './containers/survey-response-view-expansion.component';
+import { SurveyResponseViewSummaryComponent } from './containers/survey-response-view-summary.component';
 import { SurveyResponseViewComponent } from './containers/survey-response-view.component';
 import { SurveyWriteCardComponent } from './containers/survey-write-card.component';
 import { SurveyWriteExpansionComponent } from './containers/survey-write-expansion.component';
@@ -23,9 +28,12 @@ import { SurveyComponent } from './containers/survey.component';
 import { SurveyFormEffects } from './effects/survey-form.effects';
 import { SurveyPrepareEffects } from './effects/survey-prepare.effects';
 import { reducers } from './reducers';
+import { ResponseGuard } from './services/response-guard.service';
+import { ResponseService } from './services/response.service';
 import { SurveyService } from './services/survey.service';
 import { WriteCardCanDeactivateGuard } from './services/write-card-can-deactivate.guard';
 import { WriteExpansionCanDeactivateGuard } from './services/write-expansion-can-deactivate.guard';
+import { ResponseEffects } from './effects/survey-response.effects';
 
 @NgModule({
     imports: [
@@ -50,6 +58,11 @@ import { WriteExpansionCanDeactivateGuard } from './services/write-expansion-can
         SurveyWriteReviewComponent,
         CardResponseRatioComponent,
         SurveyPrepareComponent,
+        SurveyResponseViewSummaryComponent,
+        SurveyResponseViewCardListComponent,
+        SurveyResponseViewCardComponent,
+        SurveyResponseViewExpansionComponent,
+        SurveyResponseViewCardFilterComponent,
     ],
 })
 export class SurveyModule {
@@ -58,8 +71,10 @@ export class SurveyModule {
             ngModule: RootSurveyModule,
             providers: [
                 SurveyService,
+                ResponseService,
                 WriteCardCanDeactivateGuard,
                 WriteExpansionCanDeactivateGuard,
+                ResponseGuard,
             ],
         };
     }
@@ -69,7 +84,11 @@ export class SurveyModule {
     imports: [
         SurveyModule,
         StoreModule.forFeature('survey', reducers),
-        EffectsModule.forFeature([SurveyFormEffects, SurveyPrepareEffects]),
+        EffectsModule.forFeature([
+            SurveyFormEffects,
+            SurveyPrepareEffects,
+            ResponseEffects,
+        ]),
         RouterModule.forChild([
             {
                 path: 'surveys',
@@ -121,8 +140,32 @@ export class SurveyModule {
                         component: SurveyResponseListComponent,
                     },
                     {
-                        path: ':surveyId/responses/:id/view',
+                        path: ':surveyId/responses/:responseId/view',
                         component: SurveyResponseViewComponent,
+                        canActivate: [ResponseGuard],
+                        children: [
+                            {
+                                path: 'cards/:cardId',
+                                component: SurveyResponseViewCardComponent,
+                            },
+                            {
+                                path: 'cards',
+                                component: SurveyResponseViewCardListComponent,
+                            },
+                            {
+                                path: 'expansion',
+                                component: SurveyResponseViewExpansionComponent,
+                            },
+                            {
+                                path: 'summary',
+                                component: SurveyResponseViewSummaryComponent,
+                            },
+                            {
+                                path: '',
+                                redirectTo: 'summary',
+                                pathMatch: 'full',
+                            },
+                        ],
                     },
                     { path: '', redirectTo: 'guide', pathMatch: 'full' },
                 ],

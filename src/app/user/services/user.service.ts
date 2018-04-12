@@ -38,7 +38,9 @@ export class UserService {
                         cardResponses: response.cardResponses.map(
                             x => `${x.cardId}-${response.id}`,
                         ),
-                        expansionResponse: response.id,
+                        expansionResponse: response.expansionResponse
+                            ? response.id
+                            : null,
                     }));
                     const cardResponses = res.user.responses.reduce(
                         (arr, response) => [

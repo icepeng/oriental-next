@@ -11,7 +11,7 @@ import {
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import { Subject } from 'rxjs/Subject';
-import { takeUntil, combineLatest, map } from 'rxjs/operators';
+import { takeUntil, combineLatest, map, filter } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Directive({
@@ -33,6 +33,7 @@ export class LocalExpansionDirective implements OnInit, OnChanges, OnDestroy {
             .select(fromRoot.getLocalExpansions)
             .pipe(
                 combineLatest(this.code$, this.prop$),
+                filter(([expansions, code, prop]) => !!code && !!prop),
                 map(([expansions, code, prop]) => expansions[code][prop]),
                 takeUntil(this.unsubscribe$),
             )

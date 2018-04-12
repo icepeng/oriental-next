@@ -1,0 +1,11 @@
+<div class="content-container">
+  <div class="content-area">
+    <h1>{{ battletag$ | async }}</h1>
+    <ul class="nav" role="tablist">
+      <li role="presentation" class="nav-item">
+        <button [routerLink]="['./', 'responses']" routerLinkActive="active" id="tab1" class="btn btn-link nav-link" type="button">평가 목록</button>
+      </li>
+    </ul>
+    <router-outlet></router-outlet>
+  </div>
+</div>
