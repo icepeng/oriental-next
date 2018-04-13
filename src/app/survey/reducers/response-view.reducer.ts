@@ -6,6 +6,7 @@ import { ResponseViewCardFilter } from '../models/filter.model';
 
 export interface State {
     filter: ResponseViewCardFilter;
+    viewLimit: number;
 }
 
 export const initialState: State = {
@@ -14,6 +15,7 @@ export const initialState: State = {
         cost: 'ALL',
         rarity: 'ALL',
     },
+    viewLimit: 20,
 };
 
 export function reducer(
@@ -30,7 +32,15 @@ export function reducer(
         case ResponseViewActionTypes.SetFilter: {
             return {
                 ...state,
+                viewLimit: 20,
                 filter: action.payload,
+            };
+        }
+
+        case ResponseViewActionTypes.ExpandLimit: {
+            return {
+                ...state,
+                viewLimit: state.viewLimit + 20,
             };
         }
 
@@ -41,3 +51,5 @@ export function reducer(
 }
 
 export const getFilter = (state: State) => state.filter;
+
+export const getViewLimit = (state: State) => state.viewLimit;

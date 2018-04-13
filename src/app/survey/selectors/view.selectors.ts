@@ -3,7 +3,7 @@ import { Card } from '../../card/models/card.model';
 import * as fromCard from '../../card/reducers';
 import { ResponseViewCardFilter } from '../models/filter.model';
 import { getSurveyState } from '../reducers';
-import * as fromForm from '../reducers/survey-form.reducer';
+import * as fromView from '../reducers/response-view.reducer';
 import * as fromResponse from './response.selectors';
 
 export const getResponseViewState = createSelector(
@@ -13,7 +13,12 @@ export const getResponseViewState = createSelector(
 
 export const getFilter = createSelector(
     getResponseViewState,
-    fromForm.getFilter,
+    fromView.getFilter,
+);
+
+export const getViewLimit = createSelector(
+    getResponseViewState,
+    fromView.getViewLimit,
 );
 
 export const getFilteredCards = createSelector(
@@ -30,6 +35,18 @@ export const getFilteredCards = createSelector(
 export const getFilteredCardsTotal = createSelector(
     getFilteredCards,
     cards => cards.length,
+);
+
+export const getLimitedFilteredCards = createSelector(
+    getFilteredCards,
+    getViewLimit,
+    (cards, viewLimit) => cards.slice(0, viewLimit),
+);
+
+export const getShowExpandButton = createSelector(
+    getFilteredCardsTotal,
+    getViewLimit,
+    (total, limit) => total > limit,
 );
 
 function filterCard(card: Card, filter: ResponseViewCardFilter) {

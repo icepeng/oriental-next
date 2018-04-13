@@ -14,8 +14,9 @@ import * as fromResponseView from '../selectors/view.selectors';
 export class SurveyResponseViewCardListComponent implements OnInit {
     filter$ = this.store.select(fromResponseView.getFilter);
     cardResponses$ = this.store.select(
-        fromResponseView.getFilteredCards,
+        fromResponseView.getLimitedFilteredCards,
     );
+    showExpandButton$ = this.store.select(fromResponseView.getShowExpandButton);
 
     constructor(private store: Store<any>) {}
 
@@ -23,5 +24,9 @@ export class SurveyResponseViewCardListComponent implements OnInit {
 
     onFilterChange(filter: ResponseViewCardFilter) {
         this.store.dispatch(new ResponseViewAction.SetFilter(filter));
+    }
+
+    moreCards() {
+        this.store.dispatch(new ResponseViewAction.ExpandLimit());
     }
 }
