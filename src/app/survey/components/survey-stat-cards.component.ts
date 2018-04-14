@@ -34,7 +34,6 @@ export class SurveyStatCardsComponent implements OnInit, OnChanges {
             combineLatest(this.prop$, this.store.select(fromRoot.getLocalCards)),
             map(([cardStats, prop, localCards]) => {
                 const data = this.getData(cardStats, prop);
-                console.log(data);
                 return {
                     tooltip: {},
                     color: [
