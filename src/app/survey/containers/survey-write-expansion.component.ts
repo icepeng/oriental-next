@@ -41,7 +41,6 @@ export class SurveyWriteExpansionComponent implements OnInit {
             .select(fromResponse.getSelectedExpansionResponse)
             .pipe(take(1))
             .subscribe(expansionResponse => {
-                console.log(expansionResponse);
                 if (!expansionResponse) {
                     return this.formGroup.reset({
                         fun: null,

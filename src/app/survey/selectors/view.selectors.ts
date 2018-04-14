@@ -21,7 +21,7 @@ export const getViewLimit = createSelector(
     fromView.getViewLimit,
 );
 
-export const getFilteredCards = createSelector(
+export const getFilteredCardResponses = createSelector(
     getFilter,
     fromResponse.getSelectedResponseCardResponses,
     fromCard.getCardEntities,
@@ -32,19 +32,26 @@ export const getFilteredCards = createSelector(
     },
 );
 
-export const getFilteredCardsTotal = createSelector(
-    getFilteredCards,
-    cards => cards.length,
+export const getFilteredCardResponsesTotal = createSelector(
+    getFilteredCardResponses,
+    cardResponses => cardResponses.length,
 );
 
-export const getLimitedFilteredCards = createSelector(
-    getFilteredCards,
+export const getLimitedFilteredCardResponses = createSelector(
+    getFilteredCardResponses,
     getViewLimit,
-    (cards, viewLimit) => cards.slice(0, viewLimit),
+    (cardResponses, viewLimit) => cardResponses.slice(0, viewLimit),
+);
+
+export const getSelectedCardResponseIndex = createSelector(
+    getFilteredCardResponses,
+    fromResponse.getSelectedCardResponseId,
+    (cardResponses, cardResponseId) =>
+        cardResponses.findIndex(x => x.id === cardResponseId),
 );
 
 export const getShowExpandButton = createSelector(
-    getFilteredCardsTotal,
+    getFilteredCardResponsesTotal,
     getViewLimit,
     (total, limit) => total > limit,
 );

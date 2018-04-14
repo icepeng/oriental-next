@@ -11,8 +11,6 @@ export const initialState: State = {
         class: 'ALL',
         cost: 'ALL',
         rarity: 'ALL',
-        sortColumn: 'power',
-        sortOrder: 'DESC',
     },
     viewLimit: 20,
 };

@@ -26,11 +26,3 @@ export const getSelectedSurvey = createSelector(
         return selectedId && entities[selectedId];
     },
 );
-
-export const getOngoingSurveys = createSelector(getAllSurveys, surveys =>
-    surveys.filter(x => x.status === 'ongoing'),
-);
-
-export const getClosedSurveys = createSelector(getAllSurveys, surveys =>
-    surveys.filter(x => x.status === 'closed'),
-);

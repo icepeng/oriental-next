@@ -4,9 +4,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 import { StoreModule } from '@ngrx/store';
+import { NgxEchartsModule } from 'ngx-echarts';
 import { SharedModule } from '../shared/shared.module';
+import { CardBasicChartComponent } from './components/card-basic-chart.component';
 import { CardFilterComponent } from './components/card-filter.component';
-import { CardNavigateComponent } from './components/card-navigate.component';
 import { CardDetailComponent } from './containers/card-detail.component';
 import { CardListComponent } from './containers/card-list.component';
 import { CardComponent } from './containers/card.component';
@@ -20,13 +21,14 @@ import * as fromCard from './reducers';
         FormsModule,
         ReactiveFormsModule,
         SharedModule,
+        NgxEchartsModule,
     ],
     declarations: [
         CardListComponent,
         CardDetailComponent,
         CardComponent,
         CardFilterComponent,
-        CardNavigateComponent,
+        CardBasicChartComponent,
     ],
 })
 export class CardModule {

@@ -34,6 +34,7 @@ export const ui = {
     'Starting Guide': '사전 가이드',
     Review: '검토',
     Summary: '요약',
+    Responses: '평가',
     'Unanswered Only': '미응답만 표시',
     'Pre-Release': '사전 평가',
     YES: '예',

@@ -48,8 +48,8 @@ export class CardFilterComponent implements OnInit, OnDestroy {
         class: new FormControl(),
         cost: new FormControl(),
         rarity: new FormControl(),
-        sortColumn: new FormControl(),
-        sortOrder: new FormControl(),
+        // sortColumn: new FormControl(),
+        // sortOrder: new FormControl(),
     });
     unsubscribe$: Subject<void> = new Subject<void>();
 

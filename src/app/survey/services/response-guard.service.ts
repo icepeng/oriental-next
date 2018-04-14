@@ -30,7 +30,6 @@ export class ResponseGuard implements CanActivate {
                         }),
                     );
                 }
-                console.log('ho')
             }),
             filter(response => !!response),
             take(1),

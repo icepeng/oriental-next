@@ -20,9 +20,17 @@ export class CardResponseRatioComponent implements OnInit, OnChanges {
 
     options = {
         tooltip: {},
+        color: [
+            '#6870C4',
+            '#00BFA9',
+            '#80746D',
+            '#6FEAD9',
+            '#BBB3A9',
+            '#0F1E82',
+        ],
         xAxis: {
             type: 'category',
-            data: [20, 40, 60, 80]
+            data: [20, 40, 60, 80],
         },
         yAxis: {},
         series: [],

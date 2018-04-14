@@ -1,7 +1,6 @@
 <div *ngIf="selectedCardResponse$ | async as cardResponse" class="wrapper">
-  <div class="card-selected">
-    <img appLocalCardImg [id]="cardResponse.card">
-  </div>
+  <app-card-navigate (prev)="onPrev()" (next)="onNext()" [id]="cardResponse.card" [total]="total$ | async" [index]="index$ | async">
+  </app-card-navigate>
   <div class="row">
     <div class="col-sm-3">
       <div class="card light-blue">

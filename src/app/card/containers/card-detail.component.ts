@@ -1,15 +1,16 @@
 import {
-    Component,
-    OnInit,
     ChangeDetectionStrategy,
+    Component,
     OnDestroy,
+    OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs/Subject';
-import * as CardActions from '../actions/card.actions';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subject } from 'rxjs/Subject';
+import { take, takeUntil, withLatestFrom } from 'rxjs/operators';
+import * as fromSurvey from '../../survey/selectors/survey.selectors';
+import * as CardActions from '../actions/card.actions';
 import * as fromCard from '../reducers';
-import { takeUntil, take, withLatestFrom } from 'rxjs/operators';
 
 @Component({
     selector: 'app-card-detail',
@@ -18,14 +19,19 @@ import { takeUntil, take, withLatestFrom } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardDetailComponent implements OnInit, OnDestroy {
-    card$ = this.store.select(fromCard.getSelectedCard);
     selectedId$ = this.store.select(fromCard.getSelectedCardId);
     total$ = this.store.select(fromCard.getFilteredCardsTotal);
     index$ = this.store.select(fromCard.getSelectedCardIndex);
+    stats$ = this.store.select(fromCard.getSelectedCardStats);
+    surveyEntities$ = this.store.select(fromSurvey.getSurveyEntities);
 
     unsubscribe$: Subject<void> = new Subject<void>();
 
-    constructor(private route: ActivatedRoute, private store: Store<any>) {}
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private store: Store<any>,
+    ) {}
 
     ngOnInit() {
         this.route.paramMap
@@ -43,9 +49,9 @@ export class CardDetailComponent implements OnInit, OnDestroy {
                 if (index <= 0) {
                     return;
                 }
-                this.store.dispatch(
-                    new CardActions.Select(cards[index - 1].id),
-                );
+                this.router.navigate(['../', cards[index - 1].id], {
+                    relativeTo: this.route,
+                });
             });
     }
 
@@ -57,9 +63,9 @@ export class CardDetailComponent implements OnInit, OnDestroy {
                 if (index + 1 >= total) {
                     return;
                 }
-                this.store.dispatch(
-                    new CardActions.Select(cards[index + 1].id),
-                );
+                this.router.navigate(['../', cards[index + 1].id], {
+                    relativeTo: this.route,
+                });
             });
     }
 

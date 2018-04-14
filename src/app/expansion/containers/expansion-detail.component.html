@@ -1,43 +1,14 @@
 <h1>마녀숲
-  <a class="label label-light-blue clickable">
-    카드 목록 보기
-  </a>
 </h1>
 <div class="row">
-  <div class="col-sm-3">
-    <div class="card">
-      <div class="card-header">
-        평가 참여
-      </div>
-      <div class="card-block">
-        <div class="card-text">
-          520명
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-3">
-    <div class="card">
-      <div class="card-header">
-        카드 평가 횟수
-      </div>
-      <div class="card-block">
-        <div class="card-text">
-          17,520회
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">
   <div class="col-sm-6">
     <div class="card">
       <div class="card-header">
-        확장팩 평가
+        재미
       </div>
       <div class="card-block">
         <div class="card-text">
-          <app-expansion-rating-chart></app-expansion-rating-chart>
+          <app-expansion-basic-chart [expansionStats]="stats$ | async" [surveyEntities]="surveyEntities$ | async" prop="fun"></app-expansion-basic-chart>
         </div>
       </div>
     </div>
@@ -45,11 +16,11 @@
   <div class="col-sm-6">
     <div class="card">
       <div class="card-header">
-        카드 평가 - 평균
+        밸런스
       </div>
       <div class="card-block">
         <div class="card-text">
-          <app-card-average-chart style="width: 100px;"></app-card-average-chart>
+          <app-expansion-basic-chart [expansionStats]="stats$ | async" [surveyEntities]="surveyEntities$ | async" prop="balance"></app-expansion-basic-chart>
         </div>
       </div>
     </div>

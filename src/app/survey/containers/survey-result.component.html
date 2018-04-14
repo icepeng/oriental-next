@@ -1,0 +1,15 @@
+<h1 appLocalExpansion [code]="expansion$ | async" prop="name">
+</h1>
+<div class="wrapper">
+  <ul class="nav" role="tablist">
+    <li role="presentation" class="nav-item">
+      <button [routerLink]="['./', 'summary']" routerLinkActive="active" appLocalUI="Summary" id="tab1" class="btn btn-link nav-link"
+        type="button"></button>
+    </li>
+    <li role="presentation" class="nav-item">
+      <button [routerLink]="['./', 'responses']" routerLinkActive="active" appLocalUI="Responses" id="tab2" class="btn btn-link nav-link"
+        type="button"></button>
+    </li>
+  </ul>
+  <router-outlet></router-outlet>
+</div>

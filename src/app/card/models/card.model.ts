@@ -4,10 +4,6 @@ export interface Card {
     class: Classes | 'NEUTRAL';
     rarity: Rarity;
     cost: number;
-    stat?: {
-        power: number;
-        generality: number;
-    };
 }
 
 export type Classes =

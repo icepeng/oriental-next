@@ -13,6 +13,7 @@ import { CardFilter } from '../models/filter.model';
 export class CardListComponent implements OnInit {
     filter$ = this.store.select(fromCard.getFilter);
     list$ = this.store.select(fromCard.getLimitedFilteredCards);
+    showExpandButton$ = this.store.select(fromCard.getShowExpandButton);
 
     constructor(private store: Store<any>) {}
 
@@ -20,5 +21,9 @@ export class CardListComponent implements OnInit {
 
     onFilterChange(cardFilter: CardFilter) {
         this.store.dispatch(new FilterAction.SetFilter(cardFilter));
+    }
+
+    moreCards() {
+        this.store.dispatch(new FilterAction.ExpandLimit());
     }
 }

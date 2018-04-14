@@ -5,4 +5,6 @@ export interface Survey {
     endTime: string | null;
     isPreRelease: boolean;
     status: 'ongoing' | 'closed';
+    cardStats: string[];
+    expansionStat: number | null;
 }

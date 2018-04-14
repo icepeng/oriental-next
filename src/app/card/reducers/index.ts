@@ -9,10 +9,12 @@ import { Card } from '../models/card.model';
 import { CardFilter } from '../models/filter.model';
 import * as fromCard from './card.reducer';
 import * as fromFilter from './filter.reducer';
+import * as fromStat from './card-stat.reducer';
 
 export interface CardState {
     card: fromCard.State;
     filter: fromFilter.State;
+    stat: fromStat.State;
 }
 
 export interface State extends fromRoot.State {
@@ -22,6 +24,7 @@ export interface State extends fromRoot.State {
 export const reducers: ActionReducerMap<CardState> = {
     card: fromCard.reducer,
     filter: fromFilter.reducer,
+    stat: fromStat.reducer,
 };
 
 export const getCardState = createFeatureSelector<CardState>('card');
@@ -51,8 +54,23 @@ export const getSelectedCard = createSelector(
     },
 );
 
-export const getAvailableCards = createSelector(getAllCards, cards =>
-    cards.filter(card => !!card.stat),
+// Stat
+export const getCardStatState = createSelector(
+    getCardState,
+    state => state.stat,
+);
+
+export const {
+    selectIds: getCardStatIds,
+    selectEntities: getCardStatEntities,
+    selectAll: getAllCardStats,
+    selectTotal: getTotalCardStats,
+} = fromStat.adapter.getSelectors(getCardStatState);
+
+export const getSelectedCardStats = createSelector(
+    getSelectedCardId,
+    getAllCardStats,
+    (cardId, cardStats) => cardStats.filter(x => x.card === cardId),
 );
 
 // Filter
@@ -73,11 +91,10 @@ export const getViewLimit = createSelector(
 
 export const getFilteredCards = createSelector(
     getFilter,
-    getAvailableCards,
+    getAllCards,
     (filter, cards) => {
-        return cards
-            .filter(card => filterCard(card, filter))
-            .sort(sortCard(filter));
+        return cards.filter(card => filterCard(card, filter));
+        // .sort(sortCard(filter));
     },
 );
 
@@ -98,6 +115,12 @@ export const getLimitedFilteredCards = createSelector(
     (cards, viewLimit) => cards.slice(0, viewLimit),
 );
 
+export const getShowExpandButton = createSelector(
+    getFilteredCardsTotal,
+    getViewLimit,
+    (total, limit) => total > limit,
+);
+
 function filterCard(card: Card, filter: CardFilter) {
     if (card.class !== filter.class && filter.class !== 'ALL') {
         return false;
@@ -111,21 +134,21 @@ function filterCard(card: Card, filter: CardFilter) {
     return true;
 }
 
-const sortCard = (filter: CardFilter) => (a: Card, b: Card) => {
-    const sign = filter.sortOrder === 'ASC' ? 1 : -1;
-    const primary = filter.sortColumn;
-    const secondary = filter.sortColumn === 'power' ? 'generality' : 'power';
-    if (a.stat[primary] < b.stat[primary]) {
-        return -1 * sign;
-    }
-    if (a.stat[primary] > b.stat[primary]) {
-        return 1 * sign;
-    }
-    if (a.stat[secondary] < b.stat[secondary]) {
-        return -1 * sign;
-    }
-    if (a.stat[secondary] > b.stat[secondary]) {
-        return 1 * sign;
-    }
-    return 0;
-};
+// const sortCard = (filter: CardFilter) => (a: Card, b: Card) => {
+//     const sign = filter.sortOrder === 'ASC' ? 1 : -1;
+//     const primary = filter.sortColumn;
+//     const secondary = filter.sortColumn === 'power' ? 'generality' : 'power';
+//     if (a.stat[primary] < b.stat[primary]) {
+//         return -1 * sign;
+//     }
+//     if (a.stat[primary] > b.stat[primary]) {
+//         return 1 * sign;
+//     }
+//     if (a.stat[secondary] < b.stat[secondary]) {
+//         return -1 * sign;
+//     }
+//     if (a.stat[secondary] > b.stat[secondary]) {
+//         return 1 * sign;
+//     }
+//     return 0;
+// };

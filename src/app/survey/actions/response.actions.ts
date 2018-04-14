@@ -13,6 +13,7 @@ export enum ResponseActionTypes {
     LoadOne = '[Survey Response] Load One',
     LoadOneSuccess = '[Survey Response] Load One Success',
     LoadFailure = '[Survey Response] Load Failure',
+    NavigateRandom = '[Survey Response] Navigate Random',
 }
 
 export class Select implements Action {
@@ -52,9 +53,16 @@ export class LoadFailure implements Action {
     constructor(public payload: HttpErrorResponse) {}
 }
 
+export class NavigateRandom implements Action {
+    readonly type = ResponseActionTypes.NavigateRandom;
+
+    constructor(public payload: { survey: number }) {}
+}
+
 export type ResponseActions =
     | Select
     | SelectCard
     | LoadOne
     | LoadOneSuccess
-    | LoadFailure;
+    | LoadFailure
+    | NavigateRandom;

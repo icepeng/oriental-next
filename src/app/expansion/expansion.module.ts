@@ -6,8 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { SharedModule } from '../shared/shared.module';
-import { CardAverageChartComponent } from './components/card-average-chart.component';
-import { ExpansionRatingChartComponent } from './components/expansion-rating-chart.component';
+import { ExpansionBasicChartComponent } from './components/expansion-basic-chart.component';
 import { ExpansionDetailComponent } from './containers/expansion-detail.component';
 import { ExpansionListComponent } from './containers/expansion-list.component';
 import { ExpansionComponent } from './containers/expansion.component';
@@ -26,8 +25,7 @@ import { ExpansionService } from './services/expansion.service';
     declarations: [
         ExpansionListComponent,
         ExpansionDetailComponent,
-        ExpansionRatingChartComponent,
-        CardAverageChartComponent,
+        ExpansionBasicChartComponent,
         ExpansionComponent,
     ],
 })

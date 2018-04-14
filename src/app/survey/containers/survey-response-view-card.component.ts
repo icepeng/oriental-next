@@ -4,12 +4,13 @@ import {
     OnDestroy,
     OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs/Subject';
-import { combineLatest, takeUntil } from 'rxjs/operators';
+import { combineLatest, takeUntil, withLatestFrom, take } from 'rxjs/operators';
 import * as ResponseAction from '../actions/response.actions';
 import * as fromResponse from '../selectors/response.selectors';
+import * as fromResponseView from '../selectors/view.selectors';
 
 @Component({
     selector: 'app-survey-response-view-card',
@@ -21,9 +22,15 @@ export class SurveyResponseViewCardComponent implements OnInit, OnDestroy {
     selectedCardResponse$ = this.store.select(
         fromResponse.getSelectedCardResponse,
     );
+    total$ = this.store.select(fromResponseView.getFilteredCardResponsesTotal);
+    index$ = this.store.select(fromResponseView.getSelectedCardResponseIndex);
     unsubscribe$: Subject<void> = new Subject<void>();
 
-    constructor(private store: Store<any>, private route: ActivatedRoute) {}
+    constructor(
+        private store: Store<any>,
+        private route: ActivatedRoute,
+        private router: Router,
+    ) {}
 
     ngOnInit() {
         this.route.paramMap
@@ -39,6 +46,34 @@ export class SurveyResponseViewCardComponent implements OnInit, OnDestroy {
                         `${paramMap.get('cardId')}-${responseId}`,
                     ),
                 );
+            });
+    }
+
+    onPrev() {
+        this.store
+            .select(fromResponseView.getFilteredCardResponses)
+            .pipe(withLatestFrom(this.index$), take(1))
+            .subscribe(([cardResponses, index]) => {
+                if (index <= 0) {
+                    return;
+                }
+                this.router.navigate(['../', cardResponses[index - 1].card], {
+                    relativeTo: this.route,
+                });
+            });
+    }
+
+    onNext() {
+        this.store
+            .select(fromResponseView.getFilteredCardResponses)
+            .pipe(withLatestFrom(this.index$, this.total$), take(1))
+            .subscribe(([cardResponses, index, total]) => {
+                if (index + 1 >= total) {
+                    return;
+                }
+                this.router.navigate(['../', cardResponses[index + 1].card], {
+                    relativeTo: this.route,
+                });
             });
     }
 

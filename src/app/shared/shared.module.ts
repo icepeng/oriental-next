@@ -6,15 +6,18 @@ import { LocalCardDirective } from './local-card.directive';
 import { LocalExpansionImageDirective } from './local-expansion-image.directive';
 import { LocalExpansionDirective } from './local-expansion.directive';
 import { LocalUIDirective } from './local-ui.directive';
+import { CardNavigateComponent } from './card-navigate.component';
+import { ClarityModule } from '@clr/angular';
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [CommonModule, ClarityModule],
     exports: [
         LocalCardImageDirective,
         LocalCardDirective,
         LocalExpansionDirective,
         LocalExpansionImageDirective,
         LocalUIDirective,
+        CardNavigateComponent,
     ],
     declarations: [
         LocalCardImageDirective,
@@ -22,6 +25,7 @@ import { LocalUIDirective } from './local-ui.directive';
         LocalExpansionDirective,
         LocalExpansionImageDirective,
         LocalUIDirective,
+        CardNavigateComponent,
     ],
 })
 export class SharedModule {}

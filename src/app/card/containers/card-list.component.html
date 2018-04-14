@@ -1,4 +1,4 @@
-<h1>Card List</h1>
+<h1 appLocalUI="Card List"></h1>
 <div class="list-wrapper">
   <app-card-filter [filter]="filter$ | async" (filterChange)="onFilterChange($event)"></app-card-filter>
   <div class="row">
@@ -7,5 +7,8 @@
         <img appLocalCardImg [id]="card.id">
       </div>
     </div>
+  </div>
+  <div *ngIf="showExpandButton$ | async" class="more-cards">
+    <button (click)="moreCards()" class="btn btn-block">더 보기</button>
   </div>
 </div>

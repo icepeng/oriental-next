@@ -71,4 +71,14 @@ export class ResponseService {
                 }),
             );
     }
+
+    getRandomId(surveyId: number) {
+        return this.http
+            .get<{ response: { id: number } }>(
+                `${
+                    environment.apiAddress
+                }/surveys/${surveyId}/responses/random`,
+            )
+            .pipe(map(data => data.response.id));
+    }
 }
