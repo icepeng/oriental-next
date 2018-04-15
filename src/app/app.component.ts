@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(new Expansion.Load());
+        this.setDefaultLocale();
     }
 
     openLocaleModal() {
