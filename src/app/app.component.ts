@@ -8,6 +8,7 @@ import * as LocaleModal from './core/actions/locale-modal.actions';
 import * as Expansion from './expansion/actions/expansion.actions';
 import * as fromExpansion from './expansion/reducers';
 import * as fromUser from './user/reducers';
+import * as Localization from './core/actions/localization.actions';
 
 @Component({
     selector: 'my-app',
@@ -39,5 +40,12 @@ export class AppComponent implements OnInit {
 
     login() {
         this.store.dispatch(new AuthAction.Login());
+    }
+
+    setDefaultLocale() {
+        if (navigator.language.indexOf('en') !== -1) {
+            return this.store.dispatch(new Localization.Set('en-us'));
+        }
+        return this.store.dispatch(new Localization.Set('ko-kr'));
     }
 }
