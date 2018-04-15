@@ -1,28 +1,26 @@
 <app-card-navigate (prev)="onPrev()" (next)="onNext()" [id]="selectedId$ | async" [total]="total$ | async" [index]="index$ | async">
 </app-card-navigate>
 <div class="row">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-header">
-          카드 파워
-        </div>
-        <div class="card-block">
-          <div class="card-text">
-              <app-card-basic-chart [cardStats]="stats$ | async" [surveyEntities]="surveyEntities$ | async" prop="power"></app-card-basic-chart>
-          </div>
-        </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div appLocalUI="Card Power" class="card-header">
       </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-header">
-          범용성 (카드 유형)
-        </div>
-        <div class="card-block">
-          <div class="card-text">
-                <app-card-basic-chart [cardStats]="stats$ | async" [surveyEntities]="surveyEntities$ | async" prop="generality"></app-card-basic-chart>
-          </div>
+      <div class="card-block">
+        <div class="card-text">
+          <app-card-basic-chart [cardStats]="stats$ | async" [surveyEntities]="surveyEntities$ | async" prop="power"></app-card-basic-chart>
         </div>
       </div>
     </div>
   </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div appLocalUI="Generality" class="card-header">
+      </div>
+      <div class="card-block">
+        <div class="card-text">
+          <app-card-basic-chart [cardStats]="stats$ | async" [surveyEntities]="surveyEntities$ | async" prop="generality"></app-card-basic-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>추가 설명</label>
+                <label appLocalUI="Description"></label>
                 <textarea formControlName="description" rows="6"></textarea>
             </div>
             <button type="button" [clrLoading]="isLoading$ | async" [attr.disabled]="formGroup.invalid ? true : null" (click)="onSubmit()" class="btn btn-primary">확인</button>

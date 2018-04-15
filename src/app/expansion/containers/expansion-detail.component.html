@@ -1,10 +1,9 @@
-<h1>마녀숲
+<h1 appLocalExpansion [code]="selectedId$ | async" prop="name">
 </h1>
 <div class="row">
   <div class="col-sm-6">
     <div class="card">
-      <div class="card-header">
-        재미
+      <div appLocalUI="Fun" class="card-header">
       </div>
       <div class="card-block">
         <div class="card-text">
@@ -15,8 +14,7 @@
   </div>
   <div class="col-sm-6">
     <div class="card">
-      <div class="card-header">
-        밸런스
+      <div appLocalUI="Balance" class="card-header">
       </div>
       <div class="card-block">
         <div class="card-text">

@@ -1,42 +1,39 @@
 <div class="expansion-img">
-    <img appLocalExpansionImg [code]="(survey$ | async).expansion">
+  <img appLocalExpansionImg [code]="(survey$ | async).expansion">
 </div>
 <div *ngIf="expansionResponse$ | async as response" class="row">
-    <div class="col-sm-3">
-      <div class="card light-blue">
-        <div class="card-header">
-          재미
-        </div>
-        <div class="card-block">
-          <div class="card-text score">
-            {{ response.fun }}점
-          </div>
-        </div>
+  <div class="col-sm-3">
+    <div class="card light-blue">
+      <div appLocalUI="Fun" class="card-header">
       </div>
-    </div>
-    <div class="col-sm-3">
-      <div class="card orange">
-        <div class="card-header">
-          밸런스
-        </div>
-        <div class="card-block">
-          <div class="card-text score">
-            {{ response.balance }}점
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-12">
-      <div class="card description blue">
-        <div class="card-header">
-          추가 설명
-        </div>
-        <div class="card-block">
-          <div class="card-text">
-            <span *ngIf="response.description">{{ response.description }}</span>
-            <span *ngIf="!response.description">추가 설명이 없습니다.</span>
-          </div>
+      <div class="card-block">
+        <div class="card-text score">
+          {{ response.fun }}점
         </div>
       </div>
     </div>
   </div>
+  <div class="col-sm-3">
+    <div class="card orange">
+      <div appLocalUI="Balance" class="card-header">
+      </div>
+      <div class="card-block">
+        <div class="card-text score">
+          {{ response.balance }}점
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-12">
+    <div class="card description blue">
+      <div appLocalUI="Description" class="card-header">
+      </div>
+      <div class="card-block">
+        <div class="card-text">
+          <span *ngIf="response.description">{{ response.description }}</span>
+          <span *ngIf="!response.description">추가 설명이 없습니다.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

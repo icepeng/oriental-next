@@ -4,7 +4,7 @@
 <form [formGroup]="formGroup">
     <section class="form-block">
         <div class="form-group">
-            <label>재미</label>
+            <label appLocalUI="Fun"></label>
             <div class="radio-inline">
                 <input type="radio" formControlName="fun" [value]="80" id="f4">
                 <label for="f4">80 (매우 높음)</label>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>밸런스</label>
+            <label appLocalUI="Balance"></label>
             <div class="radio-inline">
                 <input type="radio" formControlName="balance" [value]="80" id="b4">
                 <label for="b4">80 (매우 높음)</label>
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label>추가 설명</label>
+            <label appLocalUI="Description"></label>
             <textarea formControlName="description" rows="6"></textarea>
         </div>
         <button type="button" (click)="onSubmit()" [clrLoading]="isLoading$ | async" [attr.disabled]="formGroup.invalid ? true : null"

@@ -6,10 +6,12 @@
       <img appLocalCardImg [id]="cardResponse.card">
     </div>
     <div class="card-badge">
-      <span class="label label-light-blue">카드 파워
+      <span class="label label-light-blue">
+        <span appLocalUI="Card Power"></span>
         <span class="badge">{{ cardResponse.power }}</span>
       </span>
-      <span class="label label-orange">범용성
+      <span class="label label-orange">
+        <span appLocalUI="Generality"></span>
         <span class="badge">{{ cardResponse.generality }}</span>
       </span>
     </div>

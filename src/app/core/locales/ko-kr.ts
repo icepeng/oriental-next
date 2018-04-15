@@ -53,4 +53,9 @@ export const ui = {
     EPIC: '영웅',
     RARE: '희귀',
     COMMON: '일반',
+    'Card Power': '카드 파워',
+    Generality: '범용성 (카드 유형)',
+    Description: '추가 설명',
+    Fun: '재미',
+    Balance: '밸런스',
 };
