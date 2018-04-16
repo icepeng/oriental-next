@@ -5,7 +5,7 @@
     <form [formGroup]="formGroup">
         <section class="form-block">
             <div class="form-group">
-                <label>카드 파워</label>
+                <label appLocalUI="Card Power"></label>
                 <div class="radio-inline">
                     <input type="radio" formControlName="power" [value]="80" id="f4">
                     <label for="f4">80 (매우 높음)</label>
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>범용성 (카드 유형)</label>
+                <label appLocalUI="Generality"></label>
                 <div class="radio-inline">
                     <input type="radio" formControlName="generality" [value]="80" id="b4">
                     <label for="b4">80 (순수 단독형)</label>
@@ -46,7 +46,8 @@
                 <label appLocalUI="Description"></label>
                 <textarea formControlName="description" rows="6"></textarea>
             </div>
-            <button type="button" [clrLoading]="isLoading$ | async" [attr.disabled]="formGroup.invalid ? true : null" (click)="onSubmit()" class="btn btn-primary">확인</button>
+            <button type="button" [clrLoading]="isLoading$ | async" [attr.disabled]="formGroup.invalid ? true : null" (click)="onSubmit()"
+                class="btn btn-primary">확인</button>
             <button (click)="onCancel()" class="btn btn-secondary">취소</button>
         </section>
     </form>
@@ -63,10 +64,12 @@
                 <span class="label label-blue">미응답</span>
             </div>
             <div *ngIf="card.form" class="card-badge">
-                <span class="label label-light-blue">카드 파워
+                <span class="label label-light-blue">
+                    <span appLocalUI="Card Power"></span>
                     <span class="badge">{{ card.form.power }}</span>
                 </span>
-                <span class="label label-orange">범용성
+                <span class="label label-orange">
+                    <span appLocalUI="Generality"></span>
                     <span class="badge">{{ card.form.generality }}</span>
                 </span>
             </div>
