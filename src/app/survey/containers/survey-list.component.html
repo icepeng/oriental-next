@@ -7,9 +7,10 @@
       </div>
       <div class="card-block">
         <span appLocalExpansion [code]="survey.expansion" prop="name" class="card-title"></span>
-        <span *ngIf="survey.status === 'ongoing'" class="label label-light-blue"></span>
+        <span *ngIf="survey.status === 'ongoing'" appLocalUI="Ongoing" class="label label-light-blue"></span>
         <span *ngIf="survey.status === 'closed'" appLocalUI="Closed" class="label label-blue"></span>
         <span *ngIf="survey.isPreRelease" appLocalUI="Pre-Release" class="label label-orange"></span>
+        <span *ngIf="!survey.isPreRelease" appLocalUI="After-Release" class="label label-orange"></span>
         <ul class="list">
           <li>시작: {{ survey.startTime | date:'yyyy-MM-dd, HH:mm:ss' }}</li>
           <li *ngIf="survey.endTime">종료: {{ survey.endTime | date:'yyyy-MM-dd, HH:mm:ss' }}</li>

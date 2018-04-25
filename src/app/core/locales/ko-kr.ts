@@ -37,6 +37,7 @@ export const ui = {
     Responses: '평가',
     'Unanswered Only': '미응답만 표시',
     'Pre-Release': '사전 평가',
+    'After-Release': '출시후 평가',
     YES: '예',
     NO: '아니오',
     DRUID: '드루이드',

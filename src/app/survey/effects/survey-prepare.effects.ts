@@ -11,7 +11,7 @@ import {
     SubmitSuccess,
     SurveySubmitActionTypes,
 } from '../actions/submit.actions';
-import { SurveyService } from '../services/survey.service';
+import { ResponseService } from '../services/response.service';
 
 @Injectable()
 export class SurveyPrepareEffects {
@@ -21,7 +21,7 @@ export class SurveyPrepareEffects {
         .pipe(
             map((action: Submit) => action.payload),
             switchMap(payload =>
-                this.surveyService.create(payload.survey).pipe(
+                this.responseService.create(payload.survey).pipe(
                     map(
                         res =>
                             new SubmitSuccess({
@@ -54,7 +54,7 @@ export class SurveyPrepareEffects {
 
     constructor(
         private actions$: Actions,
-        private surveyService: SurveyService,
+        private responseService: ResponseService,
         private router: Router,
     ) {}
 }

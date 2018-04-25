@@ -12,19 +12,6 @@ import {
 export class SurveyService {
     constructor(private http: HttpAuth) {}
 
-    create(
-        surveyId: number,
-    ): Observable<{
-        id: number;
-    }> {
-        return this.http
-            .post<{ id: number }>(
-                `${environment.apiAddress}/surveys/${surveyId}/responses/empty`,
-                {},
-            )
-            .pipe(map(data => data));
-    }
-
     saveCard({
         responseId,
         surveyId,

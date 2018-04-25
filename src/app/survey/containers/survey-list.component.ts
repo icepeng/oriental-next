@@ -46,11 +46,11 @@ export class SurveyListComponent implements OnInit {
                         showWriteButton:
                             survey.status === 'ongoing' &&
                             loggedIn &&
-                            !!response,
+                            !response,
                         showEditButton:
                             survey.status === 'ongoing' &&
                             loggedIn &&
-                            !response,
+                            !!response,
                         showLoginButton:
                             survey.status === 'ongoing' && !loggedIn,
                         showResultButton: survey.status === 'closed',

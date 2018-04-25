@@ -19,6 +19,19 @@ import { User } from '../../user/models/user.model';
 export class ResponseService {
     constructor(private http: HttpAuth) {}
 
+    create(
+        surveyId: number,
+    ): Observable<{
+        id: number;
+    }> {
+        return this.http
+            .post<{ id: number }>(
+                `${environment.apiAddress}/surveys/${surveyId}/responses`,
+                {},
+            )
+            .pipe(map(data => data));
+    }
+
     getOne({
         survey,
         id,
