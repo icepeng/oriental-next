@@ -7,6 +7,10 @@ import {
     ResponseActions,
     ResponseActionTypes,
 } from '../../survey/actions/response.actions';
+import {
+    SurveySubmitActions,
+    SurveySubmitActionTypes,
+} from '../../survey/actions/submit.actions';
 
 export interface State extends EntityState<User> {
     authedId: string | null;
@@ -25,13 +29,14 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(
     state = initialState,
-    action: UserActions | AuthActions | ResponseActions,
+    action: UserActions | AuthActions | ResponseActions | SurveySubmitActions,
 ): State {
     switch (action.type) {
         case UserActionTypes.LoadSuccess: {
             return {
                 ...adapter.addOne(action.payload.user, state),
                 selectedId: state.selectedId,
+                authedId: state.authedId,
             };
         }
 
@@ -39,6 +44,21 @@ export function reducer(
             return {
                 ...adapter.addOne(action.payload.user, state),
                 selectedId: state.selectedId,
+                authedId: state.authedId,
+            };
+        }
+
+        case SurveySubmitActionTypes.SubmitCardSuccess: {
+            return {
+                ...adapter.updateOne(
+                    {
+                        id: action.payload.user,
+                        changes: { point: action.payload.point },
+                    },
+                    state,
+                ),
+                selectedId: state.selectedId,
+                authedId: state.authedId,
             };
         }
 

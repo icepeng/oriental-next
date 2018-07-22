@@ -70,6 +70,6 @@ export const getSelectedExpansionStats = createSelector(
     fromSurvey.getSurveyEntities,
     (expansionId, expansionStats, surveyEntities) =>
         expansionStats.filter(
-            x => surveyEntities[x.id].expansion === expansionId,
+            x => surveyEntities[x.survey].expansion === expansionId,
         ),
 );

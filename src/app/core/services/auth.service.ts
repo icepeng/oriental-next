@@ -28,6 +28,7 @@ export class AuthService {
         return {
             id: decoded.id,
             battletag: decoded.battletag,
+            point: decoded.point,
             exp: decoded.exp,
         };
     }

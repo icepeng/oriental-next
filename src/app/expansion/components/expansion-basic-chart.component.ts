@@ -61,7 +61,7 @@ export class ExpansionBasicChartComponent implements OnInit, OnChanges {
             type: 'category',
             data: expansionStats.map(
                 expansionStat =>
-                    surveyEntities[expansionStat.id].endTime.split('T')[0],
+                    surveyEntities[expansionStat.survey].endTime.split('T')[0],
             ),
         };
     }

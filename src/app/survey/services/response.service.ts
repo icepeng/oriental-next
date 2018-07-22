@@ -63,6 +63,7 @@ export class ResponseService {
                     };
                     const cardResponses = res.response.cardResponses.map(x => ({
                         id: `${x.cardId}-${response.id}`,
+                        pid: x.id,
                         card: x.cardId,
                         power: x.power,
                         generality: x.generality,
@@ -72,6 +73,7 @@ export class ResponseService {
                         ? {
                               ...res.response.expansionResponse,
                               id: response.id,
+                              pid: res.response.expansionResponse.id,
                           }
                         : undefined;
                     const user = res.response.user;

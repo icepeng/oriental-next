@@ -20,8 +20,8 @@ export class SurveyService {
         responseId: number;
         surveyId: number;
         form: SurveyCardForm;
-    }): Observable<{}> {
-        return this.http.post<{}>(
+    }): Observable<{ point: number }> {
+        return this.http.post<{ point: number }>(
             `${
                 environment.apiAddress
             }/surveys/${surveyId}/responses/${responseId}/card-responses`,
@@ -37,8 +37,8 @@ export class SurveyService {
         responseId: number;
         surveyId: number;
         form: SurveyExpansionForm;
-    }): Observable<{}> {
-        return this.http.post<{}>(
+    }): Observable<{ point: number }> {
+        return this.http.post<{ point: number }>(
             `${
                 environment.apiAddress
             }/surveys/${surveyId}/responses/${responseId}/expansion-response`,

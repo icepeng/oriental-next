@@ -62,6 +62,8 @@ export class SubmitCardSuccess implements Action {
             survey: number;
             response: number;
             form: SurveyCardForm;
+            point: number;
+            user: string;
         },
     ) {}
 }
@@ -86,6 +88,8 @@ export class SubmitExpansionSuccess implements Action {
             survey: number;
             response: number;
             form: SurveyExpansionForm;
+            point: number;
+            user: string;
         },
     ) {}
 }

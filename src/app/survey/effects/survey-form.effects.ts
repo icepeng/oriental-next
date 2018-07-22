@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import {
     SubmitCard,
     SubmitCardFailure,
@@ -14,6 +14,7 @@ import {
     SurveySubmitActionTypes,
 } from '../actions/submit.actions';
 import { SurveyService } from '../services/survey.service';
+import * as fromUser from '../../user/reducers';
 
 @Injectable()
 export class SurveyFormEffects {
@@ -30,12 +31,17 @@ export class SurveyFormEffects {
                         surveyId: payload.survey,
                     })
                     .pipe(
+                        withLatestFrom(
+                            this.store.select(fromUser.getAuthedUserId),
+                        ),
                         map(
-                            res =>
+                            ([res, user]) =>
                                 new SubmitCardSuccess({
                                     survey: payload.survey,
                                     response: payload.response,
                                     form: payload.form,
+                                    point: res.point,
+                                    user,
                                 }),
                         ),
                         catchError(error => of(new SubmitCardFailure(error))),
@@ -56,12 +62,17 @@ export class SurveyFormEffects {
                         surveyId: payload.survey,
                     })
                     .pipe(
+                        withLatestFrom(
+                            this.store.select(fromUser.getAuthedUserId),
+                        ),
                         map(
-                            res =>
+                            ([res, user]) =>
                                 new SubmitExpansionSuccess({
                                     survey: payload.survey,
                                     response: payload.response,
                                     form: payload.form,
+                                    point: res.point,
+                                    user,
                                 }),
                         ),
                         catchError(error =>
@@ -72,6 +83,7 @@ export class SurveyFormEffects {
         );
 
     constructor(
+        private store: Store<any>,
         private actions$: Actions,
         private surveyService: SurveyService,
     ) {}

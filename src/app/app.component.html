@@ -24,17 +24,19 @@
       </a>
     </div>
     <div class="header-actions">
-      <clr-dropdown *ngIf="authedUser$ | async as authedUser; else noauth">
-        <button class="nav-text" clrDropdownTrigger>
-          {{ authedUser.battletag }}
-          <clr-icon shape="caret down"></clr-icon>
-        </button>
-        <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a (click)="openLocaleModal()" clrDropdownItem>Change Locale</a>
-          <a [routerLink]="['/', 'users', authedUser.id]"  clrDropdownItem>My Profile</a>
-          <a (click)="logout()" clrDropdownItem>Log out</a>
-        </clr-dropdown-menu>
-      </clr-dropdown>
+      <ng-container *ngIf="authedUser$ | async as authedUser; else noauth">
+        <clr-dropdown>
+          <button class="nav-text" clrDropdownTrigger>
+            {{ authedUser.battletag }} (<img src="/images/dust.png"> {{ authedUser.point }})
+            <clr-icon shape="caret down"></clr-icon>
+          </button>
+          <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+            <a (click)="openLocaleModal()" clrDropdownItem>Change Locale</a>
+            <a [routerLink]="['/', 'users', authedUser.id]" clrDropdownItem>My Profile</a>
+            <a (click)="logout()" clrDropdownItem>Log out</a>
+          </clr-dropdown-menu>
+        </clr-dropdown>
+      </ng-container>
       <ng-template #noauth>
         <clr-dropdown>
           <button class="nav-icon" clrDropdownTrigger>

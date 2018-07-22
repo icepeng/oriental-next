@@ -8,6 +8,7 @@ export interface SurveyResponse {
 
 export interface CardResponse {
     id: string;
+    pid: number;
     card: string;
     power: number;
     generality: number;
@@ -16,6 +17,7 @@ export interface CardResponse {
 
 export interface ExpansionResponse {
     id: number;
+    pid: number;
     fun: number;
     balance: number;
     description: string;
@@ -29,6 +31,7 @@ export interface ResponseFromApi {
 }
 
 export interface CardResponseFromApi {
+    id: number;
     cardId: string;
     power: number;
     generality: number;
@@ -36,6 +39,7 @@ export interface CardResponseFromApi {
 }
 
 export interface ExpansionResponseFromApi {
+    id: number;
     fun: number;
     balance: number;
     description: string;

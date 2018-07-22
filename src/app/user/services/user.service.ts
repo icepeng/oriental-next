@@ -30,6 +30,7 @@ export class UserService {
                     const user = {
                         id: res.user.id,
                         battletag: res.user.battletag,
+                        point: res.user.point,
                     };
                     const responses = res.user.responses.map(response => ({
                         id: response.id,
@@ -47,6 +48,7 @@ export class UserService {
                             ...arr,
                             ...response.cardResponses.map(x => ({
                                 id: `${x.cardId}-${response.id}`,
+                                pid: x.id,
                                 card: x.cardId,
                                 power: x.power,
                                 generality: x.generality,
@@ -63,6 +65,7 @@ export class UserService {
                                 {
                                     ...response.expansionResponse,
                                     id: response.id,
+                                    pid: response.expansionResponse.id,
                                 },
                             ],
                             [] as ExpansionResponse[],

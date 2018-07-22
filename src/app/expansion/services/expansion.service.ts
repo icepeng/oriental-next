@@ -59,10 +59,12 @@ export class ExpansionService {
                         .reduce(
                             (arr, expansion) => [
                                 ...arr,
-                                ...expansion.surveys.map(survey => ({
-                                    ...survey.expansionStat,
-                                    id: survey.id,
-                                })),
+                                ...expansion.surveys
+                                    .filter(survey => !!survey.expansionStat)
+                                    .map(survey => ({
+                                        ...survey.expansionStat,
+                                        survey: survey.id,
+                                    })),
                             ],
                             [],
                         )
