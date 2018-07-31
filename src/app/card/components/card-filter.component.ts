@@ -1,16 +1,16 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    EventEmitter,
     Input,
     OnDestroy,
     OnInit,
     Output,
-    EventEmitter,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs/Subject';
-
+import { takeUntil } from 'rxjs/operators';
+import { Expansion } from '../../expansion/models/expansion.model';
 import { Classes, Rarity } from '../models/card.model';
 import { CardFilter } from '../models/filter.model';
 
@@ -28,6 +28,7 @@ export class CardFilterComponent implements OnInit, OnDestroy {
         }
         this.formGroup.reset(value);
     }
+    @Input() expansions: Expansion[];
     @Output('filterChange') filterChange = new EventEmitter<CardFilter>();
 
     classFilter: (Classes | 'NEUTRAL')[] = [
@@ -48,6 +49,7 @@ export class CardFilterComponent implements OnInit, OnDestroy {
         class: new FormControl(),
         cost: new FormControl(),
         rarity: new FormControl(),
+        expansion: new FormControl(),
         // sortColumn: new FormControl(),
         // sortOrder: new FormControl(),
     });

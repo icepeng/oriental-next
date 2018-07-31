@@ -12,6 +12,8 @@ import { CardDetailComponent } from './containers/card-detail.component';
 import { CardListComponent } from './containers/card-list.component';
 import { CardComponent } from './containers/card.component';
 import * as fromCard from './reducers';
+import { CardRandomResponseComponent } from './components/card-random-response.component';
+import { CardService } from './services/card.service';
 
 @NgModule({
     imports: [
@@ -29,13 +31,14 @@ import * as fromCard from './reducers';
         CardComponent,
         CardFilterComponent,
         CardBasicChartComponent,
+        CardRandomResponseComponent,
     ],
 })
 export class CardModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: RootCardModule,
-            providers: [],
+            providers: [CardService],
         };
     }
 }

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as fromCard from '../reducers';
+import * as fromExpansion from '../../expansion/reducers';
 import * as FilterAction from '../actions/filter.actions';
 import { CardFilter } from '../models/filter.model';
 @Component({
@@ -13,6 +14,7 @@ import { CardFilter } from '../models/filter.model';
 export class CardListComponent implements OnInit {
     filter$ = this.store.select(fromCard.getFilter);
     list$ = this.store.select(fromCard.getLimitedFilteredCards);
+    expansions$ = this.store.select(fromExpansion.getAllExpansions);
     showExpandButton$ = this.store.select(fromCard.getShowExpandButton);
 
     constructor(private store: Store<any>) {}

@@ -6,6 +6,8 @@ export enum SurveyFormActionTypes {
     SelectCard = '[Survey Form] Select Card',
     CloseError = '[Survey Form] Close Error',
     SetFilter = '[Survey Form] Set Filter',
+    SetNextCard = '[Survey Form] Set Next Card',
+    SetNextCardSuccess = '[Survey Form] Set Next Card Success',
 }
 
 export class Init implements Action {
@@ -28,4 +30,20 @@ export class SetFilter implements Action {
     constructor(public payload: SurveyCardFilter) {}
 }
 
-export type SurveyFormActions = Init | SelectCard | CloseError | SetFilter;
+export class SetNextCard implements Action {
+    readonly type = SurveyFormActionTypes.SetNextCard;
+}
+
+export class SetNextCardSuccess implements Action {
+    readonly type = SurveyFormActionTypes.SetNextCardSuccess;
+
+    constructor(public payload: string) {}
+}
+
+export type SurveyFormActions =
+    | Init
+    | SelectCard
+    | CloseError
+    | SetFilter
+    | SetNextCard
+    | SetNextCardSuccess;

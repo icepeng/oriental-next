@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 import * as fromSurvey from '../../survey/selectors/survey.selectors';
 import * as ExpansionActions from '../actions/expansion.actions';
 import * as fromExpansion from '../reducers';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'app-expansion-detail',
@@ -16,6 +17,7 @@ export class ExpansionDetailComponent implements OnInit {
     selectedId$ = this.store.select(fromExpansion.getSelectedExpansionId);
     stats$ = this.store.select(fromExpansion.getSelectedExpansionStats);
     surveyEntities$ = this.store.select(fromSurvey.getSurveyEntities);
+    isStatAvailable$: Observable<boolean>;
 
     constructor(private store: Store<any>, private route: ActivatedRoute) {}
 
@@ -27,5 +29,8 @@ export class ExpansionDetailComponent implements OnInit {
                     new ExpansionActions.Select(params.get('id')),
                 ),
             );
+        this.isStatAvailable$ = this.stats$.pipe(
+            map(stats => stats.length > 0),
+        );
     }
 }

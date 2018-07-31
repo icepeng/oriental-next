@@ -24,49 +24,68 @@ export const getFormError = createSelector(
     fromForm.getError,
 );
 
+export const getFormSuccess = createSelector(
+    getSurveyFormState,
+    fromForm.getSuccess,
+);
+
 export const getFormSelectedCardId = createSelector(
     getSurveyFormState,
     fromForm.getSelectedCardId,
 );
 
-export const getFilter = createSelector(getSurveyFormState, fromForm.getFilter);
+export const getFormNextCardId = createSelector(
+    getSurveyFormState,
+    fromForm.getNextCardId,
+);
 
-export const getFilteredCards = createSelector(
-    getFilter,
+export const getFormNextCard = createSelector(
+    getFormNextCardId,
+    fromCard.getCardEntities,
+    (id, entities) => (id ? entities[id] : null),
+);
+
+export const getSurveyCards = createSelector(
     fromSurvey.getSelectedSurvey,
     fromExpansion.getExpansionEntities,
     fromCard.getCardEntities,
-    (filter, survey, expansions, cards) => {
-        return expansions[survey.expansion].cards
-            .map(id => cards[id])
-            .filter(card => filterCard(card, filter));
+    (survey, expansions, cardEntities) => {
+        if (!survey) {
+            return [];
+        }
+        return expansions[survey.expansion].cards.map(id => cardEntities[id]);
     },
 );
+
+export const getFilter = createSelector(getSurveyFormState, fromForm.getFilter);
 
 export const getCardFormList = createSelector(
-    getFilter,
-    getFilteredCards,
+    getSurveyCards,
     fromResponse.getSelectedResponseId,
     fromResponse.getCardResponseEntities,
-    (filter, cards, responseId, formCards) => {
-        const res = cards.map<
+    (cards, responseId, formCards) => {
+        return cards.map<
             Card & {
-                form: CardResponse;
+                form?: CardResponse;
             }
         >(card => ({ ...card, form: formCards[`${card.id}-${responseId}`] }));
-        if (!filter.nullOnly) {
-            return res;
-        }
-        return res.filter(card => !card.form);
     },
 );
 
-export const getFilteredCardsTotal = createSelector(
-    getFilteredCards,
-    cards => cards.length,
+export const getFilteredFormList = createSelector(
+    getFilter,
+    getCardFormList,
+    (filter, cards) => {
+        return cards.filter(card => filterCard(card, filter));
+    },
 );
 
-function filterCard(card: Card, filter: SurveyCardFilter) {
+function filterCard(
+    card: Card & {
+        form?: CardResponse;
+    },
+    filter: SurveyCardFilter,
+) {
     if (card.class !== filter.class && filter.class !== 'ALL') {
         return false;
     }
@@ -74,6 +93,9 @@ function filterCard(card: Card, filter: SurveyCardFilter) {
         return false;
     }
     if (filter.cost !== 'ALL' && card.cost !== +filter.cost) {
+        return false;
+    }
+    if (filter.nullOnly && !!card.form) {
         return false;
     }
     return true;

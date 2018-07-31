@@ -3,7 +3,13 @@ import { Actions, Effect } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { catchError, map, switchMap, withLatestFrom } from 'rxjs/operators';
+import {
+    catchError,
+    map,
+    switchMap,
+    withLatestFrom,
+    tap,
+} from 'rxjs/operators';
 import {
     SubmitCard,
     SubmitCardFailure,
@@ -15,6 +21,11 @@ import {
 } from '../actions/submit.actions';
 import { SurveyService } from '../services/survey.service';
 import * as fromUser from '../../user/reducers';
+import * as fromForm from '../selectors/form.selectors';
+import {
+    SurveyFormActionTypes,
+    SetNextCardSuccess,
+} from '../actions/survey-form.actions';
 
 @Injectable()
 export class SurveyFormEffects {
@@ -80,6 +91,25 @@ export class SurveyFormEffects {
                         ),
                     ),
             ),
+        );
+
+    @Effect()
+    setNextCard$: Observable<Action> = this.actions$
+        .ofType(
+            SurveyFormActionTypes.SetNextCard,
+            SurveySubmitActionTypes.SubmitCardSuccess,
+        )
+        .pipe(
+            tap(() => console.log('hi')),
+            withLatestFrom(this.store.select(fromForm.getCardFormList)),
+            map(([_, cards]) => {
+                const left = cards.filter(x => !x.form);
+                const randomPick =
+                    left[Math.floor(Math.random() * left.length)];
+                return new SetNextCardSuccess(
+                    randomPick ? randomPick.id : null,
+                );
+            }),
         );
 
     constructor(

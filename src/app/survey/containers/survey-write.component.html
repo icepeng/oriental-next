@@ -16,10 +16,22 @@
   </ul>
   <clr-alert [clrAlertType]="'alert-danger'" [clrAlertClosed]="!(error$ | async)" (clrAlertClosedChange)="alertClose()">
     <div class="alert-item">
-        <span class="alert-text">
-          저장 중 오류가 발생했습니다.
-        </span>
+      <span class="alert-text">
+        저장 중 오류가 발생했습니다.
+      </span>
     </div>
   </clr-alert>
+  <div class="alert alert-success" *ngIf="success$ | async">
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+        </div>
+        <span class="alert-text">
+          저장 성공! 현재 가루: {{ (authedUser$ | async).point }}
+        </span>
+      </div>
+    </div>
+  </div>
   <router-outlet></router-outlet>
 </div>

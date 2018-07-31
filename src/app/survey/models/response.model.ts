@@ -32,6 +32,7 @@ export interface ResponseFromApi {
 
 export interface CardResponseFromApi {
     id: number;
+    responseId: number;
     cardId: string;
     power: number;
     generality: number;
@@ -40,6 +41,7 @@ export interface CardResponseFromApi {
 
 export interface ExpansionResponseFromApi {
     id: number;
+    responseId: number;
     fun: number;
     balance: number;
     description: string;

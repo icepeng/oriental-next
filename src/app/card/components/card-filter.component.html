@@ -4,7 +4,7 @@
       <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
         <label appLocalUI="Class" for="class"></label>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
+      <div class="col-lg-2 col-md-2 col-sm-8 col-xs-8">
         <div class="select form-control">
           <select formControlName="class" id="class">
             <option appLocalUI="ALL" value="ALL">ALL</option>
@@ -15,7 +15,7 @@
       <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
         <label appLocalUI="Cost" for="cost"></label>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
+      <div class="col-lg-2 col-md-2 col-sm-8 col-xs-8">
         <div class="select form-control">
           <select formControlName="cost" id="cost">
             <option appLocalUI="ALL" value="ALL"></option>
@@ -26,11 +26,22 @@
       <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
         <label appLocalUI="Rarity" for="rarity"></label>
       </div>
-      <div class="col-lg-3 col-md-3 col-sm-8 col-xs-8">
+      <div class="col-lg-2 col-md-2 col-sm-8 col-xs-8">
         <div class="select form-control">
           <select formControlName="rarity" id="rarity">
             <option appLocalUI="ALL" value="ALL"></option>
             <option [appLocalUI]="_rarity" *ngFor="let _rarity of rarityFilter" [value]="_rarity"></option>
+          </select>
+        </div>
+      </div>
+      <div class="col-lg-1 col-md-1 col-sm-4 col-xs-4">
+        <label appLocalUI="Expansion" for="expansion"></label>
+      </div>
+      <div class="col-lg-2 col-md-2 col-sm-8 col-xs-8">
+        <div class="select form-control">
+          <select formControlName="expansion" id="expansion">
+            <option appLocalUI="ALL" value="ALL"></option>
+            <option [appLocalUI]="_expansion.code" *ngFor="let _expansion of expansions" [value]="_expansion.code"></option>
           </select>
         </div>
       </div>

@@ -36,21 +36,19 @@ export class SurveyPrepareEffects {
         );
 
     @Effect({ dispatch: false })
-    success$ = this.actions$
-        .ofType(SurveySubmitActionTypes.SubmitSuccess)
-        .pipe(
-            map((action: SubmitSuccess) => action.payload),
-            tap(payload =>
-                this.router.navigate([
-                    '/',
-                    'surveys',
-                    payload.survey,
-                    'responses',
-                    payload.id,
-                    'write',
-                ]),
-            ),
-        );
+    success$ = this.actions$.ofType(SurveySubmitActionTypes.SubmitSuccess).pipe(
+        map((action: SubmitSuccess) => action.payload),
+        tap(payload =>
+            this.router.navigate([
+                '/',
+                'surveys',
+                payload.survey,
+                'responses',
+                payload.id,
+                'write',
+            ]),
+        ),
+    );
 
     constructor(
         private actions$: Actions,

@@ -4,4 +4,5 @@ export interface CardFilter {
     class: Classes | 'NEUTRAL' | 'ALL';
     rarity: Rarity | 'ALL';
     cost: string | 'ALL';
+    expansion: string | 'ALL';
 }

@@ -9,6 +9,14 @@ import { Survey } from '../models/survey.model';
 import * as fromResponse from '../selectors/response.selectors';
 import * as fromSurvey from '../selectors/survey.selectors';
 
+type SURVEY_LIST = Survey & {
+    responseId: number;
+    showWriteButton: boolean;
+    showEditButton: boolean;
+    showLoginButton: boolean;
+    showResultButton: boolean;
+};
+
 @Component({
     selector: 'app-survey-list',
     templateUrl: './survey-list.component.html',
@@ -16,20 +24,13 @@ import * as fromSurvey from '../selectors/survey.selectors';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurveyListComponent implements OnInit {
-    list$: Observable<
-        (Survey & {
-            responseId: number;
-            showWriteButton: boolean;
-            showEditButton: boolean;
-            showLoginButton: boolean;
-            showResultButton: boolean;
-        })[]
-    >;
+    ongoingList$: Observable<SURVEY_LIST[]>;
+    closedList$: Observable<SURVEY_LIST[]>;
 
     constructor(private store: Store<any>) {}
 
     ngOnInit() {
-        this.list$ = this.store.select(fromSurvey.getAllSurveys).pipe(
+        const list$ = this.store.select(fromSurvey.getAllSurveys).pipe(
             combineLatest(
                 this.store.select(fromUser.getAuthedUserId),
                 this.store.select(fromResponse.getAllResponses),
@@ -58,6 +59,8 @@ export class SurveyListComponent implements OnInit {
                 });
             }),
         );
+        this.ongoingList$ = list$.pipe(map(item => item.filter(x => x.status === 'ongoing')))
+        this.closedList$ = list$.pipe(map(item => item.filter(x => x.status === 'closed')))
     }
 
     login() {

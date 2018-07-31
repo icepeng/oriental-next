@@ -9,7 +9,7 @@
         <p appLocalExpansion [code]="expansion.code" prop="text" class="card-text"></p>
       </div>
       <div class="card-footer">
-        <button [routerLink]="['/', 'expansions', 'the-witchwood']" class="btn btn-sm btn-link">자세히 보기</button>
+        <button [routerLink]="['/', 'expansions', expansion.code]" class="btn btn-sm btn-link">자세히 보기</button>
       </div>
     </div>
   </div>

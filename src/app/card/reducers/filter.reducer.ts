@@ -11,6 +11,7 @@ export const initialState: State = {
         class: 'ALL',
         cost: 'ALL',
         rarity: 'ALL',
+        expansion: 'ALL',
     },
     viewLimit: 20,
 };

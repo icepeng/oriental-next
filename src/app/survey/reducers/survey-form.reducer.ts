@@ -13,6 +13,8 @@ export interface State {
     isLoading: boolean;
     selectedCardId: string;
     filter: SurveyCardFilter;
+    nextCardId: string;
+    success: boolean;
 }
 
 export const initialState: State = {
@@ -25,6 +27,8 @@ export const initialState: State = {
         rarity: 'ALL',
         nullOnly: true,
     },
+    nextCardId: null,
+    success: false,
 };
 
 export function reducer(
@@ -41,6 +45,7 @@ export function reducer(
         case SurveyFormActionTypes.SelectCard: {
             return {
                 ...state,
+                success: false,
                 selectedCardId: action.payload,
             };
         }
@@ -59,6 +64,13 @@ export function reducer(
             };
         }
 
+        case SurveyFormActionTypes.SetNextCardSuccess: {
+            return {
+                ...state,
+                nextCardId: action.payload,
+            };
+        }
+
         case SurveySubmitActionTypes.SubmitCard:
         case SurveySubmitActionTypes.SubmitExpansion: {
             return {
@@ -74,6 +86,7 @@ export function reducer(
                 error: null,
                 isLoading: false,
                 selectedCardId: null,
+                success: true,
             };
         }
 
@@ -96,6 +109,10 @@ export const getIsLoading = (state: State) => state.isLoading;
 
 export const getError = (state: State) => state.error;
 
+export const getSuccess = (state: State) => state.success;
+
 export const getSelectedCardId = (state: State) => state.selectedCardId;
 
 export const getFilter = (state: State) => state.filter;
+
+export const getNextCardId = (state: State) => state.nextCardId;

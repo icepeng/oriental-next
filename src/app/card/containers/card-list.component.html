@@ -1,6 +1,6 @@
 <h1 appLocalUI="Card List"></h1>
 <div class="list-wrapper">
-  <app-card-filter [filter]="filter$ | async" (filterChange)="onFilterChange($event)"></app-card-filter>
+  <app-card-filter [filter]="filter$ | async" [expansions]="expansions$ | async" (filterChange)="onFilterChange($event)"></app-card-filter>
   <div class="row">
     <div *ngFor="let card of list$ | async" class="col-sm-3">
       <div [routerLink]="['/', 'cards', card.id]" class="card-img">

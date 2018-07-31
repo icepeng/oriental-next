@@ -6,14 +6,23 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { combineLatest, take, takeUntil } from 'rxjs/operators';
+import {
+    combineLatest,
+    map,
+    take,
+    takeUntil,
+    withLatestFrom,
+} from 'rxjs/operators';
+import { Card } from '../../card/models/card.model';
 import * as SubmitAction from '../actions/submit.actions';
 import * as FormAction from '../actions/survey-form.actions';
 import { SurveyCardFilter } from '../models/filter.model';
 import * as fromForm from '../selectors/form.selectors';
 import * as fromResponse from '../selectors/response.selectors';
 import * as fromSurvey from '../selectors/survey.selectors';
+import { CardResponse } from '../models/response.model';
 
 @Component({
     selector: 'app-survey-write-card',
@@ -23,9 +32,10 @@ import * as fromSurvey from '../selectors/survey.selectors';
 })
 export class SurveyWriteCardComponent implements OnInit, OnDestroy {
     filter$ = this.store.select(fromForm.getFilter);
-    cards$ = this.store.select(fromForm.getCardFormList);
     selectedCardId$ = this.store.select(fromForm.getFormSelectedCardId);
     isLoading$ = this.store.select(fromForm.getFormIsLoading);
+    cards$: Observable<(Card & { form?: CardResponse })[]>;
+
     unsubscribe$: Subject<void> = new Subject<void>();
 
     formGroup = new FormGroup({
@@ -63,6 +73,17 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
                     description: cardResponse.description,
                 });
             });
+        this.cards$ = this.store.select(fromForm.getFilteredFormList).pipe(
+            combineLatest(this.store.select(fromForm.getFormNextCard)),
+            withLatestFrom(this.store.select(fromSurvey.getSelectedSurvey)),
+            map(([[cards, nextCard], survey]) => {
+                if (survey.isPreRelease) {
+                    return cards;
+                }
+                const responsed = cards.filter(x => !!x.form);
+                return nextCard ? [nextCard, ...responsed] : responsed;
+            }),
+        );
         this.store.dispatch(new FormAction.SelectCard(null));
     }
 

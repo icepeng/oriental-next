@@ -12,7 +12,7 @@ export interface State extends EntityState<Survey> {
 
 export const adapter: EntityAdapter<Survey> = createEntityAdapter<Survey>({
     selectId: (survey: Survey) => survey.id,
-    sortComparer: false,
+    sortComparer: (a, b) => b.id - a.id,
 });
 
 export const initialState: State = adapter.getInitialState({

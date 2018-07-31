@@ -673,5 +673,400 @@
         "imgLink":
             "https://assets.webn.mobi/hearthstone/11c3b3dd01ac75781f5cf7e6acdbafd28d64ac157c4641ba262a5c2f47fcde57.png",
         "name": "Cinderstorm"
+    },
+    "academic-espionage": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/afbf757e71ed10036d1fa47d4e4210588e926a55782dd8daaea959e843b26e09.png",
+        "name": "Academic Espionage"
+    },
+    "myras-unstable-element": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/dfabd473e0f53885619868fe47d573f1b36339a7d6870fa4d66d72106fea2522.png",
+        "name": ""
+    },
+    "myra-rotspring": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/52df630c86a6933ba5593342fc43222999cb54970f47ff26725de2c108759dab.png",
+        "name": ""
+    },
+    "the-storm-bringer": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/46c69e02135043ce17b04fed3e3a05789085d2cb1753e6e35d9aea5fe3389681.png",
+        "name": ""
+    },
+    "weaponized-piata": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/4c365c8da45701c9f9b347aad7924fd48a79b34506bdca09c421505016e6d9b7.png",
+        "name": ""
+    },
+    "juicy-psychmelon": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/ae1a28bb725f662f3378b10e3b743540eb021110ade0633592e32af6bae7b0c0.png",
+        "name": ""
+    },
+    "supercollider": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/7089d9f7e837366a6a5351fa8018b687262d2303e2a330c5b77a5933e3dceb45.png",
+        "name": ""
+    },
+    "thunderhead": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/0f5fd59448d55020cfdb6091dd7accca091ea55ca077efd9d5411b3110621d6a.png",
+        "name": ""
+    },
+    "power-word-replicate": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/0db7b92a03784cfe234b783c9100e571650104cfe2dc17d83a9a3db113fc1fd8.png",
+        "name": ""
+    },
+    "crystalsmith-kangor": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/e7f2621928952199ad1b122a26e374d7efdd07e96977dca9772a234d24ce94b0.png",
+        "name": ""
+    },
+    "shrink-ray": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/290fea40bf0c819b639f65abdd6018f5466db78df56e44686e647dba11b44f99.png",
+        "name": ""
+    },
+    "beryllium-nullifier": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/fd09e54b8e9a952a86a37afa0837d87e31e70c99d377045425a4aba81ad19d08.png",
+        "name": ""
+    },
+    "mulchmuncher": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/c05062975c35ceff1297639e5436bf50f384c5e0f0626e07266713ebfa34de26.png",
+        "name": ""
+    },
+    "faithful-lumi": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/5155c0d9b1c001e859fe078b0ef9a7916b6c5e96a1304d0dff603076215595b0.png",
+        "name": ""
+    },
+    "annoyo-module": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/6ff06b03d843515f1d4c71a2f186ec39dd0fb7b1aa818e25db336c25cee0102a.png",
+        "name": ""
+    },
+    "dr-boom-mad-genius": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/8ac5f6dd9fa78493c42af021509d344c66666746e8cb05122ee2cfce8bbda189.png",
+        "name": ""
+    },
+    "kangors-endless-army": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/db8bb36395466effe5cf2e77717b265a5d9898d734c8321d8c05d17e42dad466.png",
+        "name": ""
+    },
+    "demonic-project": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/83070e81ba907b7e274b5aad5b709d7eb25283cd24e5a3c1cceb52ee982b9f37.png",
+        "name": ""
+    },
+    "whizbangthe-wonderful": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/fae0b710bdbe4536850b2489152a435317f96ad4be03de88fea8d1a61a2012fe.png",
+        "name": ""
+    },
+    "seaforium-bomber": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/6e89a7dac4ac8e1b57967300c983128630cdb108c935c0628a3a4e90efbfc601.png",
+        "name": ""
+    },
+    "dreampetal-florist": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/4a3c6141a7390b78553a948acf40c0dfecef3adc91ae85d2abeacbc06a4bd3c8.png",
+        "name": ""
+    },
+    "landscaping": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/f395c39da9e1170414862dcc33d69f6336269beac21ce6ed424709011817f06f.png",
+        "name": ""
+    },
+    "mechathun": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/6fec77e63bea35fe4e70d206e5116144322b0c470fb2993596b06eec15822c86.png",
+        "name": ""
+    },
+    "emp-operative": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/acf7cd9eeee3096dc0902d23c10c259129d1aaa2901078efc6c35faff9c054c0.png",
+        "name": ""
+    },
+    "omega-mind": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/012b055cdd50e00a5e8b7f9af2392be4bd0509694acf6c051c3242fa95b461dc.png",
+        "name": ""
+    },
+    "zilliax": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/a8ff06a69e0e7244cd01eef0d90230fbbb39748249811eb8ea35e3a350604d40.png",
+        "name": ""
+    },
+    "upgradeable-framebot": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/01204b3b01f024a26195db13de4b1dc642cdc27e9bbb04bc64fdf6f3ef291852.png",
+        "name": ""
+    },
+    "unexpected-results": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/e894e7fa179cfd0fffac311ada9c63a3600ab2c44f8d2bb09973168fa6509351.png",
+        "name": ""
+    },
+    "spider-bomb": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/6c92a6b96b2e5bb9bb3023820707a2ba0507e6e371a650c05534d926e9d497ba.png",
+        "name": ""
+    },
+    "astromancer": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b1f666df4a9d956a255bd2d9659b26acad5e3bdf1c9c7b36ba9fbe96c77c28c5.png",
+        "name": ""
+    },
+    "celestial-emissary": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/3009e5f9912250e4f09fc3f4fa1c29aa8a7340273ec901dedfec8c227316f167.png",
+        "name": ""
+    },
+    "lunas-pocket-galaxy": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/2a47a2d20f95707b3f2acdcdc43ce16c22a0f5d1dc6e0bbe0e6acc0559bb3cce.png",
+        "name": ""
+    },
+    "menacing-nimbus": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/84379ad07db273dde226ecb949f1ab5c8cc34222ec1fc772e5edb6d2be624949.png",
+        "name": ""
+    },
+    "zerek-master-cloner": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/e46fda47d731b7643061df470cb68bd2a637531d85891e1f21c2528994e3e469.png",
+        "name": ""
+    },
+    "omega-agent": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/8002033c9584a3e3053f7e40f73cfae1b201f020d3a0652ccb9a10b5881d2035.png",
+        "name": ""
+    },
+    "arcane-dynamo": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b678093d949e14e9da190815e96fbd5495e6c7e1311b9048a12eec462c019465.png",
+        "name": ""
+    },
+    "eureka": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b021c6464b2cb08a17b32cbf61dea651d669118bd468324075f6c4ba7ec9dd44.png",
+        "name": ""
+    },
+    "pogo-hopper": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b985468fcc425caf33bf5a63bc8fefa73a6a4e7bb7a74c36116328c4e2bddb41.png",
+        "name": ""
+    },
+    "wargear": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/fa2237c301b7364f7d6066cb545c6d74cd17533f7d384a330dd2c22d3556b17a.png",
+        "name": ""
+    },
+    "lab-recruiter": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/acf0ce5d04ff70454a7b5040fb1f51954035f8a3e192986c5e41b68992b6c8fd.png",
+        "name": ""
+    },
+    "electra-stormsurge": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/d1f2184c51a96faf2e3bd9367e74ba85395f584dc4d32ae5a7ec6a6b898772ec.png",
+        "name": ""
+    },
+    "dendrologist": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/568b35d093a4641b3461317fee94972ffd6b4374bb2a2be05479b997cacaf916.png",
+        "name": ""
+    },
+    "void-analyst": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/5e14fb174e7ee109661bb7c3ce22f1bf3249ed9b421cf5ef1e41838f423def3c.png",
+        "name": ""
+    },
+    "blightnozzle-crawler": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b08537f370f009ec894d52c12bccd6e24c3d823437d56da438b7bab76b625cc5.png",
+        "name": ""
+    },
+    "necrium-blade": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/64570c65049b6bced6fc9af0608b0384d74c3ffc14b16e4acbbeb7863c67d37d.png",
+        "name": ""
+    },
+    "zereks-cloning-gallery": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/eb142bc30e9cfc1f7c5ca0472a7d95ed0c7d795710b297ba38c6ddf33df228a1.png",
+        "name": ""
+    },
+    "reckless-experimenter": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/680659aeb3a1b61c2183ac4d0036619d5fc06e85a8af9e919ee5d8aa0ca8fffe.png",
+        "name": ""
+    },
+    "meteorologist": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/6015523d02484a5a23d67839f857d1c8e72e6a75489332e5e64999c7e228f9f7.png",
+        "name": ""
+    },
+    "the-soularium": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/001a237db839bfa7492e272ff0aa8d1fd243c4951818255505c8e522d97c54aa.png",
+        "name": ""
+    },
+    "cosmic-anomaly": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/29297ff4349e079f8cc2cdae46c76bc4afda85a70b2446877694dfe1acd91c25.png",
+        "name": ""
+    },
+    "giggling-inventor": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/52ffafac03c1888f437f455f9f0b6be49738e335a39fe7c539716f89b7db00e6.png",
+        "name": ""
+    },
+    "star-aligner": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/2c45a9d956299262505457626a8d8151473f31d978c12db82fb275cb7ebaa4d7.png",
+        "name": ""
+    },
+    "boommaster-flark": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/e3476d3ad1559191b95dddd86d7c2bfadd30d48e9acbcb2c35d4a825a31b5f15.png",
+        "name": ""
+    },
+    "cloning-device": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/2a8120229f2a8b7b237439e173534ffedb134831fcecd8547aefc834f4fe8705.png",
+        "name": ""
+    },
+    "replicating-menace": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/88d67950d9d6211f16ca4b2b189b1362e535d4f62e2d89679de7b5de50a9cc12.png",
+        "name": ""
+    },
+    "fireworks-tech": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/d3d98b041ff73b1f0d483dd9f9e02d3652a562778170e24cdf03f1419558ef9e.png",
+        "name": ""
+    },
+    "dr-morrigan": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/ab477af20903018e528999ce5bf147c505b7401d13e7922f9d0756fbf8deef05.png",
+        "name": ""
+    },
+    "flobbidinous-floop": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/ac96872d4a3e67673b3cf48283c0d54e395e90b0a8189ddb5d3619226bdcea82.png",
+        "name": ""
+    },
+    "mechanical-whelp": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b8371e1698eea07dee0851885ed8dff3783148ce6404fce50ebb386314ed8b33.png",
+        "name": ""
+    },
+    "cybertech-chip": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/dbf98c49abfa9a05855f04a15adcf01221fe07977d69d375993dcacc81ea4a0e.png",
+        "name": ""
+    },
+    "augmented-elekk": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/872b440f3903c2aa0f7ec13e5b3ea969f023c6b197df1e26d5c00d752cd9642d.png",
+        "name": ""
+    },
+    "the-boomship": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/6b3330e9050b0ce7296a0f24bc3a424055cb1284a933b3a4ad0d63a35ea79c17.png",
+        "name": ""
+    },
+    "stargazer-luna": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/3d96861c8dacb95dc215781795703a98ff6dbb27a1f96e67c4ca3adc91bf45b4.png",
+        "name": ""
+    },
+    "missile-launcher": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/64062cc725eb90dd74bd8d022b689bbf959fa497d64bb55df7aa0e716d704913.png",
+        "name": ""
+    },
+    "necrium-vial": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/e48f2972f284b8b4608979d4e6995c4e5703351e1e6cc3eea1c16d3cbc513153.png",
+        "name": ""
+    },
+    "dead-ringer": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/91c0ab34d240c375fde04332da7a53c86c6d2ad0fb4c5cc4f9a69b59e2a101dc.png",
+        "name": ""
+    },
+    "gloop-sprayer": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/67140b75fb58ac9aca5a2ccc7792ed6a473b01f8ad69767174bcdba6d4cf1f7c.png",
+        "name": ""
+    },
+    "biology-project": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/aadd8ce5206deebe7af56ed5b975994b92c0bcfa58b4507001036ae98da76b75.png",
+        "name": ""
+    },
+    "crystology": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/2965dd64180f9958b2a8a5162481191a964a2b9cdea9f541e09608b4b8c164be.png",
+        "name": ""
+    },
+    "galvanizer": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/781b47d92c7e081f2d9d3a88be4419c79f2c71c037cd2a0117b34fd146494322.png",
+        "name": ""
+    },
+    "voltaic-burst": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/9b4fe46fb950823cd71e637b1a37a03a451b16b4da6ebff2a1daa1c04aa6c5ef.png",
+        "name": ""
+    },
+    "storm-chaser": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/7fa214ce5ce589b54bcba91445f9a5e677457a88c3f3504f4296e371c702b932.png",
+        "name": ""
+    },
+    "omega-assembly": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/33abf176681a8e6a816745815ec096dad67b267ec06bfece6326c67137358925.png",
+        "name": ""
+    },
+    "autodefense-matrix": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/708efb451d11eeec87520944be0d2a4b717908a5415f9ef6435a34f1207a2802.png",
+        "name": ""
+    },
+    "omega-defender": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/3a57b72af1cc92b4c561f8f9384fcb57f96674797ee5ff18b940f1c38af9a9cf.png",
+        "name": ""
+    },
+    "eternium-rover": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/19a97e547b6f411ff06988017cb6925000f47fcd6c8890dde3e42a93d52a625a.png",
+        "name": ""
+    },
+    "security-rover": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/b0c3ea9dbc8f0f593aa77981d031abf481fa3f463bf6c127bdae2e644a3c7d0f.png",
+        "name": ""
+    },
+    "shooting-star": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/0f241007d7a1d6c60c07180c4129ee1b5cf4a9784c8fbfe67445afbc5f070938.png",
+        "name": ""
+    },
+    "omega-medic": {
+        "imgLink":
+            "https://d15f34w2p8l1cc.cloudfront.net/hearthstone/4bd3ba9f497eba1a1f632584058a03d7d90cf95867ba2ee7f6f3dc417a8c326a.png",
+        "name": ""
     }
 }

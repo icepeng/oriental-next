@@ -131,6 +131,9 @@ function filterCard(card: Card, filter: CardFilter) {
     if (filter.cost !== 'ALL' && card.cost !== +filter.cost) {
         return false;
     }
+    if (filter.expansion !== 'ALL' && card.expansion !== filter.expansion) {
+        return false;
+    }
     return true;
 }
 

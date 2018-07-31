@@ -1,6 +1,6 @@
 <h1 appLocalExpansion [code]="selectedId$ | async" prop="name">
 </h1>
-<div class="row">
+<div *ngIf="isStatAvailable$ | async; else emptyBlock;" class="row">
   <div class="col-sm-6">
     <div class="card">
       <div appLocalUI="Fun" class="card-header">
@@ -24,3 +24,6 @@
     </div>
   </div>
 </div>
+<ng-template #emptyBlock>
+  아직 설문이 완료되지 않았습니다. 조금만 기다려주세요!
+</ng-template>
