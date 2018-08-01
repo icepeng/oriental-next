@@ -27,7 +27,7 @@
       <ng-container *ngIf="authedUser$ | async as authedUser; else noauth">
         <clr-dropdown>
           <button class="nav-text" clrDropdownTrigger>
-            {{ authedUser.battletag }} (<img src="/images/dust.png"> {{ authedUser.point }})
+            {{ authedUser.battletag }} (<img src="./images/dust.png"> {{ authedUser.point }})
             <clr-icon shape="caret down"></clr-icon>
           </button>
           <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
