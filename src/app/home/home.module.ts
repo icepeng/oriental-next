@@ -4,9 +4,10 @@ import { RouterModule } from '@angular/router';
 import { ClarityModule } from '@clr/angular';
 
 import { HomeComponent } from './containers/home.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-    imports: [CommonModule, RouterModule, ClarityModule],
+    imports: [CommonModule, SharedModule, RouterModule, ClarityModule],
     declarations: [HomeComponent],
 })
 export class HomeModule {

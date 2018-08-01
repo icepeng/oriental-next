@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import {
     combineLatest,
+    filter,
     map,
     take,
     takeUntil,
@@ -25,7 +26,6 @@ import * as ResponseAction from '../actions/response.actions';
 import * as fromArchiveForm from '../selectors/archive-form.selectors';
 import * as fromResponse from '../selectors/response.selectors';
 import * as fromResponseView from '../selectors/view.selectors';
-
 
 @Component({
     selector: 'app-survey-response-view-card',
@@ -52,6 +52,7 @@ export class SurveyResponseViewCardComponent implements OnInit, OnDestroy {
     isModalOpen$ = this.store.select(fromArchiveForm.getArchiveFormIsOpen);
     unsubscribe$: Subject<void> = new Subject<void>();
 
+    points$: Observable<{ current: number; cost: number; result: number }>;
     canArchive$: Observable<boolean>;
     formGroup = new FormGroup({
         description: new FormControl('', Validators.required),
@@ -79,11 +80,17 @@ export class SurveyResponseViewCardComponent implements OnInit, OnDestroy {
                 );
                 this.store.dispatch(new ArchiveAction.Close());
             });
-        this.canArchive$ = this.store
-            .select(fromUser.getAuthedUser)
-            .pipe(
-                map(user => user.point >= environment.POINT_REQUIRED_ARCHIVE),
-            );
+        this.points$ = this.store.select(fromUser.getAuthedUser).pipe(
+            filter(user => !!user),
+            map(user => {
+                return {
+                    current: user.point,
+                    cost: environment.POINT_REQUIRED_ARCHIVE,
+                    result: user.point - environment.POINT_REQUIRED_ARCHIVE,
+                };
+            }),
+        );
+        this.canArchive$ = this.points$.pipe(map(points => points.result >= 0));
     }
 
     onPrev() {

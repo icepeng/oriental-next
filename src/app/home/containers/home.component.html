@@ -5,5 +5,56 @@
       <h4>재판이 곧 시작됩니다.</h4>
       <button [routerLink]="['/', 'surveys', 'guide']" class="btn btn-primary">시작</button>
     </section>
+    <section class="archives">
+      <div class="title">
+        <h2>최근 박제된 평가</h2>
+      </div>
+      <div class="archives-wrapper">
+        <div class="row">
+          <div *ngFor="let archive of recentArchives$ | async" class="col-sm-6">
+            <div class="card">
+              <div class="card-header">
+                {{ archive.cardResponse.battletag }}
+              </div>
+              <div class="card-img">
+                <img appLocalCardImg [id]="archive.cardResponse.cardId" alt="card" />
+              </div>
+              <div class="card-block">
+                <div style="text-align: center" class="card-text">
+                  <span class="label label-light-blue">
+                    <span appLocalUI="Card Power"></span>:
+                    <span [appLocalProp]="archive.cardResponse.power" prop="power"></span>
+                  </span>
+                  <span class="label label-orange">
+                    <span [appLocalProp]="archive.cardResponse.generality" prop="generality"></span>
+                  </span>
+                </div>
+                <div class="card-text">
+                  {{ archive.cardResponse.description }}
+                </div>
+              </div>
+              <div class="card-block">
+                <div class="card-title">
+                  {{ archive.battletag }}
+                </div>
+                <div class="card-text">
+                  {{ archive.description }}
+                </div>
+              </div>
+              <div class="card-footer">
+                <button [routerLink]="['/', 'surveys', archive.cardResponse.surveyId, 'responses', archive.cardResponse.responseId, 'view', 'cards', archive.cardResponse.cardId]"
+                  class="btn btn-sm btn-link">보러 가기</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="discord">
+      <h2>오리엔탈 디스코드</h2>
+      <br>
+      <iframe src="https://discordapp.com/widget?id=424033601408073728&theme=dark" width="300" height="500" allowtransparency="true"
+        frameborder="0"></iframe>
+    </section>
   </div>
 </div>

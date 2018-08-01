@@ -72,6 +72,22 @@
       <form [formGroup]="formGroup" class="form">
         <textarea formControlName="description" id="textarea" placeholder="내용 입력" rows="6"></textarea>
       </form>
+      <table *ngIf="points$ | async as points" class="table table-vertical">
+          <tbody>
+              <tr>
+                  <th>현재 가루</th>
+                  <td><img src="/images/dust.png"> {{ points.current }}</td>
+              </tr>
+              <tr>
+                  <th>박제 비용</th>
+                  <td><img src="/images/dust.png"> {{ points.cost }}</td>
+              </tr>
+              <tr>
+                  <th>박제 후 가루</th>
+                  <td><img src="/images/dust.png"> {{ points.result }}</td>
+              </tr>
+          </tbody>
+      </table>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline" (click)="closeArchiveForm()">Cancel</button>

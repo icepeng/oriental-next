@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Survey } from '../../survey/models/survey.model';
 import { ExpansionStat } from '../models/stat.model';
+import { propName } from '../../core/locales/ko-kr';
 
 @Component({
     selector: 'app-expansion-basic-chart',
@@ -69,11 +70,11 @@ export class ExpansionBasicChartComponent implements OnInit, OnChanges {
     getSeries(expansionStats: ExpansionStat[], prop: 'fun' | 'balance') {
         return [20, 40, 60, 80].map((value, index) => ({
             type: 'bar',
-            name: value,
+            name: propName[prop][value],
             data: expansionStats.map(
                 expansionStat =>
                     expansionStat.data[prop][index] /
-                    expansionStat.data.responseCount,
+                    expansionStat.data.responseCount * 100,
             ),
             tooltip: {
                 formatter: function(params) {
