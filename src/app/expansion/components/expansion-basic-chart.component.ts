@@ -71,8 +71,21 @@ export class ExpansionBasicChartComponent implements OnInit, OnChanges {
             type: 'bar',
             name: value,
             data: expansionStats.map(
-                expansionStat => expansionStat.data[prop][index],
+                expansionStat =>
+                    expansionStat.data[prop][index] /
+                    expansionStat.data.responseCount,
             ),
+            tooltip: {
+                formatter: function(params) {
+                    return `${
+                        params.name
+                    }<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:${
+                        params.color
+                    }"></span>${params.seriesName}: ${Math.round(
+                        params.data,
+                    )}%`;
+                },
+            },
         }));
     }
 }

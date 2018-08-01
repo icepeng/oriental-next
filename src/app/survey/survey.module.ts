@@ -28,10 +28,12 @@ import { SurveyWriteExpansionComponent } from './containers/survey-write-expansi
 import { SurveyWriteReviewComponent } from './containers/survey-write-review.component';
 import { SurveyWriteComponent } from './containers/survey-write.component';
 import { SurveyComponent } from './containers/survey.component';
+import { ArchiveEffects } from './effects/archive.effects';
 import { SurveyFormEffects } from './effects/survey-form.effects';
 import { SurveyPrepareEffects } from './effects/survey-prepare.effects';
 import { ResponseEffects } from './effects/survey-response.effects';
 import { reducers } from './reducers';
+import { ArchiveService } from './services/archive.service';
 import { ResponseGuard } from './services/response-guard.service';
 import { ResponseService } from './services/response.service';
 import { SurveyService } from './services/survey.service';
@@ -78,6 +80,7 @@ export class SurveyModule {
             providers: [
                 SurveyService,
                 ResponseService,
+                ArchiveService,
                 WriteCardCanDeactivateGuard,
                 WriteExpansionCanDeactivateGuard,
                 ResponseGuard,
@@ -94,6 +97,7 @@ export class SurveyModule {
             SurveyFormEffects,
             SurveyPrepareEffects,
             ResponseEffects,
+            ArchiveEffects,
         ]),
         RouterModule.forChild([
             {

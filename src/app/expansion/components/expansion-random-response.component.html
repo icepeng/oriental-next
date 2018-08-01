@@ -9,15 +9,16 @@
           {{ response.description }}
         </div>
         <span class="label label-light-blue">
-          <span appLocalUI="Card Power"></span>:
-          <span [appLocalProp]="response.power" prop="power"></span>
+          <span appLocalUI="Fun"></span>:
+          <span [appLocalProp]="response.fun" prop="fun"></span>
         </span>
         <span class="label label-orange">
-          <span [appLocalProp]="response.generality" prop="generality"></span>
+          <span appLocalUI="Balance"></span>:
+          <span [appLocalProp]="response.balance" prop="balance"></span>
         </span>
       </div>
       <div class="card-footer">
-        <button [routerLink]="['/', 'surveys', response.surveyId, 'responses', response.responseId, 'view', 'cards', cardId]" class="btn btn-sm btn-link">보러 가기</button>
+        <button [routerLink]="['/', 'surveys', response.surveyId, 'responses', response.responseId, 'view', 'expansion']" class="btn btn-sm btn-link">보러 가기</button>
       </div>
     </div>
   </div>

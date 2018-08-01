@@ -7,6 +7,7 @@ import { Card } from '../../card/models/card.model';
 import { CardStat } from '../../card/models/stat.model';
 import { Survey } from '../../survey/models/survey.model';
 import { Expansion } from '../models/expansion.model';
+import { ExpansionResponseView } from '../models/response.model';
 import { ExpansionStat } from '../models/stat.model';
 
 @Injectable()
@@ -77,6 +78,7 @@ export class ExpansionService {
                                     ...arr2,
                                     ...survey.cardStats.map(cardStat => ({
                                         id: `${cardStat.cardId}-${survey.id}`,
+                                        pid: cardStat.id,
                                         card: cardStat.cardId,
                                         survey: survey.id,
                                         data: cardStat.data,
@@ -94,6 +96,27 @@ export class ExpansionService {
                         expansionStats,
                         cardStats,
                     };
+                }),
+            );
+    }
+
+    getRandomResponses(id: string): Observable<ExpansionResponseView[]> {
+        return this.http
+            .get<{ expansionResponses: any[] }>(
+                `${environment.apiAddress}/expansions/${id}/responses`,
+            )
+            .pipe(
+                map(data => {
+                    return data.expansionResponses.map(x => ({
+                        id: x.id,
+                        battletag: x.response.user.battletag,
+                        userId: x.response.user.id,
+                        surveyId: x.response.surveyId,
+                        responseId: x.response.id,
+                        fun: x.fun,
+                        balance: x.balance,
+                        description: x.description,
+                    }));
                 }),
             );
     }

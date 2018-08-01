@@ -5,6 +5,7 @@ import { ResponseViewCardFilter } from '../models/filter.model';
 import * as fromResponse from '../selectors/response.selectors';
 import * as fromResponseView from '../selectors/view.selectors';
 
+
 @Component({
     selector: 'app-survey-response-view-card-list',
     templateUrl: './survey-response-view-card-list.component.html',

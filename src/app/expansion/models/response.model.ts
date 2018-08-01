@@ -1,10 +1,10 @@
-export interface CardResponseView {
+export interface ExpansionResponseView {
     id: number;
     battletag: string;
     userId: string;
     surveyId: number;
     responseId: number;
-    power: number;
-    generality: number;
+    fun: number;
+    balance: number;
     description: string;
 }

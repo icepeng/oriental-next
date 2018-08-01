@@ -1,16 +1,19 @@
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-
-import { AuthActions, AuthActionTypes } from '../../core/actions/auth.actions';
-import { UserActions, UserActionTypes } from '../actions/user.actions';
-import { User } from '../models/user.model';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { AuthActionTypes, AuthActions } from '../../core/actions/auth.actions';
 import {
-    ResponseActions,
+    ArchiveActions,
+    ArchiveActionTypes,
+} from '../../survey/actions/archive.actions';
+import {
     ResponseActionTypes,
+    ResponseActions,
 } from '../../survey/actions/response.actions';
 import {
-    SurveySubmitActions,
     SurveySubmitActionTypes,
+    SurveySubmitActions,
 } from '../../survey/actions/submit.actions';
+import { UserActionTypes, UserActions } from '../actions/user.actions';
+import { User } from '../models/user.model';
 
 export interface State extends EntityState<User> {
     authedId: string | null;
@@ -29,12 +32,20 @@ export const initialState: State = adapter.getInitialState({
 
 export function reducer(
     state = initialState,
-    action: UserActions | AuthActions | ResponseActions | SurveySubmitActions,
+    action:
+        | UserActions
+        | AuthActions
+        | ResponseActions
+        | SurveySubmitActions
+        | ArchiveActions,
 ): State {
     switch (action.type) {
         case UserActionTypes.LoadSuccess: {
             return {
-                ...adapter.addOne(action.payload.user, state),
+                ...adapter.addMany(
+                    [action.payload.user, ...action.payload.archiveUsers],
+                    state,
+                ),
                 selectedId: state.selectedId,
                 authedId: state.authedId,
             };
@@ -42,13 +53,27 @@ export function reducer(
 
         case ResponseActionTypes.LoadOneSuccess: {
             return {
-                ...adapter.addOne(action.payload.user, state),
+                ...adapter.addMany(action.payload.users, state),
                 selectedId: state.selectedId,
                 authedId: state.authedId,
             };
         }
 
         case SurveySubmitActionTypes.SubmitCardSuccess: {
+            return {
+                ...adapter.updateOne(
+                    {
+                        id: action.payload.user,
+                        changes: { point: action.payload.point },
+                    },
+                    state,
+                ),
+                selectedId: state.selectedId,
+                authedId: state.authedId,
+            };
+        }
+
+        case ArchiveActionTypes.SubmitSuccess: {
             return {
                 ...adapter.updateOne(
                     {

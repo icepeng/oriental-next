@@ -7,6 +7,7 @@ import {
     SurveyResponse,
 } from '../../survey/models/response.model';
 import { User } from '../models/user.model';
+import { Archive } from '../../survey/models/archive.model';
 
 export enum UserActionTypes {
     Load = '[User] Load',
@@ -29,6 +30,8 @@ export class LoadSuccess implements Action {
             user: User;
             responses: SurveyResponse[];
             cardResponses: CardResponse[];
+            archives: Archive[];
+            archiveUsers: User[];
             expansionResponses: ExpansionResponse[];
         },
     ) {}

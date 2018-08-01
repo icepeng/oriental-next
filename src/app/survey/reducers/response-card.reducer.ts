@@ -15,6 +15,7 @@ import {
     SurveySubmitActions,
 } from '../actions/submit.actions';
 import { CardResponse } from '../models/response.model';
+import { ArchiveActions, ArchiveActionTypes } from '../actions/archive.actions';
 
 export interface State extends EntityState<CardResponse> {
     selectedId: string | null;
@@ -37,6 +38,7 @@ function buildCardResponse(action: SubmitCardSuccess): Update<CardResponse> {
         id,
         changes: {
             id,
+            archives: [],
             ...action.payload.form,
         },
     };
@@ -44,7 +46,11 @@ function buildCardResponse(action: SubmitCardSuccess): Update<CardResponse> {
 
 export function reducer(
     state = initialState,
-    action: UserActions | SurveySubmitActions | ResponseActions,
+    action:
+        | UserActions
+        | SurveySubmitActions
+        | ResponseActions
+        | ArchiveActions,
 ): State {
     switch (action.type) {
         case ResponseActionTypes.SelectCard: {
@@ -70,6 +76,23 @@ export function reducer(
         case SurveySubmitActionTypes.SubmitCardSuccess: {
             return {
                 ...adapter.upsertOne(buildCardResponse(action), state),
+            };
+        }
+
+        case ArchiveActionTypes.SubmitSuccess: {
+            const existing = (state.ids as string[])
+                .map(id => state.entities[id])
+                .find(x => x.pid === action.payload.cardResponse);
+            return {
+                ...adapter.updateOne(
+                    {
+                        id: existing.id,
+                        changes: {
+                            archives: [...existing.archives, action.payload.id],
+                        },
+                    },
+                    state,
+                ),
             };
         }
 

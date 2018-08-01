@@ -11,7 +11,7 @@ export const adapter: EntityAdapter<ExpansionStat> = createEntityAdapter<
     ExpansionStat
 >({
     selectId: (card: ExpansionStat) => card.id,
-    sortComparer: false,
+    sortComparer: (a, b) => a.id - b.id,
 });
 
 export const initialState: State = adapter.getInitialState();

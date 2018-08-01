@@ -69,6 +69,11 @@ export const getLocalUI = createSelector(
     locale => locales.ui[locale],
 );
 
+export const getLocalPropName = createSelector(
+    getLocale,
+    locale => locales.propName[locale],
+);
+
 /**
  * Locale Modal Reducers
  */

@@ -1,5 +1,6 @@
 export interface CardStat {
     id: string;
+    pid: number;
     card: string;
     survey: number;
     data: {

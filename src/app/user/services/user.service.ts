@@ -10,6 +10,7 @@ import {
 } from '../../survey/models/response.model';
 import { User, UserFromApi } from '../models/user.model';
 import { environment } from 'environments/environment';
+import { Archive } from '../../survey/models/archive.model';
 
 @Injectable()
 export class UserService {
@@ -22,6 +23,8 @@ export class UserService {
         responses: SurveyResponse[];
         cardResponses: CardResponse[];
         expansionResponses: ExpansionResponse[];
+        archives: Archive[];
+        archiveUsers: User[];
     }> {
         return this.http
             .get<UserFromApi>(`${environment.apiAddress}/users/${id}`)
@@ -53,6 +56,7 @@ export class UserService {
                                 power: x.power,
                                 generality: x.generality,
                                 description: x.description,
+                                archives: x.archives.map(y => y.id),
                             })),
                         ],
                         [] as CardResponse[],
@@ -70,11 +74,25 @@ export class UserService {
                             ],
                             [] as ExpansionResponse[],
                         );
+                    const archivesFromApi = res.user.responses
+                        .map(x => x.cardResponses)
+                        .reduce((arr, x) => [...arr, ...x], [])
+                        .map(x => x.archives)
+                        .reduce((arr, x) => [...arr, ...x], []);
+                    const archives = archivesFromApi.map(x => ({
+                        id: x.id,
+                        description: x.description,
+                        cardResponse: x.cardResponseId,
+                        user: x.userId,
+                    }));
+                    const archiveUsers = archivesFromApi.map(x => x.user);
                     return {
                         user,
                         responses,
                         cardResponses,
                         expansionResponses,
+                        archives,
+                        archiveUsers,
                     };
                 }),
             );

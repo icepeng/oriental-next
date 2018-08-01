@@ -6,6 +6,7 @@ import {
     OnInit,
 } from '@angular/core';
 import { CardResponse } from '../models/response.model';
+import { propName } from '../../core/locales/ko-kr';
 
 @Component({
     selector: 'app-card-response-ratio',
@@ -31,14 +32,24 @@ export class CardResponseRatioComponent implements OnInit, OnChanges {
         xAxis: {
             type: 'category',
             data: [20, 40, 60, 80],
+            axisLabel: {
+                rotate: -75,
+            },
         },
         yAxis: {},
         series: [],
+        grid: {
+            bottom: '30%'
+        },
     };
 
     constructor() {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.options.xAxis.data = [20, 40, 60, 80].map(
+            x => propName[this.prop][x],
+        );
+    }
 
     ngOnChanges() {
         if (!this.label || !this.cardResponses || !this.prop) {

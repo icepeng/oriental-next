@@ -6,6 +6,7 @@ import {
     ExpansionResponse,
     SurveyResponse,
 } from '../models/response.model';
+import { Archive } from '../models/archive.model';
 
 export enum ResponseActionTypes {
     Select = '[Survey Response] Select',
@@ -42,7 +43,8 @@ export class LoadOneSuccess implements Action {
             response: SurveyResponse;
             cardResponses: CardResponse[];
             expansionResponse?: ExpansionResponse;
-            user: User;
+            archives: Archive[];
+            users: User[];
         },
     ) {}
 }

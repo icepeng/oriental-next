@@ -10,38 +10,38 @@
                 <label appLocalUI="Card Power"></label>
                 <div class="radio-inline">
                     <input type="radio" formControlName="power" [value]="80" id="f4">
-                    <label for="f4">80 (매우 높음)</label>
+                    <label for="f4">매우 높음</label>
                 </div>
                 <div class="radio-inline">
                     <input type="radio" formControlName="power" [value]="60" id="f3">
-                    <label for="f3">60 (높음)</label>
+                    <label for="f3">높음</label>
                 </div>
                 <div class="radio-inline">
                     <input type="radio" formControlName="power" [value]="40" id="f2">
-                    <label for="f2">40 (낮음)</label>
+                    <label for="f2">낮음</label>
                 </div>
                 <div class="radio-inline">
                     <input type="radio" formControlName="power" [value]="20" id="f1">
-                    <label for="f1">20 (매우 낮음)</label>
+                    <label for="f1">매우 낮음</label>
                 </div>
             </div>
             <div class="form-group">
                 <label appLocalUI="Generality"></label>
                 <div class="radio-inline">
                     <input type="radio" formControlName="generality" [value]="80" id="b4">
-                    <label for="b4">80 (순수 단독형)</label>
+                    <label for="b4">순수 단독형</label>
                 </div>
                 <div class="radio-inline">
                     <input type="radio" formControlName="generality" [value]="60" id="b3">
-                    <label for="b3">60 (중립적 단독형)</label>
+                    <label for="b3">중립적 단독형</label>
                 </div>
                 <div class="radio-inline">
                     <input type="radio" formControlName="generality" [value]="40" id="b2">
-                    <label for="b2">40 (중립적 시너지형)</label>
+                    <label for="b2">중립적 시너지형</label>
                 </div>
                 <div class="radio-inline">
                     <input type="radio" formControlName="generality" [value]="20" id="b1">
-                    <label for="b1">20 (순수 시너지형)</label>
+                    <label for="b1">순수 시너지형</label>
                 </div>
             </div>
             <div class="form-group">
@@ -67,12 +67,12 @@
             </div>
             <div *ngIf="card.form" class="card-badge">
                 <span class="label label-light-blue">
-                    <span appLocalUI="Card Power"></span>
-                    <span class="badge">{{ card.form.power }}</span>
+                    <span appLocalUI="Card Power"></span>:
+                    <span [appLocalProp]="card.form.power" prop="power"></span>
                 </span>
+                <br>
                 <span class="label label-orange">
-                    <span appLocalUI="Generality"></span>
-                    <span class="badge">{{ card.form.generality }}</span>
+                    <span [appLocalProp]="card.form.generality" prop="generality"></span>
                 </span>
             </div>
         </div>

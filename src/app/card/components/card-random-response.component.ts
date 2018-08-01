@@ -5,6 +5,8 @@ import {
     Input,
 } from '@angular/core';
 import { CardResponseView } from '../models/response.model';
+import { Card } from '../models/card.model';
+
 
 @Component({
     selector: 'app-card-random-response',
@@ -14,6 +16,7 @@ import { CardResponseView } from '../models/response.model';
 })
 export class CardRandomResponseComponent implements OnInit {
     @Input() responses: CardResponseView[];
+    @Input() cardId: string;
 
     constructor() {}
 

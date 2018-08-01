@@ -7,6 +7,8 @@ import * as fromResponse from './response.reducer';
 import * as fromForm from './survey-form.reducer';
 import * as fromPrepare from './survey-prepare.reducer';
 import * as fromSurvey from './survey.reducer';
+import * as fromArchive from './archive.reducer';
+import * as fromArchiveForm from './archive-form.reducer';
 
 export interface SurveyState {
     survey: fromSurvey.State;
@@ -15,6 +17,8 @@ export interface SurveyState {
     response: fromResponse.State;
     cardResponse: fromCardResponse.State;
     expansionResponse: fromExpansionResponse.State;
+    archive: fromArchive.State;
+    archiveForm: fromArchiveForm.State;
     prepare: fromPrepare.State;
 }
 
@@ -29,6 +33,8 @@ export const reducers: ActionReducerMap<SurveyState> = {
     response: fromResponse.reducer,
     cardResponse: fromCardResponse.reducer,
     expansionResponse: fromExpansionResponse.reducer,
+    archive: fromArchive.reducer,
+    archiveForm: fromArchiveForm.reducer,
     prepare: fromPrepare.reducer,
 };
 

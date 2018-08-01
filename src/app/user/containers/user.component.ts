@@ -15,6 +15,13 @@ import { Observable } from 'rxjs/Observable';
     selector: 'app-user',
     templateUrl: './user.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    styles: [
+        `
+            .content-container {
+                max-width: 1048px;
+            }
+        `,
+    ],
 })
 export class UserComponent implements OnInit {
     user$ = this.store.select(fromUser.getSelectedUser);
@@ -28,6 +35,9 @@ export class UserComponent implements OnInit {
         this.route.paramMap.pipe(take(1)).subscribe(paramMap => {
             this.store.dispatch(new UserAction.Select(paramMap.get('id')));
         });
-        this.battletag$ = this.user$.pipe(filter(x => !!x), map(x => x.battletag));
+        this.battletag$ = this.user$.pipe(
+            filter(x => !!x),
+            map(x => x.battletag),
+        );
     }
 }

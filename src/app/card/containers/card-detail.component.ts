@@ -6,21 +6,22 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import {
+    combineLatest,
+    map,
+    switchMap,
     take,
     takeUntil,
     withLatestFrom,
-    switchMap,
-    combineLatest,
 } from 'rxjs/operators';
 import * as fromSurvey from '../../survey/selectors/survey.selectors';
 import * as CardActions from '../actions/card.actions';
-import * as fromCard from '../reducers';
 import { CardResponseView } from '../models/response.model';
+import * as fromCard from '../reducers';
 import { CardService } from '../services/card.service';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Component({
     selector: 'app-card-detail',
@@ -41,6 +42,7 @@ export class CardDetailComponent implements OnInit, OnDestroy {
     stats$ = this.store.select(fromCard.getSelectedCardStats);
     surveyEntities$ = this.store.select(fromSurvey.getSurveyEntities);
 
+    isStatAvailable$: Observable<boolean>;
     responses$: Observable<CardResponseView[]>;
     refresh$ = new BehaviorSubject<string>('click');
 
@@ -62,7 +64,9 @@ export class CardDetailComponent implements OnInit, OnDestroy {
         this.responses$ = this.selectedId$.pipe(
             combineLatest(this.refresh$),
             switchMap(([id]) => this.cardService.getRandomResponses(id)),
-            takeUntil(this.unsubscribe$),
+        );
+        this.isStatAvailable$ = this.stats$.pipe(
+            map(stats => stats.length > 0),
         );
     }
 

@@ -21,6 +21,33 @@ export const expansions = {
     },
 };
 
+export const propName = {
+    power: {
+        20: '매우 낮음',
+        40: '낮음',
+        60: '높음',
+        80: '매우 높음',
+    },
+    generality: {
+        20: '순수 시너지형',
+        40: '중립적 시너지형',
+        60: '중립적 단독형',
+        80: '순수 단독형',
+    },
+    fun: {
+        20: '매우 낮음',
+        40: '낮음',
+        60: '높음',
+        80: '매우 높음',
+    },
+    balance: {
+        20: '매우 나쁨',
+        40: '나쁨',
+        60: '좋음',
+        80: '매우 좋음',
+    },
+};
+
 export const ui = {
     'the-witchwood': '마녀숲',
     'boomsday-project': '박사붐의 폭심만만 프로젝트',
@@ -65,7 +92,7 @@ export const ui = {
     RARE: '희귀',
     COMMON: '일반',
     'Card Power': '카드 파워',
-    Generality: '범용성 (카드 유형)',
+    Generality: '카드 유형',
     Description: '추가 설명',
     Fun: '재미',
     Balance: '밸런스',

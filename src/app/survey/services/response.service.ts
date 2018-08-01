@@ -3,17 +3,14 @@ import { environment } from 'environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { HttpAuth } from '../../core/services/http-auth.service';
+import { User } from '../../user/models/user.model';
+import { Archive } from '../models/archive.model';
 import {
-    SurveyCardForm,
-    SurveyExpansionForm,
-} from '../models/survey-form.model';
-import {
-    SurveyResponse,
     CardResponse,
     ExpansionResponse,
     ResponseFromApi,
+    SurveyResponse,
 } from '../models/response.model';
-import { User } from '../../user/models/user.model';
 
 @Injectable()
 export class ResponseService {
@@ -40,7 +37,8 @@ export class ResponseService {
         id: number;
     }): Observable<{
         response: SurveyResponse;
-        user: User;
+        users: User[];
+        archives: Archive[];
         cardResponses: CardResponse[];
         expansionResponse?: ExpansionResponse;
     }> {
@@ -68,6 +66,7 @@ export class ResponseService {
                         power: x.power,
                         generality: x.generality,
                         description: x.description,
+                        archives: x.archives.map(y => y.id),
                     }));
                     const expansionResponse = res.response.expansionResponse
                         ? {
@@ -76,12 +75,26 @@ export class ResponseService {
                               pid: res.response.expansionResponse.id,
                           }
                         : undefined;
-                    const user = res.response.user;
+
+                    const archivesFromApi = res.response.cardResponses
+                        .map(x => x.archives)
+                        .reduce((arr, x) => [...arr, ...x], []);
+                    const archives = archivesFromApi.map(x => ({
+                        id: x.id,
+                        description: x.description,
+                        cardResponse: x.cardResponseId,
+                        user: x.userId,
+                    }));
+                    const users = [
+                        res.response.user,
+                        ...archivesFromApi.map(x => x.user),
+                    ];
                     return {
                         response,
                         cardResponses,
                         expansionResponse,
-                        user,
+                        users,
+                        archives,
                     };
                 }),
             );

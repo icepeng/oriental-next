@@ -13,6 +13,7 @@ import { ExpansionComponent } from './containers/expansion.component';
 import { ExpansionEffects } from './effects/expansion.effects';
 import * as fromExpansion from './reducers';
 import { ExpansionService } from './services/expansion.service';
+import { ExpansionRandomResponseComponent } from './components/expansion-random-response.component';
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { ExpansionService } from './services/expansion.service';
         ExpansionDetailComponent,
         ExpansionBasicChartComponent,
         ExpansionComponent,
+        ExpansionRandomResponseComponent,
     ],
 })
 export class ExpansionModule {

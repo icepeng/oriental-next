@@ -9,7 +9,7 @@ export interface State extends EntityState<CardStat> {}
 
 export const adapter: EntityAdapter<CardStat> = createEntityAdapter<CardStat>({
     selectId: (card: CardStat) => card.id,
-    sortComparer: false,
+    sortComparer: (a, b) => a.pid - b.pid,
 });
 
 export const initialState: State = adapter.getInitialState();

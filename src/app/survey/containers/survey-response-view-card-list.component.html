@@ -7,12 +7,12 @@
     </div>
     <div class="card-badge">
       <span class="label label-light-blue">
-        <span appLocalUI="Card Power"></span>
-        <span class="badge">{{ cardResponse.power }}</span>
+        <span appLocalUI="Card Power"></span>:
+        <span [appLocalProp]="cardResponse.power" prop="power"></span>
       </span>
+      <br>
       <span class="label label-orange">
-        <span appLocalUI="Generality"></span>
-        <span class="badge">{{ cardResponse.generality }}</span>
+        <span [appLocalProp]="cardResponse.generality" prop="generality"></span>
       </span>
     </div>
   </div>

@@ -24,6 +24,7 @@ import * as fromResponse from '../selectors/response.selectors';
 import * as fromSurvey from '../selectors/survey.selectors';
 import { CardResponse } from '../models/response.model';
 
+
 @Component({
     selector: 'app-survey-write-card',
     templateUrl: './survey-write-card.component.html',

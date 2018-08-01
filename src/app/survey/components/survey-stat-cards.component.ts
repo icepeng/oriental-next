@@ -12,6 +12,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { map, combineLatest } from 'rxjs/operators';
 import * as fromRoot from '../../reducers';
+import { propName } from '../../core/locales/ko-kr';
 
 @Component({
     selector: 'app-survey-stat-cards',
@@ -30,8 +31,18 @@ export class SurveyStatCardsComponent implements OnInit, OnChanges {
     constructor(private store: Store<any>) {}
 
     ngOnInit() {
+        const formatter = params => {
+            return `${
+                params.name
+            }<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:${
+                params.color
+            }"></span>${params.seriesName}: ${Math.round(params.data)}%`;
+        };
         this.options$ = this.cardStats$.pipe(
-            combineLatest(this.prop$, this.store.select(fromRoot.getLocalCards)),
+            combineLatest(
+                this.prop$,
+                this.store.select(fromRoot.getLocalCards),
+            ),
             map(([cardStats, prop, localCards]) => {
                 const data = this.getData(cardStats, prop);
                 return {
@@ -78,27 +89,39 @@ export class SurveyStatCardsComponent implements OnInit, OnChanges {
                     series: [
                         {
                             type: 'bar',
-                            name: '60',
+                            name: propName[prop][60],
                             data: data.map(x => x.values[0]),
                             stack: 'one',
+                            tooltip: {
+                                formatter,
+                            },
                         },
                         {
                             type: 'bar',
-                            name: '80',
+                            name: propName[prop][80],
                             data: data.map(x => x.values[1]),
                             stack: 'one',
+                            tooltip: {
+                                formatter,
+                            },
                         },
                         {
                             type: 'bar',
-                            name: '40',
+                            name: propName[prop][40],
                             data: data.map(x => x.values[2]),
                             stack: 'one',
+                            tooltip: {
+                                formatter,
+                            },
                         },
                         {
                             type: 'bar',
-                            name: '20',
+                            name: propName[prop][20],
                             data: data.map(x => x.values[3]),
                             stack: 'one',
+                            tooltip: {
+                                formatter,
+                            },
                         },
                     ],
                 };
@@ -123,10 +146,10 @@ export class SurveyStatCardsComponent implements OnInit, OnChanges {
                     0,
                 );
                 const values = [
-                    Math.floor(cardStat.data[prop][2] / total * 100),
-                    Math.floor(cardStat.data[prop][3] / total * 100),
-                    -Math.floor(cardStat.data[prop][1] / total * 100),
-                    -Math.floor(cardStat.data[prop][0] / total * 100),
+                    Math.floor((cardStat.data[prop][2] / total) * 100),
+                    Math.floor((cardStat.data[prop][3] / total) * 100),
+                    -Math.floor((cardStat.data[prop][1] / total) * 100),
+                    -Math.floor((cardStat.data[prop][0] / total) * 100),
                 ];
                 return {
                     card: cardStat.card,

@@ -1,3 +1,5 @@
+import { User } from '../../user/models/user.model';
+
 export interface SurveyResponse {
     id: number;
     user: string;
@@ -13,6 +15,7 @@ export interface CardResponse {
     power: number;
     generality: number;
     description: string;
+    archives: number[];
 }
 
 export interface ExpansionResponse {
@@ -37,6 +40,7 @@ export interface CardResponseFromApi {
     power: number;
     generality: number;
     description: string;
+    archives: ArchiveFromApi[];
 }
 
 export interface ExpansionResponseFromApi {
@@ -45,4 +49,12 @@ export interface ExpansionResponseFromApi {
     fun: number;
     balance: number;
     description: string;
+}
+
+export interface ArchiveFromApi {
+    id: number;
+    description: string;
+    cardResponseId: number;
+    userId: string;
+    user: User;
 }

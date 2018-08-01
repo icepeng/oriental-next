@@ -8,7 +8,7 @@
       </div>
       <div class="card-block">
         <div class="card-text score">
-          {{ response.fun }}점
+          <span [appLocalProp]="response.fun" prop="fun"></span>
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
       </div>
       <div class="card-block">
         <div class="card-text score">
-          {{ response.balance }}점
+          <span [appLocalProp]="response.balance" prop="balance"></span>
         </div>
       </div>
     </div>

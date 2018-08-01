@@ -8,6 +8,7 @@ import { LocalExpansionDirective } from './local-expansion.directive';
 import { LocalUIDirective } from './local-ui.directive';
 import { CardNavigateComponent } from './card-navigate.component';
 import { ClarityModule } from '@clr/angular';
+import { LocalPropDirective } from './local-prop.directive';
 
 @NgModule({
     imports: [CommonModule, ClarityModule],
@@ -17,6 +18,7 @@ import { ClarityModule } from '@clr/angular';
         LocalExpansionDirective,
         LocalExpansionImageDirective,
         LocalUIDirective,
+        LocalPropDirective,
         CardNavigateComponent,
     ],
     declarations: [
@@ -25,6 +27,7 @@ import { ClarityModule } from '@clr/angular';
         LocalExpansionDirective,
         LocalExpansionImageDirective,
         LocalUIDirective,
+        LocalPropDirective,
         CardNavigateComponent,
     ],
 })

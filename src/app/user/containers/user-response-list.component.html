@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="row">
-    <div *ngFor="let item of list$ | async" class="col-sm-3">
+    <div *ngFor="let item of list$ | async" class="col-sm-4">
       <div class="card">
         <div class="card-img">
           <img appLocalExpansionImg [code]="item.survey.expansion">
@@ -9,6 +9,8 @@
           <p>
             <span appLocalExpansion [code]="item.survey.expansion" prop="name" class="card-title"></span>
             <span *ngIf="item.survey.status === 'ongoing'" appLocalUI="Ongoing" class="label label-light-blue"></span>
+            <span *ngIf="item.survey.status === 'closed'" appLocalUI="Closed" class="label label-blue"></span>
+            <span *ngIf="!item.survey.isPreRelease" appLocalUI="After-Release" class="label label-orange"></span>
             <span *ngIf="item.survey.isPreRelease" appLocalUI="Pre-Release" class="label label-orange"></span>
           </p>
           <ul class="list">

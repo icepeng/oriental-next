@@ -21,6 +21,33 @@ export const expansions = {
     },
 };
 
+export const propName = {
+    power: {
+        20: '매우 낮음',
+        40: '낮음',
+        60: '높음',
+        80: '매우 높음',
+    },
+    generality: {
+        20: '순수 시너지형',
+        40: '중립적 시너지형',
+        60: '중립적 단독형',
+        80: '순수 단독형',
+    },
+    fun: {
+        20: '매우 낮음',
+        40: '낮음',
+        60: '높음',
+        80: '매우 높음',
+    },
+    balance: {
+        20: '매우 나쁨',
+        40: '나쁨',
+        60: '좋음',
+        80: '매우 좋음',
+    },
+};
+
 export const ui = {
     'the-witchwood': 'The Witchwood',
     'boomsday-project': 'The Boomsday Project',

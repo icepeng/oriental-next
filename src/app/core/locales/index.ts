@@ -15,3 +15,8 @@ export const ui = {
     'ko-kr': ko.ui,
     'en-us': en.ui,
 };
+
+export const propName = {
+    'ko-kr': ko.propName,
+    'en-us': en.propName,
+};

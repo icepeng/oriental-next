@@ -1,29 +1,38 @@
-<h1 appLocalExpansion [code]="selectedId$ | async" prop="name">
-</h1>
-<div *ngIf="isStatAvailable$ | async; else emptyBlock;" class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div appLocalUI="Fun" class="card-header">
-      </div>
-      <div class="card-block">
-        <div class="card-text">
-          <app-expansion-basic-chart [expansionStats]="stats$ | async" [surveyEntities]="surveyEntities$ | async" prop="fun"></app-expansion-basic-chart>
+<div class="wrapper">
+  <div class="expansion-img">
+    <img appLocalExpansionImg [code]="selectedId$ | async">
+  </div>
+  <div *ngIf="isStatAvailable$ | async; else emptyBlock;" class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div appLocalUI="Fun" class="card-header">
+        </div>
+        <div class="card-block">
+          <div class="card-text">
+            <app-expansion-basic-chart [expansionStats]="stats$ | async" [surveyEntities]="surveyEntities$ | async" prop="fun"></app-expansion-basic-chart>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div appLocalUI="Balance" class="card-header">
-      </div>
-      <div class="card-block">
-        <div class="card-text">
-          <app-expansion-basic-chart [expansionStats]="stats$ | async" [surveyEntities]="surveyEntities$ | async" prop="balance"></app-expansion-basic-chart>
+    <div class="col-sm-6">
+      <div class="card">
+        <div appLocalUI="Balance" class="card-header">
+        </div>
+        <div class="card-block">
+          <div class="card-text">
+            <app-expansion-basic-chart [expansionStats]="stats$ | async" [surveyEntities]="surveyEntities$ | async" prop="balance"></app-expansion-basic-chart>
+          </div>
         </div>
       </div>
     </div>
+    <h2>유저 평가
+      <button (click)="refresh$.next('click')" type="button" class="btn btn-icon">
+        <clr-icon shape="refresh"></clr-icon>
+      </button>
+    </h2>
+    <app-expansion-random-response [responses]="responses$ | async"></app-expansion-random-response>
   </div>
+  <ng-template #emptyBlock>
+    아직 설문이 완료되지 않았습니다. 조금만 기다려주세요!
+  </ng-template>
 </div>
-<ng-template #emptyBlock>
-  아직 설문이 완료되지 않았습니다. 조금만 기다려주세요!
-</ng-template>

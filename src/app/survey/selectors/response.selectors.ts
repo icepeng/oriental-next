@@ -1,11 +1,10 @@
 import { createSelector } from '@ngrx/store';
 import { getSurveyState } from '../reducers';
-import * as fromResponse from '../reducers/response.reducer';
+import * as fromArchive from '../reducers/archive.reducer';
 import * as fromCardResponse from '../reducers/response-card.reducer';
 import * as fromExpansionResponse from '../reducers/response-expansion.reducer';
-import * as fromCard from '../../card/reducers';
-import * as fromExpansion from '../../expansion/reducers';
-import * as fromSurvey from './survey.selectors';
+import * as fromResponse from '../reducers/response.reducer';
+import * as fromUser from '../../user/reducers';
 
 export const getResponseState = createSelector(
     getSurveyState,
@@ -83,4 +82,32 @@ export const getSelectedResponseCardResponses = createSelector(
     (response, entities) => {
         return response ? response.cardResponses.map(id => entities[id]) : [];
     },
+);
+
+export const getArchiveState = createSelector(
+    getSurveyState,
+    state => state.archive,
+);
+
+export const {
+    selectIds: getArchiveIds,
+    selectEntities: getArchiveEntities,
+    selectAll: getAllArchives,
+    selectTotal: getTotalArchives,
+} = fromArchive.adapter.getSelectors(getArchiveState);
+
+export const getSelectedCardResponseArchives = createSelector(
+    getSelectedCardResponse,
+    getArchiveEntities,
+    fromUser.getUserEntities,
+    (cardResponse, archiveEntities, userEntities) =>
+        cardResponse
+            ? cardResponse.archives.map(id => {
+                  const archive = archiveEntities[id];
+                  return {
+                      ...archive,
+                      battletag: userEntities[archive.user].battletag,
+                  };
+              })
+            : [],
 );

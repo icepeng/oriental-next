@@ -4,18 +4,40 @@ import {
     OnDestroy,
     OnInit,
 } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { environment } from 'environments/environment';
+import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import { combineLatest, takeUntil, withLatestFrom, take } from 'rxjs/operators';
+import {
+    combineLatest,
+    map,
+    take,
+    takeUntil,
+    withLatestFrom,
+} from 'rxjs/operators';
+import * as AuthAction from '../../core/actions/auth.actions';
+import * as fromRoot from '../../reducers';
+import * as fromUser from '../../user/reducers';
+import * as ArchiveAction from '../actions/archive.actions';
 import * as ResponseAction from '../actions/response.actions';
+import * as fromArchiveForm from '../selectors/archive-form.selectors';
 import * as fromResponse from '../selectors/response.selectors';
 import * as fromResponseView from '../selectors/view.selectors';
+
 
 @Component({
     selector: 'app-survey-response-view-card',
     templateUrl: './survey-response-view-card.component.html',
     styleUrls: ['./survey-write-card.component.scss'],
+    styles: [
+        `
+            .archive-actions {
+                margin-top: 12px;
+            }
+        `,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SurveyResponseViewCardComponent implements OnInit, OnDestroy {
@@ -24,7 +46,16 @@ export class SurveyResponseViewCardComponent implements OnInit, OnDestroy {
     );
     total$ = this.store.select(fromResponseView.getFilteredCardResponsesTotal);
     index$ = this.store.select(fromResponseView.getSelectedCardResponseIndex);
+    archives$ = this.store.select(fromResponse.getSelectedCardResponseArchives);
+    isLoggedIn$ = this.store.select(fromRoot.getLoggedIn);
+    isLoading$ = this.store.select(fromArchiveForm.getArchiveFormIsLoading);
+    isModalOpen$ = this.store.select(fromArchiveForm.getArchiveFormIsOpen);
     unsubscribe$: Subject<void> = new Subject<void>();
+
+    canArchive$: Observable<boolean>;
+    formGroup = new FormGroup({
+        description: new FormControl('', Validators.required),
+    });
 
     constructor(
         private store: Store<any>,
@@ -46,13 +77,22 @@ export class SurveyResponseViewCardComponent implements OnInit, OnDestroy {
                         `${paramMap.get('cardId')}-${responseId}`,
                     ),
                 );
+                this.store.dispatch(new ArchiveAction.Close());
             });
+        this.canArchive$ = this.store
+            .select(fromUser.getAuthedUser)
+            .pipe(
+                map(user => user.point >= environment.POINT_REQUIRED_ARCHIVE),
+            );
     }
 
     onPrev() {
         this.store
             .select(fromResponseView.getFilteredCardResponses)
-            .pipe(withLatestFrom(this.index$), take(1))
+            .pipe(
+                withLatestFrom(this.index$),
+                take(1),
+            )
             .subscribe(([cardResponses, index]) => {
                 if (index <= 0) {
                     return;
@@ -66,7 +106,10 @@ export class SurveyResponseViewCardComponent implements OnInit, OnDestroy {
     onNext() {
         this.store
             .select(fromResponseView.getFilteredCardResponses)
-            .pipe(withLatestFrom(this.index$, this.total$), take(1))
+            .pipe(
+                withLatestFrom(this.index$, this.total$),
+                take(1),
+            )
             .subscribe(([cardResponses, index, total]) => {
                 if (index + 1 >= total) {
                     return;
@@ -75,6 +118,32 @@ export class SurveyResponseViewCardComponent implements OnInit, OnDestroy {
                     relativeTo: this.route,
                 });
             });
+    }
+
+    openArchiveForm() {
+        this.formGroup.reset({
+            description: '',
+        });
+        this.store.dispatch(new ArchiveAction.Open());
+    }
+
+    closeArchiveForm() {
+        this.store.dispatch(new ArchiveAction.Close());
+    }
+
+    login() {
+        this.store.dispatch(new AuthAction.Login());
+    }
+
+    submitArchive() {
+        this.selectedCardResponse$.pipe(take(1)).subscribe(cardResponse => {
+            this.store.dispatch(
+                new ArchiveAction.Submit({
+                    description: this.formGroup.value.description,
+                    cardResponse: cardResponse.pid,
+                }),
+            );
+        });
     }
 
     ngOnDestroy() {

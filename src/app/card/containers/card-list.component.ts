@@ -8,7 +8,19 @@ import { CardFilter } from '../models/filter.model';
 @Component({
     selector: 'app-card-list',
     templateUrl: './card-list.component.html',
-    styles: [`.list-wrapper { max-width: 1056px; }`],
+    styles: [
+        `
+            .list-wrapper {
+                max-width: 1056px;
+            }
+            .card-img {
+                margin-bottom: 12px;
+            }
+            .card-img:hover {
+                cursor: pointer;
+            }
+        `,
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardListComponent implements OnInit {

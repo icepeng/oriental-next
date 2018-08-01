@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { Survey } from '../../survey/models/survey.model';
 import { CardStat } from '../models/stat.model';
+import { propName } from '../../core/locales/ko-kr';
 
 @Component({
     selector: 'app-card-basic-chart',
@@ -34,7 +35,11 @@ export class CardBasicChartComponent implements OnInit, OnChanges {
             type: 'category',
             data: [],
         },
-        yAxis: {},
+        yAxis: {
+            axisLabel: {
+                formatter: '{value} %',
+            },
+        },
         series: [],
     };
 
@@ -64,10 +69,28 @@ export class CardBasicChartComponent implements OnInit, OnChanges {
     }
 
     getSeries(cardStats: CardStat[], prop: 'power' | 'generality') {
-        return [20, 40, 60, 80].map((value, index) => ({
-            type: 'bar',
-            name: value,
-            data: cardStats.map(cardStat => cardStat.data[prop][index]),
-        }));
+        return [20, 40, 60, 80].map((value, index) => {
+            return {
+                type: 'bar',
+                name: propName[prop][value],
+                data: cardStats.map(
+                    cardStat =>
+                        (cardStat.data[prop][index] /
+                            cardStat.data.responseCount) *
+                        100,
+                ),
+                tooltip: {
+                    formatter: params => {
+                        return `${
+                            params.name
+                        }<br><span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:${
+                            params.color
+                        }"></span>${params.seriesName}: ${Math.round(
+                            params.data,
+                        )}%`;
+                    },
+                },
+            };
+        });
     }
 }

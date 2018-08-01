@@ -20,6 +20,8 @@ export class CardService {
                         id: x.id,
                         battletag: x.response.user.battletag,
                         userId: x.response.user.id,
+                        surveyId: x.response.surveyId,
+                        responseId: x.response.id,
                         power: x.power,
                         generality: x.generality,
                         description: x.description,
