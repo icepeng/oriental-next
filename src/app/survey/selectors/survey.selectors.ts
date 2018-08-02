@@ -1,5 +1,5 @@
-import { createSelector } from "@ngrx/store";
-import { getSurveyState } from "../reducers";
+import { createSelector } from '@ngrx/store';
+import { getSurveyState } from '../reducers';
 import * as fromSurvey from '../reducers/survey.reducer';
 
 export const getSurveyEntitiesState = createSelector(
@@ -25,4 +25,9 @@ export const getSelectedSurvey = createSelector(
     (entities, selectedId) => {
         return selectedId && entities[selectedId];
     },
+);
+
+export const getIsPreRelease = createSelector(
+    getSelectedSurvey,
+    survey => survey.isPreRelease,
 );

@@ -7,6 +7,7 @@ import * as ResponseAction from '../actions/response.actions';
 import * as FormAction from '../actions/survey-form.actions';
 import * as SurveyAction from '../actions/survey.actions';
 import * as fromForm from '../selectors/form.selectors';
+import * as fromSurvey from '../selectors/survey.selectors';
 
 @Component({
     selector: 'app-survey-write',
@@ -24,6 +25,7 @@ export class SurveyWriteComponent implements OnInit {
     error$ = this.store.select(fromForm.getFormError);
     success$ = this.store.select(fromForm.getFormSuccess);
     authedUser$ = this.store.select(fromUser.getAuthedUser);
+    isPreRelease$ = this.store.select(fromSurvey.getIsPreRelease);
 
     constructor(private store: Store<any>, private route: ActivatedRoute) {}
 

@@ -27,9 +27,14 @@
         <div class="alert-icon-wrapper">
           <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
         </div>
-        <span class="alert-text">
-          저장 성공! 현재 가루: {{ (authedUser$ | async).point }}
+        <span *ngIf="isPreRelease$ | async; else afterBlock;" class="alert-text">
+          평가가 등록되었습니다.
         </span>
+        <ng-template #afterBlock>
+          <span class="alert-text">
+            평가가 등록되었습니다. 현재 가루: {{ (authedUser$ | async).point }}
+          </span>
+        </ng-template>
       </div>
     </div>
   </div>

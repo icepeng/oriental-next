@@ -35,6 +35,7 @@ export class SurveyWriteCardComponent implements OnInit, OnDestroy {
     filter$ = this.store.select(fromForm.getFilter);
     selectedCardId$ = this.store.select(fromForm.getFormSelectedCardId);
     isLoading$ = this.store.select(fromForm.getFormIsLoading);
+    isPreRelease$ = this.store.select(fromSurvey.getIsPreRelease);
     cards$: Observable<(Card & { form?: CardResponse })[]>;
 
     unsubscribe$: Subject<void> = new Subject<void>();
